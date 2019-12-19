@@ -1,0 +1,12 @@
+{
+    "id": "73b9eb4cac20bb6889cadc2f2de3a0b7",
+    "name": "Crowdstrike",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": []
+}
