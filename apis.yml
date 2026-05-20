@@ -26,6 +26,10 @@ apis:
     description: >-
       The CrowdStrike API provides access to platform services and data for enterprise integration and automation.
 common:
+  - type: GitHubOrganization
+    url: https://github.com/CrowdStrike
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/crowdstrike
   - type: Website
     url: https://www.crowdstrike.com
 maintainers:
