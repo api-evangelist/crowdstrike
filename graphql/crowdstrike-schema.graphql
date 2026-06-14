@@ -1,0 +1,918 @@
+"""
+CrowdStrike Falcon Platform — Conceptual GraphQL Schema
+Derived from the CrowdStrike OAuth2-based REST API surface.
+Reference: https://falcon.crowdstrike.com/documentation/page/a2a7fc0e/crowdstrike-oauth2-based-apis
+"""
+
+scalar DateTime
+scalar JSON
+
+# ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum IOCType {
+  SHA256
+  MD5
+  DOMAIN
+  IPV4
+  IPV6
+}
+
+enum IOCAction {
+  NO_ACTION
+  ALLOW
+  PREVENT_NO_UI
+  PREVENT
+  DETECT
+}
+
+enum SeverityLevel {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+  INFORMATIONAL
+}
+
+enum AlertStatus {
+  NEW
+  IN_PROGRESS
+  TRUE_POSITIVE
+  FALSE_POSITIVE
+  IGNORED
+  CLOSED
+}
+
+enum IncidentStatus {
+  NEW
+  IN_PROGRESS
+  CLOSED
+  REOPENED
+}
+
+enum RTRSessionStatus {
+  ACTIVE
+  PENDING
+  EXPIRED
+  CLOSED
+}
+
+enum PolicyAction {
+  PREVENT
+  DETECT
+  ALLOW
+  MONITOR
+}
+
+enum SubmissionStatus {
+  PENDING
+  RUNNING
+  SUCCESS
+  FAILED
+  SKIPPED
+}
+
+# ─── OS / Agent ──────────────────────────────────────────────────────────────
+
+type OSDetails {
+  platform: String
+  version: String
+  build: String
+  kernelVersion: String
+  productType: String
+  majorVersion: String
+  minorVersion: String
+}
+
+type AgentVersion {
+  version: String
+  build: String
+  sensorVersion: String
+  configBuild: String
+  firstSeen: DateTime
+  lastSeen: DateTime
+}
+
+type NetworkInterface {
+  interfaceAlias: String
+  interfaceDescription: String
+  localIP: String
+  macAddress: String
+  networkPrefix: String
+}
+
+# ─── Device ──────────────────────────────────────────────────────────────────
+
+type Device {
+  deviceId: ID!
+  hostname: String
+  externalIP: String
+  localIP: String
+  macAddress: String
+  osDetails: OSDetails
+  agentVersion: AgentVersion
+  networkInterfaces: [NetworkInterface]
+  sensorTags: [SensorTag]
+  groupIds: [String]
+  status: String
+  firstSeen: DateTime
+  lastSeen: DateTime
+  modifiedTimestamp: DateTime
+  siteName: String
+  systemManufacturer: String
+  systemProductName: String
+  productTypeDesc: String
+  provisionStatus: String
+  reducedFunctionalityMode: String
+  containmentStatus: String
+}
+
+type DeviceDetails {
+  device: Device
+  policyDetails: [PolicyGroup]
+  groupMemberships: [HostGroupFilter]
+  vulnerabilities: [SpotlightVulnerability]
+  detections: [Detection]
+  incidents: [Incident]
+  quarantinedFiles: [Quarantine]
+}
+
+# ─── Sensor ──────────────────────────────────────────────────────────────────
+
+type SensorTag {
+  tag: String!
+  deviceId: String!
+}
+
+type SensorUpdate {
+  deviceId: ID!
+  policy: PolicyGroup
+  scheduledUpdate: String
+  pendingUpdate: Boolean
+  currentVersion: String
+  targetVersion: String
+  uninstallProtectionEnabled: Boolean
+}
+
+# ─── IOC ─────────────────────────────────────────────────────────────────────
+
+type IOC {
+  id: ID!
+  type: IOCType!
+  value: String!
+  action: IOCAction!
+  severity: SeverityLevel
+  description: String
+  source: String
+  tags: [String]
+  platforms: [String]
+  expiration: DateTime
+  createdOn: DateTime
+  createdBy: String
+  modifiedOn: DateTime
+  modifiedBy: String
+  applied_globally: Boolean
+}
+
+# ─── Detection ───────────────────────────────────────────────────────────────
+
+type DetectionBehavior {
+  behaviorId: ID!
+  detectionId: String
+  timestamp: DateTime
+  scenario: String
+  objective: String
+  tactic: String
+  technique: String
+  severity: Int
+  confidence: Int
+  iocType: IOCType
+  iocValue: String
+  iocSourceRuleId: String
+  iocDescription: String
+  commandLine: String
+  parentProcessId: String
+  processId: String
+  fileName: String
+  filePath: String
+  sha256: String
+  md5: String
+  userPrincipalName: String
+  userId: String
+}
+
+type DetectionDevice {
+  deviceId: ID!
+  hostname: String
+  externalIP: String
+  localIP: String
+  platform: String
+  osVersion: String
+  agentVersion: String
+  firstSeen: DateTime
+  lastSeen: DateTime
+}
+
+type Detection {
+  detectionId: ID!
+  cid: String
+  status: AlertStatus
+  severity: Int
+  severityName: SeverityLevel
+  confidence: Int
+  behaviors: [DetectionBehavior]
+  device: DetectionDevice
+  hostInfo: JSON
+  maxSeverity: Int
+  maxConfidence: Int
+  firstBehavior: DateTime
+  lastBehavior: DateTime
+  createdTimestamp: DateTime
+  overallRating: String
+  emailSent: Boolean
+  showInUi: Boolean
+  assignedToName: String
+  assignedToUid: String
+}
+
+# ─── Alert ───────────────────────────────────────────────────────────────────
+
+type AlertBehavior {
+  behaviorId: ID!
+  alertId: String
+  tactic: String
+  technique: String
+  description: String
+  objective: String
+  severity: Int
+  confidence: Int
+  iocValue: String
+  iocType: IOCType
+  timestamp: DateTime
+}
+
+type Alert {
+  compositeId: ID!
+  cid: String
+  alertId: String
+  status: AlertStatus
+  severity: SeverityLevel
+  confidenceScore: Int
+  patternId: String
+  patternName: String
+  scenario: String
+  behaviors: [AlertBehavior]
+  device: DetectionDevice
+  hostName: String
+  localIP: String
+  externalIP: String
+  createdTime: DateTime
+  updatedTime: DateTime
+  assignedToName: String
+  assignedToUid: String
+  comments: [String]
+  tags: [String]
+}
+
+# ─── Incident ─────────────────────────────────────────────────────────────────
+
+type IncidentDevice {
+  deviceId: ID!
+  hostname: String
+  platform: String
+  agentVersion: String
+}
+
+type IncidentIndicator {
+  type: IOCType
+  value: String
+  source: String
+  timestamp: DateTime
+}
+
+type Incident {
+  incidentId: ID!
+  cid: String
+  name: String
+  description: String
+  status: IncidentStatus
+  severity: Int
+  start: DateTime
+  end: DateTime
+  createdTime: DateTime
+  modifiedTimestamp: DateTime
+  assignedTo: String
+  assignedToName: String
+  hosts: [IncidentDevice]
+  tactics: [String]
+  techniques: [String]
+  objectives: [String]
+  users: [String]
+  tags: [String]
+  indicators: [IncidentIndicator]
+  fineScore: Float
+  state: String
+}
+
+# ─── Threat Intelligence ──────────────────────────────────────────────────────
+
+type ThreatActor {
+  id: ID!
+  name: String
+  slug: String
+  shortDescription: String
+  description: String
+  origins: [String]
+  targetCountries: [String]
+  targetIndustries: [String]
+  targetRegions: [String]
+  motivations: [String]
+  capabilities: [String]
+  aliases: [String]
+  firstActivityDate: DateTime
+  lastActivityDate: DateTime
+  active: Boolean
+  killChains: [String]
+}
+
+type ThreatIntelligence {
+  indicatorId: ID!
+  type: IOCType
+  value: String
+  publishedDate: DateTime
+  lastUpdated: DateTime
+  malwareFamilies: [String]
+  actors: [ThreatActor]
+  killChains: [String]
+  domainTypes: [String]
+  ipAddressTypes: [String]
+  tags: [String]
+  reports: [String]
+  vulnerabilities: [String]
+  confidence: Int
+  maliciousConfidence: String
+  labels: [JSON]
+}
+
+# ─── Vulnerability / Spotlight ───────────────────────────────────────────────
+
+type CVE {
+  id: ID!
+  baseScore: Float
+  severity: SeverityLevel
+  description: String
+  publishedDate: DateTime
+  modifiedDate: DateTime
+  exploitStatus: String
+  remediationLevel: String
+  references: [String]
+  cwes: [String]
+  impactScore: Float
+  exploitabilityScore: Float
+}
+
+type ExploitDetails {
+  exploit_status: String
+  exploit_status_name: String
+  has_known_exploit: Boolean
+  has_metasploit: Boolean
+}
+
+type Vulnerability {
+  id: ID!
+  cveId: String
+  cve: CVE
+  severity: SeverityLevel
+  productNameVersion: String
+  vendor: String
+  product: String
+  version: String
+  status: String
+  exploitDetails: ExploitDetails
+  fixedInVersions: [String]
+  remediationInfo: String
+  publishedDate: DateTime
+  updatedTimestamp: DateTime
+}
+
+type SpotlightEvalLogic {
+  id: ID!
+  name: String
+  logic: String
+  cveId: String
+  createdTimestamp: DateTime
+  modifiedTimestamp: DateTime
+}
+
+type SpotlightVulnerability {
+  id: ID!
+  cid: String
+  aid: String
+  cveId: String
+  cve: CVE
+  status: String
+  createdTimestamp: DateTime
+  updatedTimestamp: DateTime
+  closedTimestamp: DateTime
+  hostInfo: IncidentDevice
+  remediationIds: [String]
+  suppressed: Boolean
+  app: JSON
+  evalLogic: SpotlightEvalLogic
+}
+
+# ─── Identity / Zero Trust ───────────────────────────────────────────────────
+
+type AccountActivity {
+  activityId: ID!
+  cid: String
+  userId: String
+  userPrincipalName: String
+  activityType: String
+  timestamp: DateTime
+  sourceIP: String
+  targetResource: String
+  riskScore: Int
+  riskFactors: [String]
+  isMfaSatisfied: Boolean
+  authenticationProtocol: String
+  country: String
+  city: String
+}
+
+type Identity {
+  userId: ID!
+  email: String
+  username: String
+  domain: String
+  firstName: String
+  lastName: String
+  department: String
+  title: String
+  accountEnabled: Boolean
+  lastSeen: DateTime
+  riskScore: Int
+  riskFactors: [String]
+  groups: [String]
+  roles: [String]
+  mfaEnabled: Boolean
+  recentActivity: [AccountActivity]
+}
+
+# ─── Policy ───────────────────────────────────────────────────────────────────
+
+type PolicyRule {
+  ruleId: ID!
+  name: String
+  description: String
+  pattern: String
+  severity: SeverityLevel
+  action: PolicyAction
+  enabled: Boolean
+  createdBy: String
+  createdTimestamp: DateTime
+  modifiedBy: String
+  modifiedTimestamp: DateTime
+  platformNames: [String]
+}
+
+type PolicyResponse {
+  policyId: ID!
+  action: PolicyAction
+  appliedAt: DateTime
+  deviceId: String
+  success: Boolean
+  message: String
+}
+
+type PolicyGroup {
+  id: ID!
+  name: String
+  description: String
+  platformName: String
+  enabled: Boolean
+  rules: [PolicyRule]
+  createdBy: String
+  createdTimestamp: DateTime
+  modifiedBy: String
+  modifiedTimestamp: DateTime
+  groups: [String]
+  iocSourceIds: [String]
+}
+
+# ─── Host Groups ──────────────────────────────────────────────────────────────
+
+type QueryRule {
+  field: String!
+  operator: String!
+  value: String!
+}
+
+type HostGroupFilter {
+  id: ID!
+  groupType: String
+  name: String
+  description: String
+  assignmentRule: String
+  queryRules: [QueryRule]
+  createdBy: String
+  createdTimestamp: DateTime
+  modifiedBy: String
+  modifiedTimestamp: DateTime
+  memberCount: Int
+}
+
+# ─── Quarantine ───────────────────────────────────────────────────────────────
+
+type Quarantine {
+  id: ID!
+  cid: String
+  aid: String
+  filename: String
+  filepath: String
+  sha256: String
+  md5: String
+  size: Int
+  isPartialHash: Boolean
+  detectionIds: [String]
+  state: String
+  paths: [JSON]
+  username: String
+  quarantinedAt: DateTime
+}
+
+# ─── Sample / Sandbox ─────────────────────────────────────────────────────────
+
+type SampleMetadata {
+  sha256: ID!
+  filename: String
+  sha1: String
+  md5: String
+  fileSize: Int
+  fileType: String
+  fileTypeShort: [String]
+  createdTimestamp: DateTime
+  isMalware: Boolean
+  threatScore: Int
+  sampleFlags: [String]
+  submissionIds: [String]
+}
+
+type Submission {
+  id: ID!
+  cid: String
+  userId: String
+  userUuid: String
+  origin: String
+  state: SubmissionStatus
+  createdTimestamp: DateTime
+  sandbox: [JSON]
+  userTags: [String]
+}
+
+type SubmissionResult {
+  id: ID!
+  submissionId: String
+  cid: String
+  created: DateTime
+  verdict: String
+  threatScore: Int
+  malwareFamilies: [String]
+  sha256: String
+  iocReportBroadCsvArtifactId: String
+  iocReportStrictCsvArtifactId: String
+  screenshots: [JSON]
+  extractedFiles: [JSON]
+  processes: [JSON]
+  networkSettings: JSON
+  verdict_source: String
+}
+
+# ─── FalconX (Sandbox Intelligence) ──────────────────────────────────────────
+
+type FalconX {
+  reportId: ID!
+  sha256: String
+  malwareConfidence: String
+  verdict: String
+  iocs: [IOC]
+  behaviors: [DetectionBehavior]
+  submittedAt: DateTime
+  environment: String
+  sandbox: SubmissionResult
+}
+
+# ─── MalQuery ─────────────────────────────────────────────────────────────────
+
+type MalQuery {
+  id: ID!
+  sha256: String
+  label: String
+  firstSeen: DateTime
+  firstSeenTimestamp: DateTime
+  lastSeen: DateTime
+  malwareFamily: [String]
+  tags: [String]
+  type: String
+  yara: String
+}
+
+# ─── LogScale / Next-Gen SIEM ─────────────────────────────────────────────────
+
+type LogScale {
+  queryId: ID!
+  queryString: String
+  start: DateTime
+  end: DateTime
+  status: String
+  processedEvents: Int
+  matchCount: Int
+  results: [JSON]
+  cancelled: Boolean
+  done: Boolean
+}
+
+# ─── Real-Time Response ───────────────────────────────────────────────────────
+
+type RTRCommand {
+  cloudRequestId: ID!
+  sessionId: String
+  command: String
+  commandString: String
+  createdAt: DateTime
+  completedAt: DateTime
+  stdout: String
+  stderr: String
+  exitCode: Int
+  baseCommand: String
+  sequenceId: Int
+  taskId: String
+}
+
+type RTRSession {
+  sessionId: ID!
+  aid: String
+  cid: String
+  hostname: String
+  createdAt: DateTime
+  deletedAt: DateTime
+  status: RTRSessionStatus
+  userId: String
+  userUuid: String
+  offlineQueued: Boolean
+  commands: [RTRCommand]
+}
+
+type RealtimeResponse {
+  sessionId: ID!
+  deviceId: String
+  hostname: String
+  status: RTRSessionStatus
+  commands: [RTRCommand]
+  createdAt: DateTime
+}
+
+# ─── Cloud Security / CWP ────────────────────────────────────────────────────
+
+type CloudWorkload {
+  instanceId: ID!
+  cid: String
+  cloudProvider: String
+  accountId: String
+  region: String
+  resourceType: String
+  resourceId: String
+  imageName: String
+  imageDigest: String
+  status: String
+  lastSeen: DateTime
+  vulnerabilities: [SpotlightVulnerability]
+  alerts: [ContainerAlert]
+}
+
+type ContainerAlert {
+  alertId: ID!
+  containerId: String
+  imageName: String
+  namespace: String
+  podName: String
+  severity: SeverityLevel
+  tactic: String
+  technique: String
+  description: String
+  timestamp: DateTime
+  status: AlertStatus
+}
+
+type KubernetesEvent {
+  eventId: ID!
+  clusterId: String
+  clusterName: String
+  namespace: String
+  podName: String
+  containerName: String
+  eventType: String
+  timestamp: DateTime
+  severity: SeverityLevel
+  message: String
+  sourceIP: String
+}
+
+# ─── CID / MSSP / Flight Control ─────────────────────────────────────────────
+
+type CIDConfig {
+  cid: ID!
+  childCids: [String]
+  parentCid: String
+  name: String
+  createdTimestamp: DateTime
+  modifiedTimestamp: DateTime
+  settings: JSON
+}
+
+type FlightControl {
+  mssp: MSSP
+  childCids: [CIDConfig]
+  permissions: [String]
+}
+
+type MSSP {
+  cid: ID!
+  name: String
+  childCids: [CIDConfig]
+  managedDeviceCount: Int
+  userRoles: [String]
+  apiClients: [APIClient]
+}
+
+# ─── API / OAuth ──────────────────────────────────────────────────────────────
+
+type OAuthToken {
+  accessToken: String!
+  tokenType: String
+  expiresIn: Int
+  issuedAt: DateTime
+  expiresAt: DateTime
+}
+
+type APIClient {
+  clientId: ID!
+  name: String
+  description: String
+  cid: String
+  createdAt: DateTime
+  lastModified: DateTime
+  clientSecret: String
+  oauthToken: OAuthToken
+  scopes: [String]
+  enabled: Boolean
+}
+
+# ─── Root Operations ──────────────────────────────────────────────────────────
+
+type Query {
+  # Devices
+  device(deviceId: ID!): Device
+  devices(filter: String, limit: Int, offset: Int): [Device]
+  deviceDetails(deviceId: ID!): DeviceDetails
+
+  # Detections
+  detection(detectionId: ID!): Detection
+  detections(filter: String, limit: Int, offset: Int): [Detection]
+
+  # Alerts
+  alert(compositeId: ID!): Alert
+  alerts(filter: String, limit: Int, offset: Int, sort: String): [Alert]
+
+  # Incidents
+  incident(incidentId: ID!): Incident
+  incidents(filter: String, limit: Int, offset: Int): [Incident]
+
+  # IOC
+  ioc(id: ID!): IOC
+  iocs(filter: String, limit: Int, offset: Int): [IOC]
+
+  # Threat Intelligence
+  threatIntelligence(indicatorId: ID!): ThreatIntelligence
+  threatIndicators(query: String, type: IOCType, limit: Int): [ThreatIntelligence]
+  threatActor(id: ID!): ThreatActor
+  threatActors(query: String, limit: Int): [ThreatActor]
+
+  # Vulnerabilities
+  vulnerability(id: ID!): Vulnerability
+  vulnerabilities(filter: String, limit: Int): [Vulnerability]
+  spotlightVulnerabilities(filter: String, limit: Int): [SpotlightVulnerability]
+  cve(cveId: ID!): CVE
+
+  # Identity
+  identity(userId: ID!): Identity
+  identities(filter: String, limit: Int): [Identity]
+  accountActivities(filter: String, limit: Int): [AccountActivity]
+
+  # Policy
+  policy(id: ID!): PolicyGroup
+  policies(filter: String, limit: Int): [PolicyGroup]
+
+  # Host Groups
+  hostGroup(id: ID!): HostGroupFilter
+  hostGroups(filter: String, limit: Int): [HostGroupFilter]
+
+  # RTR
+  rtrSession(sessionId: ID!): RTRSession
+  rtrSessions(filter: String, limit: Int): [RTRSession]
+
+  # Quarantine
+  quarantine(id: ID!): Quarantine
+  quarantines(filter: String, limit: Int): [Quarantine]
+
+  # Samples / Sandbox
+  sampleMetadata(sha256: ID!): SampleMetadata
+  submission(id: ID!): Submission
+  submissionResult(id: ID!): SubmissionResult
+  falconX(reportId: ID!): FalconX
+
+  # MalQuery
+  malQuery(id: ID!): MalQuery
+  malQuerySearch(query: String!, limit: Int): [MalQuery]
+
+  # LogScale
+  logScaleQuery(queryId: ID!): LogScale
+
+  # Cloud Workloads
+  cloudWorkload(instanceId: ID!): CloudWorkload
+  cloudWorkloads(filter: String, limit: Int): [CloudWorkload]
+  containerAlerts(filter: String, limit: Int): [ContainerAlert]
+  kubernetesEvents(filter: String, limit: Int): [KubernetesEvent]
+
+  # MSSP / Flight Control
+  mssp(cid: ID!): MSSP
+  flightControl: FlightControl
+  cidConfig(cid: ID!): CIDConfig
+
+  # API Clients
+  apiClient(clientId: ID!): APIClient
+  apiClients(limit: Int): [APIClient]
+
+  # Sensor
+  sensorUpdate(deviceId: ID!): SensorUpdate
+}
+
+type Mutation {
+  # IOC management
+  createIOC(
+    type: IOCType!
+    value: String!
+    action: IOCAction!
+    severity: SeverityLevel
+    description: String
+    platforms: [String]
+    tags: [String]
+    expiration: DateTime
+  ): IOC
+
+  updateIOC(id: ID!, action: IOCAction, severity: SeverityLevel, description: String): IOC
+  deleteIOC(id: ID!): Boolean
+
+  # Detection management
+  updateDetection(detectionId: ID!, status: AlertStatus, assignedToUid: String): Detection
+
+  # Alert management
+  updateAlert(compositeId: ID!, status: AlertStatus, assignedToUid: String): Alert
+
+  # Incident management
+  createIncident(deviceIds: [ID!]!, name: String, description: String): Incident
+  updateIncident(incidentId: ID!, status: IncidentStatus, assignedTo: String): Incident
+
+  # RTR
+  initRTRSession(deviceId: ID!, originId: String, queueOffline: Boolean): RTRSession
+  executeRTRCommand(sessionId: ID!, command: String!, commandString: String!): RTRCommand
+  deleteRTRSession(sessionId: ID!): Boolean
+
+  # Quarantine
+  updateQuarantine(ids: [ID!]!, action: String!): [Quarantine]
+
+  # Sample submission
+  submitSample(sha256: String!, filename: String, comment: String): SampleMetadata
+  submitToSandbox(sha256: String!, filename: String, environmentId: Int): Submission
+
+  # LogScale
+  startLogScaleQuery(queryString: String!, start: DateTime, end: DateTime): LogScale
+
+  # Policy
+  createPolicy(name: String!, platformName: String!, description: String): PolicyGroup
+  updatePolicy(id: ID!, enabled: Boolean, name: String, description: String): PolicyGroup
+  deletePolicy(id: ID!): Boolean
+
+  # Host Groups
+  createHostGroup(name: String!, groupType: String!, assignmentRule: String): HostGroupFilter
+  updateHostGroup(id: ID!, name: String, assignmentRule: String): HostGroupFilter
+  deleteHostGroup(id: ID!): Boolean
+
+  # Sensor tags
+  addSensorTags(deviceIds: [ID!]!, tags: [String!]!): [SensorTag]
+  deleteSensorTags(deviceIds: [ID!]!, tags: [String!]!): Boolean
+
+  # API client management
+  createAPIClient(name: String!, scopes: [String!]!, description: String): APIClient
+  deleteAPIClient(clientId: ID!): Boolean
+  refreshOAuthToken(clientId: ID!, clientSecret: String!): OAuthToken
+}

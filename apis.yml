@@ -4,36 +4,39 @@ name: CrowdStrike
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Cybersecurity
-  - Endpoint Security
-description: >-
-  CrowdStrike is a major US corporation and Fortune 1000 company. The CrowdStrike API provides programmatic access to its platform services, data, and integrations for enterprise customers and partners.
+- Cybersecurity
+- Endpoint Security
+description: CrowdStrike is a major US corporation and Fortune 1000 company. The CrowdStrike
+  API provides programmatic access to its platform services, data, and integrations
+  for enterprise customers and partners.
 created: '2026-04-19'
 modified: '2026-04-19'
 specificationVersion: '0.19'
 apis:
-  - aid: crowdstrike:crowdstrike-api
-    name: CrowdStrike API
-    tags:
-      - Cybersecurity
-      - Endpoint Security
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    baseURL: https://api.crowdstrike.com
-    humanURL: https://developer.crowdstrike.com
-    properties:
-      - url: https://developer.crowdstrike.com/docs
-        type: Documentation
-    description: >-
-      The CrowdStrike API provides access to platform services and data for enterprise integration and automation.
+- aid: crowdstrike:crowdstrike-api
+  name: CrowdStrike API
+  tags:
+  - Cybersecurity
+  - Endpoint Security
+  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  baseURL: https://api.crowdstrike.com
+  humanURL: https://developer.crowdstrike.com
+  properties:
+  - url: https://developer.crowdstrike.com/docs
+    type: Documentation
+  - url: graphql/crowdstrike-graphql.md
+    type: GraphQL
+  description: The CrowdStrike API provides access to platform services and data for
+    enterprise integration and automation.
 common:
-  - type: GitHubOrganization
-    url: https://github.com/CrowdStrike
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/crowdstrike
-  - type: Website
-    url: https://www.crowdstrike.com
-  - type: LLMsTxt
-    url: https://developer.crowdstrike.com/llms.txt
+- type: GitHubOrganization
+  url: https://github.com/CrowdStrike
+- type: LinkedIn
+  url: https://www.linkedin.com/company/crowdstrike
+- type: Website
+  url: https://www.crowdstrike.com
+- type: LLMsTxt
+  url: https://developer.crowdstrike.com/llms.txt
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
