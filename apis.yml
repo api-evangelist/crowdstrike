@@ -35,7 +35,7 @@ common:
   url: https://www.linkedin.com/company/crowdstrike
 - type: Website
   url: https://www.crowdstrike.com
-- type: LLMsTxt
+- type: LlmsText
   url: https://developer.crowdstrike.com/llms.txt
 maintainers:
 - FN: Kin Lane
