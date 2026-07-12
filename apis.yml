@@ -29,6 +29,12 @@ apis:
   description: The CrowdStrike API provides access to platform services and data for
     enterprise integration and automation.
 common:
+- type: TrustCenter
+  url: security/crowdstrike-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/crowdstrike-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/crowdstrike-domain-security.yml
 - type: GitHubOrganization
   url: https://github.com/CrowdStrike
 - type: LinkedIn
@@ -37,6 +43,8 @@ common:
   url: https://www.crowdstrike.com
 - type: LlmsText
   url: https://developer.crowdstrike.com/llms.txt
+- type: Blog
+  url: https://www.crowdstrike.com/blog/feed/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
