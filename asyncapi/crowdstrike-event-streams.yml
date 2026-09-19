@@ -1,0 +1,60 @@
+specification: API Commons Event Surface
+specificationVersion: '0.1'
+provider: CrowdStrike
+providerId: crowdstrike
+generated: '2026-09-19'
+method: searched
+source: https://developer.crowdstrike.com/api-reference/collections/event-streams/
+spec_type: null
+description: 'CrowdStrike has a real event surface and publishes NO AsyncAPI for it. The Falcon Event Streams API
+  is a PULL-shaped streaming feed: the consumer discovers available streams over REST, then holds open a long-lived
+  connection to the returned datafeed URL and refreshes the session periodically. CrowdStrike does not publish an
+  outbound webhook catalog on its developer surface, so no Webhooks pointer is emitted for this provider — the event
+  surface is subscribe-and-stream, not callback-and-deliver.'
+surfaces:
+- name: Falcon Event Streams
+  transport: long-lived HTTP stream (datafeed URL)
+  direction: provider-to-consumer, consumer-initiated
+  discovery:
+    operationId: listAvailableStreamsOAuth2
+    method: GET
+    path: /sensors/entities/datafeed/v2
+    params:
+    - name: appId
+      note: consumer connection label, max 32 alphanumeric characters
+    - name: format
+      values:
+      - json
+      - flatjson
+    scope: 'Event streams: READ'
+  session:
+    operationId: refreshActiveStreamSession
+    method: POST
+    path: /sensors/entities/datafeed-actions/v1/{partition}
+    scope: 'Event streams: READ'
+  content: detections, audit events and platform notifications as they happen
+  tooling: CrowdStrike publishes an Event Driven Ansible rulebook source plugin for this stream
+- name: Falcon Data Replicator (FDR)
+  transport: bulk export to cloud storage
+  direction: batch
+  collection: FDR
+  operations: 5
+  note: Bulk telemetry replication rather than an event feed.
+- name: Next-Gen SIEM / LogScale ingest
+  transport: query + ingest
+  note: CQL search over ingested events; parsers must follow the CrowdStrike Parsing Standard (ECS-mapped).
+asyncapi:
+  published: false
+  probed:
+  - url: https://developer.crowdstrike.com/asyncapi.yaml
+    status: 200
+    note: docs-site HTML 404 shell, not a document
+  - url: https://api.crowdstrike.com/asyncapi.yaml
+    status: 404
+  - url: https://api.crowdstrike.com/asyncapi.json
+    status: 404
+  checked: '2026-09-19'
+  note: No AsyncAPI document is published on any CrowdStrike host; none is fabricated here.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

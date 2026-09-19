@@ -1,0 +1,303 @@
+specification: API Commons Well-Known
+specificationVersion: '0.1'
+provider: CrowdStrike
+providerId: crowdstrike
+generated: '2026-09-19'
+method: probed
+source: live probe of every host in apis.yml plus the documented regional API hosts, 2026-09-19
+description: 'Named-path /.well-known probe across nine CrowdStrike hosts. One real document is served:
+  RFC 9116 security.txt on www.crowdstrike.com (and via the apex 301). The developer docs host is a 200
+  catch-all and is recorded as a miss.'
+hit_count: 1
+hosts:
+- host: https://www.crowdstrike.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: crowdstrike-security.txt
+    content_type: text/plain
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  path_echo_control:
+    path: /.well-known/crowdstrike-negative-control-9f2c1a.json
+    status: 404
+    result: passed
+- host: https://crowdstrike.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 301
+  - path: /.well-known/openid-configuration
+    status: 301
+  - path: /.well-known/oauth-authorization-server
+    status: 301
+  - path: /.well-known/oauth-protected-resource
+    status: 301
+  - path: /.well-known/api-catalog
+    status: 301
+  - path: /.well-known/ai-plugin.json
+    status: 301
+  - path: /.well-known/ucp.json
+    status: 301
+  - path: /.well-known/acp.json
+    status: 301
+  - path: /.well-known/aauth-resource.json
+    status: 301
+  - path: /.well-known/apis.json
+    status: 301
+  - path: /apis.json
+    status: 301
+  - path: /apis.yml
+    status: 301
+  note: Apex host 301s every path to www.crowdstrike.com; only /.well-known/security.txt resolves to a
+    real document there.
+  path_echo_control:
+    path: /.well-known/crowdstrike-negative-control-9f2c1a.json
+    status: 301
+    result: passed
+    note: Redirect target 404s.
+- host: https://api.crowdstrike.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  note: "Every path returns the Falcon API's own JSON 404 envelope ({meta:{trace_id},errors:[{code:404}]})\
+    \ \u2014 a real API host, no discovery documents."
+  path_echo_control:
+    path: /.well-known/crowdstrike-negative-control-9f2c1a.json
+    status: 404
+    result: passed
+- host: https://developer.crowdstrike.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    soft_404: true
+  - path: /.well-known/openid-configuration
+    status: 200
+    soft_404: true
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    soft_404: true
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    soft_404: true
+  - path: /.well-known/api-catalog
+    status: 200
+    soft_404: true
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    soft_404: true
+  - path: /.well-known/ucp.json
+    status: 200
+    soft_404: true
+  - path: /.well-known/acp.json
+    status: 200
+    soft_404: true
+  - path: /.well-known/aauth-resource.json
+    status: 200
+    soft_404: true
+  - path: /.well-known/apis.json
+    status: 200
+    soft_404: true
+  - path: /apis.json
+    status: 200
+    soft_404: true
+  - path: /apis.yml
+    status: 200
+    soft_404: true
+  hit_count: 0
+  note: 'CATCH-ALL: the Astro/Starlight docs site answers 200 with its 34,326-byte HTML 404 shell for
+    every path, including a negative-control path that cannot exist. No document was saved and none of
+    these 200s counts.'
+  path_echo_control:
+    path: /.well-known/crowdstrike-negative-control-9f2c1a.json
+    status: 200
+    result: failed
+    note: "200 with the same HTML shell \u2014 every hit on this host is discarded."
+- host: https://falcon.crowdstrike.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 302
+  - path: /.well-known/openid-configuration
+    status: 302
+  - path: /.well-known/oauth-authorization-server
+    status: 302
+  - path: /.well-known/oauth-protected-resource
+    status: 302
+  - path: /.well-known/api-catalog
+    status: 302
+  - path: /.well-known/ai-plugin.json
+    status: 302
+  - path: /.well-known/ucp.json
+    status: 302
+  - path: /.well-known/acp.json
+    status: 302
+  - path: /.well-known/aauth-resource.json
+    status: 302
+  - path: /.well-known/apis.json
+    status: 302
+  - path: /apis.json
+    status: 302
+  - path: /apis.yml
+    status: 302
+  note: 'Falcon console: every path 302s to /login. Gated, not served.'
+  path_echo_control:
+    path: /.well-known/crowdstrike-negative-control-9f2c1a.json
+    status: 302
+    result: passed
+- host: https://trust.crowdstrike.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/oauth-protected-resource
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+  - path: /.well-known/ai-plugin.json
+    status: 403
+  - path: /.well-known/ucp.json
+    status: 403
+  - path: /.well-known/acp.json
+    status: 403
+  - path: /.well-known/aauth-resource.json
+    status: 403
+  - path: /.well-known/apis.json
+    status: 403
+  - path: /apis.json
+    status: 403
+  - path: /apis.yml
+    status: 403
+  note: "Trust center returns 403 to non-browser clients on every path (bot challenge); the portal itself\
+    \ is live \u2014 see security/crowdstrike-trust-center.yml."
+  path_echo_control:
+    path: /.well-known/crowdstrike-negative-control-9f2c1a.json
+    status: 403
+    result: passed
+- host: https://api.us-2.crowdstrike.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  note: Regional Falcon API host; same JSON 404 envelope as api.crowdstrike.com on every path.
+- host: https://api.eu-1.crowdstrike.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  note: Regional Falcon API host; same JSON 404 envelope as api.crowdstrike.com on every path.
+- host: https://api.laggar.gcw.crowdstrike.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  note: Regional Falcon API host; same JSON 404 envelope as api.crowdstrike.com on every path.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,4 +1,17 @@
 """
+x-authored-by: API Evangelist
+x-generated-from: documentation
+x-modeled-from: https://falcon.crowdstrike.com/documentation/page/a2a7fc0e/crowdstrike-oauth2-based-apis
+x-provenance: NOT A CROWDSTRIKE ARTIFACT. This SDL was MODELLED by API Evangelist from CrowdStrike's
+  REST documentation. CrowdStrike does not publish a GraphQL schema. CrowdStrike DOES operate one real
+  GraphQL surface — Identity Protection, POST /identity-protection/combined/graphql/v1 (operationId
+  api_preempt_proxy_post_graphql) — whose schema is auth-gated: anonymous introspection returned HTTP 401
+  when probed on 2026-09-19. Nothing below was fetched from that endpoint.
+x-quarantined: 2026-09-19 — moved to graphql/_scaffold/ so it is excluded from the contract index and no
+  longer scores as a provider-published schema. Retained for audit, not for use.
+"""
+
+"""
 CrowdStrike Falcon Platform — Conceptual GraphQL Schema
 Derived from the CrowdStrike OAuth2-based REST API surface.
 Reference: https://falcon.crowdstrike.com/documentation/page/a2a7fc0e/crowdstrike-oauth2-based-apis

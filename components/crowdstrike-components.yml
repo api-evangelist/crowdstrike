@@ -1,0 +1,66 @@
+specification: API Commons Components
+specificationVersion: '0.1'
+provider: CrowdStrike
+providerId: crowdstrike
+generated: '2026-09-19'
+method: searched
+source: https://developer.crowdstrike.com/foundry/reference/ui-kit/
+description: 'CrowdStrike''s client-side component surface is Falcon Foundry: UI extensions and pages that render
+  INSIDE the Falcon console, built from Shoelace web components with CrowdStrike''s Falcon Shoelace theme and wired
+  to the platform through the @crowdstrike/foundry-js bridge. There is no embeddable widget a third party can drop
+  into their own site — the components run within the customer''s Falcon tenant.'
+families:
+- name: Foundry UI extensions
+  type: in-console panel
+  docs: https://developer.crowdstrike.com/foundry/experience/ui-extensions/
+  scaffold: foundry ui extensions create
+  note: Renders inside an existing Falcon console page.
+- name: Foundry UI pages
+  type: in-console page
+  docs: https://developer.crowdstrike.com/foundry/experience/ui-pages/
+  scaffold: foundry ui pages create
+- name: Foundry dashboards
+  type: in-console dashboard
+  docs: https://developer.crowdstrike.com/foundry/experience/dashboards/
+loaders:
+- name: '@crowdstrike/foundry-js'
+  registry: npm
+  version: 0.22.0
+  published: '2026-05-19'
+  url: https://www.npmjs.com/package/@crowdstrike/foundry-js
+  role: bridge between app code and the Falcon platform
+- name: '@crowdstrike/falcon-shoelace'
+  registry: npm
+  version: 0.4.0
+  published: '2024-06-14'
+  url: https://www.npmjs.com/package/@crowdstrike/falcon-shoelace
+  role: Falcon theme for Shoelace components
+- name: '@crowdstrike/glide-core'
+  registry: npm
+  version: 0.34.1
+  published: '2025-09-09'
+  url: https://www.npmjs.com/package/@crowdstrike/glide-core
+  role: CrowdStrike design-system web components
+  note: Published by CrowdStrike but not referenced from the Foundry UI Kit docs.
+third_party_base:
+  library: Shoelace (@shoelace-style/shoelace)
+  components_documented:
+  - sl-button
+  - sl-input
+  - sl-select
+  - sl-card
+  - sl-dialog
+  - sl-tab-group
+  - sl-alert
+  - sl-badge
+  - sl-spinner
+  - sl-table
+  note: CrowdStrike documents the Shoelace elements Foundry apps commonly use and themes them; the component library
+    itself is not CrowdStrike's.
+frameworks:
+- Vanilla JS
+- React
+- Vue
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -4,60 +4,82 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: CrowdStrike
 providerId: crowdstrike
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
+method: probed
 modified: '2026-05-05'
-reconciled: false
+reconciled: true
 tags:
-  - Cybersecurity
-  - Endpoint Security
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: CrowdStrike Falcon OAuth2 APIs are rate-limited per-client and per-endpoint. Specific numeric
-  limits are not published publicly; they vary by API surface (Detects, Hosts, Real-Time Response, Spotlight,
-  etc.) and are documented in the authenticated Falcon developer portal. Throttling is signaled with HTTP
-  429 plus rate-limit headers; clients are expected to honor Retry-After.
+- Cybersecurity
+- Endpoint Security
+- Rate Limiting
+- Quotas
+- Throttling
+description: 'CrowdStrike Falcon signals rate limiting on every response with X-Ratelimit-Limit and X-Ratelimit-Remaining,
+  and returns HTTP 429 on exhaustion — 429 is a documented response on operations across the reference including
+  POST /oauth2/token. The numeric ceiling is NOT published in prose anywhere on the public developer surface, but
+  it is observable: an unauthenticated caller is served X-Ratelimit-Limit: 300 with a decrementing X-Ratelimit-Remaining
+  on api.crowdstrike.com. Per-tenant and per-collection ceilings are stated only inside the authenticated Falcon
+  console.'
 sources:
-  - https://www.crowdstrike.com/en-us/pricing/
-  - https://falcon.crowdstrike.com/documentation/page/a2a7fc0e/crowdstrike-oauth2-based-apis
-notes: Specific per-second and per-minute numbers are gated behind the Falcon console login. Treat the
-  limits below as descriptive and reconcile against your tenant's documented values.
+- https://developer.crowdstrike.com/api-reference/collections/oauth2/
+- https://developer.crowdstrike.com/sdks/python/responses/
+notes: Numeric per-collection ceilings remain gated behind the Falcon console login; the 300 above is what the public
+  edge actually returns and is recorded as observed, not as a documented contract.
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  retryAfter: X-Ratelimit-Retryafter
+  limit: X-Ratelimit-Limit
+  remaining: X-Ratelimit-Remaining
+  region: X-Cs-Region
+  trace: X-Cs-Traceid
+  retryAfter: null
+  note: Retry-After was NOT observed and is not documented. An earlier version of this artifact asserted an 'X-Ratelimit-Retryafter'
+    header; no such header appeared on any probed response and no CrowdStrike documentation names it, so it is removed
+    rather than carried forward.
 responseCodes:
   throttled: 429
   quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - name: Per-API rate limit
-    scope: api-client
-    metric: varies
-    limit: see CrowdStrike Falcon documentation per API surface
-    applies:
-      - CrowdStrike API
-  - name: Per-endpoint concurrency
-    scope: api-client
-    metric: concurrent_requests
-    limit: see CrowdStrike Falcon documentation per API surface
-    applies:
-      - CrowdStrike API
+- name: Observed default ceiling (unauthenticated edge)
+  scope: api-client
+  metric: requests
+  limit: 300
+  window: unstated
+  burst: null
+  evidence:
+    url: https://api.crowdstrike.com/oauth2/token
+    method: POST
+    status: 401
+    headers:
+      X-Ratelimit-Limit: '300'
+      X-Ratelimit-Remaining: '299'
+    observed: '2026-09-19'
+  note: The header names a limit of 300 and a decrementing remainder; the WINDOW is not stated in the header or
+    the docs.
+  applies:
+  - CrowdStrike API
+- name: Per-service-collection limits
+  scope: api-client
+  metric: varies
+  limit: null
+  note: Limits are scoped per service collection (Detects, Hosts, RTR, Spotlight, IOC …) and their numbers are published
+    only inside the authenticated Falcon console. Not guessed here.
+  applies:
+  - CrowdStrike API
 policies:
-  - name: OAuth2 token refresh
-    description: Tokens are issued via OAuth2 client credentials and expire after 30 minutes; cache and
-      reuse tokens until expiry rather than minting per-request.
-  - name: Backoff Strategy
-    description: On HTTP 429, honor X-Ratelimit-Retryafter (epoch seconds) and apply exponential backoff
-      with jitter for retried calls.
-  - name: Per-API surface limits
-    description: Limits are scoped per API (Detects, Hosts, RTR, Spotlight, IOC, etc.) rather than globally;
-      a 429 on one surface does not throttle others.
-  - name: Pagination over polling
-    description: Use offset/limit or after/before pagination on listing endpoints rather than tight polling
-      loops to stay within rate caps.
+- name: OAuth2 token reuse
+  description: Tokens are issued by POST /oauth2/token and expire after 30 minutes; cache and reuse until expiry
+    rather than minting per request.
+- name: Backoff on 429
+  description: No Retry-After is returned, so exponential backoff with jitter is the only available strategy; read
+    X-Ratelimit-Remaining to back off before exhaustion.
+- name: Pagination over polling
+  description: Use offset/limit (meta.pagination.total) on listing endpoints rather than tight polling loops.
+- name: Stream instead of poll
+  description: For continuous change, subscribe to the Event Streams datafeed rather than repeatedly querying —
+    see asyncapi/crowdstrike-event-streams.yml.
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
+generated: '2026-09-19'
+source: live unauthenticated probe of https://api.crowdstrike.com/oauth2/token and /devices/queries/devices/v1,
+  2026-09-19
+limit_count: 1

@@ -1,0 +1,1698 @@
+specification: API Commons OAuth Scopes
+specificationVersion: '0.1'
+provider: CrowdStrike
+providerId: crowdstrike
+generated: '2026-09-19'
+method: searched
+source: https://developer.crowdstrike.com/api-reference/all-operations/
+docs: https://developer.crowdstrike.com/falcon-mcp/getting-started/credentials/
+description: 'The 187 named scopes a CrowdStrike Falcon API client can be granted, harvested from the provider''s
+  own operation reference: every operation page states the scope it requires, in the form ''<Service collection>:
+  READ'' or ''<Service collection>: WRITE''. Scopes are selected when the API client is created in the Falcon console.
+  Counts are the number of documented operations that name each scope. NOT derived from an OpenAPI — CrowdStrike
+  publishes none; derive-oauth-scopes.py has no spec to read in this repo.'
+schemes:
+- name: FalconOAuth2
+  flow: clientCredentials
+  token_url: https://api.crowdstrike.com/oauth2/token
+scope_count: 187
+operations_covered: 1444
+operations_without_a_documented_scope: 19
+scopes:
+- scope: 'API integrations: READ'
+  service: API integrations
+  access: READ
+  operation_count: 1
+  example_operations:
+  - GetCombinedPluginConfigs
+- scope: 'API integrations: WRITE'
+  service: API integrations
+  access: WRITE
+  operation_count: 2
+  example_operations:
+  - ExecuteCommand
+  - ExecuteCommandProxy
+- scope: 'ASPM Admin: READ'
+  service: ASPM Admin
+  access: READ
+  operation_count: 10
+  example_operations:
+  - GetCloudSecurityIntegrationState
+  - GetExecutorNodes
+  - GetGroupHierarchy
+  - GetGroupV2
+  - GetIntegrationsV2
+- scope: 'ASPM Admin: WRITE'
+  service: ASPM Admin
+  access: WRITE
+  operation_count: 12
+  example_operations:
+  - CreateExecutorNode
+  - CreateIntegration
+  - CreateIntegrationTask
+  - DeleteExecutorNode
+  - DeleteIntegration
+- scope: 'ASPM Analyst: WRITE'
+  service: ASPM Analyst
+  access: WRITE
+  operation_count: 4
+  example_operations:
+  - DeleteTags
+  - RunIntegrationTask
+  - UpsertBusinessApplications
+  - UpsertTags
+- scope: 'ASPM Falcon Admin: WRITE'
+  service: ASPM Falcon Admin
+  access: WRITE
+  operation_count: 3
+  example_operations:
+  - PostGroupV2
+  - UpdateDefaultGroup
+  - UpdateGroup
+- scope: 'ASPM Read-Only: READ'
+  service: ASPM Read-Only
+  access: READ
+  operation_count: 18
+  example_operations:
+  - ExecuteFunctionData
+  - ExecuteFunctionDataCount
+  - ExecuteFunctionDataQuery
+  - ExecuteFunctionDataQueryCount
+  - ExecuteFunctions
+- scope: 'AWS accounts: READ'
+  service: AWS accounts
+  access: READ
+  operation_count: 4
+  example_operations:
+  - GetAWSAccounts
+  - GetAWSSettings
+  - QueryAWSAccounts
+  - QueryAWSAccountsForIDs
+- scope: 'AWS accounts: WRITE'
+  service: AWS accounts
+  access: WRITE
+  operation_count: 5
+  example_operations:
+  - CreateOrUpdateAWSSettings
+  - DeleteAWSAccounts
+  - ProvisionAWSAccounts
+  - UpdateAWSAccounts
+  - VerifyAWSAccountAccess
+- scope: 'Access Scope: READ'
+  service: Access Scope
+  access: READ
+  operation_count: 2
+  example_operations:
+  - ListAccessScopesExternal
+  - QueryAccessScopesExternal
+- scope: 'Actors (Falcon Intelligence): READ'
+  service: Actors (Falcon Intelligence)
+  access: READ
+  operation_count: 6
+  example_operations:
+  - GetIntelActorEntities
+  - GetMitreReport
+  - PostMitreAttacks
+  - QueryIntelActorEntities
+  - QueryIntelActorIds
+- scope: 'Alerts: READ'
+  service: Alerts
+  access: READ
+  operation_count: 7
+  example_operations:
+  - GetQueriesAlertsV1
+  - GetQueriesAlertsV2
+  - PostAggregatesAlertsV1
+  - PostAggregatesAlertsV2
+  - PostCombinedAlertsV1
+- scope: 'Alerts: WRITE'
+  service: Alerts
+  access: WRITE
+  operation_count: 2
+  example_operations:
+  - PatchEntitiesAlertsV2
+  - PatchEntitiesAlertsV3
+- scope: 'Api Client Mgmt: READ'
+  service: Api Client Mgmt
+  access: READ
+  operation_count: 3
+  example_operations:
+  - GetAccessibleScopes
+  - GetAllAPIClientIdsForCustomer
+  - GetAPIClients
+- scope: 'Api Client Mgmt: WRITE'
+  service: Api Client Mgmt
+  access: WRITE
+  operation_count: 4
+  example_operations:
+  - CreateAPIClient
+  - DeleteAPIClients
+  - ResetAPIClientSecret
+  - UpdateAPIClient
+- scope: 'App Logs: READ'
+  service: App Logs
+  access: READ
+  operation_count: 4
+  example_operations:
+  - GetSavedSearchesExecuteV1
+  - GetSavedSearchesJobResultsDownloadV1
+  - ListReposV1
+  - ListViewV1
+- scope: 'App Logs: WRITE'
+  service: App Logs
+  access: WRITE
+  operation_count: 5
+  example_operations:
+  - CreateSavedSearchesDynamicExecuteV1
+  - CreateSavedSearchesExecuteV1
+  - CreateSavedSearchesIngestV1
+  - IngestDataAsyncV1
+  - IngestDataV1
+- scope: 'Apps: READ'
+  service: Apps
+  access: READ
+  operation_count: 1
+  example_operations:
+  - ReadRequestBody
+- scope: 'Assets: READ'
+  service: Assets
+  access: READ
+  operation_count: 22
+  example_operations:
+  - ListCloudGroupIDsExternal
+  - ListCloudGroupsByIDExternal
+  - ListCloudGroupsExternal
+  - combined-applications
+  - combined-hosts
+- scope: 'Assets: WRITE'
+  service: Assets
+  access: WRITE
+  operation_count: 6
+  example_operations:
+  - CreateCloudGroupExternal
+  - DeleteCloudGroupsExternal
+  - UpdateCloudGroupExternal
+  - delete-external-assets
+  - patch-external-assets
+- scope: 'Bulk uninstallation token: WRITE'
+  service: Bulk uninstallation token
+  access: WRITE
+  operation_count: 1
+  example_operations:
+  - incrementUninstallToken
+- scope: 'CAO Hunting: READ'
+  service: CAO Hunting
+  access: READ
+  operation_count: 7
+  example_operations:
+  - AggregateHuntingGuides
+  - AggregateIntelligenceQueries
+  - GetArchiveExport
+  - GetHuntingGuides
+  - GetIntelligenceQueries
+- scope: 'CAO Incidents: READ'
+  service: CAO Incidents
+  access: READ
+  operation_count: 3
+  example_operations:
+  - cao_incidents_aggregates_v1
+  - cao_incidents_entities_v1
+  - cao_incidents_queries_v1
+- scope: 'CSPM registration: READ'
+  service: CSPM registration
+  access: READ
+  operation_count: 18
+  example_operations:
+  - DiscoverCloudAzureDownloadCertificate
+  - GetBehaviorDetections
+  - getCloudEventIDs
+  - GetConfigurationDetectionEntities
+  - GetConfigurationDetectionIDsV2
+- scope: 'CSPM registration: WRITE'
+  service: CSPM registration
+  access: WRITE
+  operation_count: 20
+  example_operations:
+  - AzureRefreshCertificate
+  - ConnectCSPMGCPAccount
+  - CreateCSPMAwsAccount
+  - CreateCSPMAzureAccount
+  - CreateCSPMAzureManagementGroup
+- scope: 'Case Templates: READ'
+  service: Case Templates
+  access: READ
+  operation_count: 20
+  example_operations:
+  - aggregates.access-tags.post.v1
+  - aggregates.notification-groups.post.v1
+  - aggregates.notification-groups.post.v2
+  - aggregates.slas.post.v1
+  - aggregates.templates.post.v1
+- scope: 'Case Templates: WRITE'
+  service: Case Templates
+  access: WRITE
+  operation_count: 13
+  example_operations:
+  - entities.notification-groups.delete.v1
+  - entities.notification-groups.delete.v2
+  - entities.notification-groups.patch.v1
+  - entities.notification-groups.patch.v2
+  - entities.notification-groups.post.v1
+- scope: 'Cases: READ'
+  service: Cases
+  access: READ
+  operation_count: 9
+  example_operations:
+  - aggregates.file-details.post.v1
+  - combined.file-details.get.v1
+  - entities.cases.post.v2
+  - entities.file-details.get.v1
+  - entities.files_bulk-download.post.v1
+- scope: 'Cases: WRITE'
+  service: Cases
+  access: WRITE
+  operation_count: 13
+  example_operations:
+  - entities.alert-evidence.post.v1
+  - entities.case-tags.delete.v1
+  - entities.case-tags.post.v1
+  - entities.cases.patch.v2
+  - entities.cases.put.v2
+- scope: 'Charlotte AI Agent Definition: READ'
+  service: Charlotte AI Agent Definition
+  access: READ
+  operation_count: 19
+  example_operations:
+  - EntitiesAgentTemplatesV1
+  - QueriesAgentTemplatesV1
+  - GetAgentVersionsV1
+  - QueryAgentVersionsV1
+  - CombinedKnowledgeBaseAuditEventsV1
+- scope: 'Charlotte AI Agent Definition: WRITE'
+  service: Charlotte AI Agent Definition
+  access: WRITE
+  operation_count: 5
+  example_operations:
+  - EntitiesKnowledgeBaseFilesCreateV1
+  - EntitiesKnowledgeBaseFilesDeleteV1
+  - EntitiesKnowledgeBaseFilesUpdateV1
+  - EntitiesKnowledgeBasesCreateV1
+  - EntitiesKnowledgeBasesUpdateV1
+- scope: 'Cloud Registration: WRITE'
+  service: Cloud Registration
+  access: WRITE
+  operation_count: 1
+  example_operations:
+  - cloud-registration-cross-provider-get-account-aggregates
+- scope: 'Cloud Security API Assets: READ'
+  service: Cloud Security API Assets
+  access: READ
+  operation_count: 7
+  example_operations:
+  - cloud-security-assets-combined-application-findings
+  - cloud-security-assets-combined-compliance-by-account
+  - cloud-security-assets-entities-get
+  - cloud-security-assets-entities-post
+  - cloud-security-assets-queries
+- scope: 'Cloud Security API Detections: READ'
+  service: Cloud Security API Detections
+  access: READ
+  operation_count: 4
+  example_operations:
+  - cspm-evaluations-combined-iom-by-rule
+  - cspm-evaluations-iom-entities
+  - cspm-evaluations-iom-entities-post
+  - cspm-evaluations-iom-queries
+- scope: 'Cloud Security API Risks: READ'
+  service: Cloud Security API Risks
+  access: READ
+  operation_count: 2
+  example_operations:
+  - combined-cloud-risks
+  - cloud-security-timeline-risks-enriched
+- scope: 'Cloud Security AWS Registration: READ'
+  service: Cloud Security AWS Registration
+  access: READ
+  operation_count: 4
+  example_operations:
+  - cloud-registration-aws-get-accounts
+  - cloud-registration-aws-query-accounts
+  - cloud-registration-aws-trigger-health-check
+  - cloud-registration-aws-validate-accounts
+- scope: 'Cloud Security AWS Registration: WRITE'
+  service: Cloud Security AWS Registration
+  access: WRITE
+  operation_count: 3
+  example_operations:
+  - cloud-registration-aws-create-account
+  - cloud-registration-aws-delete-account
+  - cloud-registration-aws-update-account
+- scope: 'Cloud Security Azure Registration: READ'
+  service: Cloud Security Azure Registration
+  access: READ
+  operation_count: 9
+  example_operations:
+  - cloud-registration-azure-get-issue-suppression-values-by-field
+  - cloud-registration-azure-get-issue-values-by-field
+  - cloud-registration-azure-get-issues
+  - cloud-registration-azure-get-registration
+  - cloud-registration-azure-get-script
+- scope: 'Cloud Security Azure Registration: WRITE'
+  service: Cloud Security Azure Registration
+  access: WRITE
+  operation_count: 8
+  example_operations:
+  - cloud-registration-azure-create-registration
+  - cloud-registration-azure-create-suppressions
+  - cloud-registration-azure-delete-legacy-subscription
+  - cloud-registration-azure-delete-registration
+  - cloud-registration-azure-delete-suppressions
+- scope: 'Cloud Security Google Cloud Registration: READ'
+  service: Cloud Security Google Cloud Registration
+  access: READ
+  operation_count: 2
+  example_operations:
+  - cloud-registration-gcp-get-entities
+  - cloud-registration-gcp-get-registration
+- scope: 'Cloud Security Google Cloud Registration: WRITE'
+  service: Cloud Security Google Cloud Registration
+  access: WRITE
+  operation_count: 6
+  example_operations:
+  - cloud-registration-gcp-create-registration
+  - cloud-registration-gcp-delete-registration
+  - cloud-registration-gcp-post-terraform-script
+  - cloud-registration-gcp-put-registration
+  - cloud-registration-gcp-trigger-health-check
+- scope: 'Cloud Security OCI Registration: READ'
+  service: Cloud Security OCI Registration
+  access: READ
+  operation_count: 2
+  example_operations:
+  - cloud-security-registration-oci-download-script
+  - cloud-security-registration-oci-get-account
+- scope: 'Cloud Security OCI Registration: WRITE'
+  service: Cloud Security OCI Registration
+  access: WRITE
+  operation_count: 5
+  example_operations:
+  - cloud-security-registration-oci-create-account
+  - cloud-security-registration-oci-delete-account
+  - cloud-security-registration-oci-rotate-key
+  - cloud-security-registration-oci-update-account
+  - cloud-security-registration-oci-validate-tenancy
+- scope: 'Cloud Security Policies: READ'
+  service: Cloud Security Policies
+  access: READ
+  operation_count: 11
+  example_operations:
+  - GetComplianceControls
+  - GetComplianceFrameworks
+  - GetEnrichedAsset
+  - GetRule
+  - GetRuleInputSchema
+- scope: 'Cloud Security Policies: WRITE'
+  service: Cloud Security Policies
+  access: WRITE
+  operation_count: 19
+  example_operations:
+  - CloneComplianceFramework
+  - CreateComplianceControl
+  - CreateComplianceFramework
+  - CreateRuleMixin0
+  - CreateRuleOverride
+- scope: 'Cloud Security Tools Download: READ'
+  service: Cloud Security Tools Download
+  access: READ
+  operation_count: 1
+  example_operations:
+  - FetchFilesDownloadInfoV2
+- scope: 'Configuration Assessment: READ'
+  service: Configuration Assessment
+  access: READ
+  operation_count: 3
+  example_operations:
+  - getCombinedAssessmentsQuery
+  - getRuleDetails
+  - getEvaluationLogicMixin0
+- scope: 'Content Update Policy: READ'
+  service: Content Update Policy
+  access: READ
+  operation_count: 6
+  example_operations:
+  - getContentUpdatePolicies
+  - queryCombinedContentUpdatePolicies
+  - queryCombinedContentUpdatePolicyMembers
+  - queryContentUpdatePolicies
+  - queryContentUpdatePolicyMembers
+- scope: 'Content Update Policy: WRITE'
+  service: Content Update Policy
+  access: WRITE
+  operation_count: 5
+  example_operations:
+  - createContentUpdatePolicies
+  - deleteContentUpdatePolicies
+  - performContentUpdatePoliciesAction
+  - setContentUpdatePoliciesPrecedence
+  - updateContentUpdatePolicies
+- scope: 'Correlation Rules Admin: WRITE'
+  service: Correlation Rules Admin
+  access: WRITE
+  operation_count: 2
+  example_operations:
+  - entities.rules_ownership.put.v1
+  - entities.rules_ownership.put.v2
+- scope: 'Correlation Rules: READ'
+  service: Correlation Rules
+  access: READ
+  operation_count: 9
+  example_operations:
+  - combined.rules.get.v1
+  - combined.rules.get.v2
+  - entities.latest-rules.get.v1
+  - entities.rules.get.v1
+  - entities.rules.get.v2
+- scope: 'Correlation Rules: WRITE'
+  service: Correlation Rules
+  access: WRITE
+  operation_count: 9
+  example_operations:
+  - aggregates.rule-versions.post.v1
+  - entities.rule-versions.delete.v1
+  - entities.rule-versions_export.post.v1
+  - entities.rule-versions_import.post.v1
+  - entities.rule-versions_publish.patch.v1
+- scope: 'Custom IOA rules: READ'
+  service: Custom IOA rules
+  access: READ
+  operation_count: 12
+  example_operations:
+  - get-patterns
+  - get-platformsMixin0
+  - get-rule-groupsMixin0
+  - get-rule-types
+  - get-rules-get
+- scope: 'Custom IOA rules: WRITE'
+  service: Custom IOA rules
+  access: WRITE
+  operation_count: 8
+  example_operations:
+  - create-rule
+  - create-rule-groupMixin0
+  - delete-rule-groupsMixin0
+  - delete-rules
+  - update-rule-groupMixin0
+- scope: 'Custom storage: READ'
+  service: Custom storage
+  access: READ
+  operation_count: 14
+  example_operations:
+  - DescribeCollection
+  - DescribeCollections
+  - GetObject
+  - GetObjectMetadata
+  - GetSchema
+- scope: 'Custom storage: WRITE'
+  service: Custom storage
+  access: WRITE
+  operation_count: 4
+  example_operations:
+  - DeleteObject
+  - DeleteVersionedObject
+  - PutObject
+  - PutObjectByVersion
+- scope: 'D4C registration: READ'
+  service: D4C registration
+  access: READ
+  operation_count: 12
+  example_operations:
+  - GetD4CAwsAccount
+  - GetD4CAWSAccountScriptsAttachment
+  - GetD4CAwsConsoleSetupURLs
+  - GetD4CCGPAccount
+  - GetD4CGCPServiceAccountsExt
+- scope: 'D4C registration: WRITE'
+  service: D4C registration
+  access: WRITE
+  operation_count: 8
+  example_operations:
+  - ConnectD4CGCPAccount
+  - CreateD4CAwsAccount
+  - CreateD4CGCPAccount
+  - CreateDiscoverCloudAzureAccount
+  - DeleteD4CAwsAccount
+- scope: 'Data Protection: READ'
+  service: Data Protection
+  access: READ
+  operation_count: 22
+  example_operations:
+  - entities.classification.get.v2
+  - entities.cloud-application.get
+  - entities.content-pattern.get
+  - entities.enterprise-account.get
+  - entities.file-type.get
+- scope: 'Data Protection: WRITE'
+  service: Data Protection
+  access: WRITE
+  operation_count: 30
+  example_operations:
+  - entities.classification.delete.v2
+  - entities.classification.patch.v2
+  - entities.classification.post.v2
+  - entities.cloud-application.create
+  - entities.cloud-application.delete
+- scope: 'Delete Managed Assets: WRITE'
+  service: Delete Managed Assets
+  access: WRITE
+  operation_count: 1
+  example_operations:
+  - DevicesActionsDeleteV1
+- scope: 'Delivery Settings: READ'
+  service: Delivery Settings
+  access: READ
+  operation_count: 1
+  example_operations:
+  - GetDeliverySettings
+- scope: 'Delivery Settings: WRITE'
+  service: Delivery Settings
+  access: WRITE
+  operation_count: 1
+  example_operations:
+  - PostDeliverySettings
+- scope: 'Deployment Coordinator: READ'
+  service: Deployment Coordinator
+  access: READ
+  operation_count: 6
+  example_operations:
+  - CombinedReleaseNotesV1
+  - CombinedReleasesV1Mixin0
+  - GetDeploymentsExternalV1
+  - GetEntityIDsByQueryPOST
+  - GetEntityIDsByQueryPOSTV2
+- scope: 'Detections: READ'
+  service: Detections
+  access: READ
+  operation_count: 3
+  example_operations:
+  - GetAggregateDetects
+  - GetDetectSummaries
+  - QueryDetects
+- scope: 'Detections: WRITE'
+  service: Detections
+  access: WRITE
+  operation_count: 1
+  example_operations:
+  - UpdateDetectsByIdsV2
+- scope: 'Device Content: READ'
+  service: Device Content
+  access: READ
+  operation_count: 2
+  example_operations:
+  - entities.states.v1
+  - queries.states.v1
+- scope: 'Device control policies: READ'
+  service: Device control policies
+  access: READ
+  operation_count: 8
+  example_operations:
+  - getDefaultDeviceControlPolicies
+  - getDefaultDeviceControlSettings
+  - getDeviceControlPolicies
+  - getDeviceControlPoliciesV2
+  - queryCombinedDeviceControlPolicies
+- scope: 'Device control policies: WRITE'
+  service: Device control policies
+  access: WRITE
+  operation_count: 10
+  example_operations:
+  - createDeviceControlPolicies
+  - deleteDeviceControlPolicies
+  - patchDeviceControlPoliciesClassesV1
+  - patchDeviceControlPoliciesV2
+  - performDeviceControlPoliciesAction
+- scope: 'Event streams: READ'
+  service: Event streams
+  access: READ
+  operation_count: 2
+  example_operations:
+  - listAvailableStreamsOAuth2
+  - refreshActiveStreamSession
+- scope: 'Falcon Complete Dashboard: READ'
+  service: Falcon Complete Dashboard
+  access: READ
+  operation_count: 17
+  example_operations:
+  - AggregateAlerts
+  - AggregateAllowList
+  - AggregateBlockList
+  - AggregateDeviceCountCollection
+  - AggregateEscalations
+- scope: 'Falcon Container CLI: READ'
+  service: Falcon Container CLI
+  access: READ
+  operation_count: 2
+  example_operations:
+  - GetCredentials
+  - HeadImageScanInventory
+- scope: 'Falcon Container CLI: WRITE'
+  service: Falcon Container CLI
+  access: WRITE
+  operation_count: 2
+  example_operations:
+  - PostImageScanInventory
+  - ReadImageVulnerabilities
+- scope: 'Falcon Container Image: READ'
+  service: Falcon Container Image
+  access: READ
+  operation_count: 128
+  example_operations:
+  - ReadContainerAlertsCount
+  - ReadContainerAlertsCountBySeverity
+  - SearchAndReadContainerAlerts
+  - GetRuntimeDetectionsCombinedV2
+  - ReadCombinedDetections
+- scope: 'Falcon Container Image: WRITE'
+  service: Falcon Container Image
+  access: WRITE
+  operation_count: 15
+  example_operations:
+  - CreateBaseImagesEntities
+  - DeleteBaseImages
+  - CreateRegistryEntities
+  - DeleteRegistryEntities
+  - UpdateRegistryEntities
+- scope: 'Falcon Container Policies: READ'
+  service: Falcon Container Policies
+  access: READ
+  operation_count: 2
+  example_operations:
+  - admission-control-get-policies
+  - admission-control-query-policies
+- scope: 'Falcon Container Policies: WRITE'
+  service: Falcon Container Policies
+  access: WRITE
+  operation_count: 13
+  example_operations:
+  - admission-control-add-host-groups
+  - admission-control-add-rule-group-custom-rule
+  - admission-control-create-policy
+  - admission-control-create-rule-groups
+  - admission-control-delete-policies
+- scope: 'Falcon Data Replicator: READ'
+  service: Falcon Data Replicator
+  access: READ
+  operation_count: 5
+  example_operations:
+  - fdrschema.combined.event.get
+  - fdrschema.entities.event.get
+  - fdrschema.entities.field.get
+  - fdrschema.queries.event.get
+  - fdrschema.queries.field.get
+- scope: 'Falcon Discover IoT: READ'
+  service: Falcon Discover IoT
+  access: READ
+  operation_count: 3
+  example_operations:
+  - get-iot-hosts
+  - query-iot-hosts
+  - query-iot-hostsV2
+- scope: 'Falcon FileVantage Content: READ'
+  service: Falcon FileVantage Content
+  access: READ
+  operation_count: 1
+  example_operations:
+  - getContents
+- scope: 'Falcon FileVantage: READ'
+  service: Falcon FileVantage
+  access: READ
+  operation_count: 12
+  example_operations:
+  - getActionsMixin0
+  - getChanges
+  - getPolicies
+  - getRuleGroups
+  - getRules
+- scope: 'Falcon FileVantage: WRITE'
+  service: Falcon FileVantage
+  access: WRITE
+  operation_count: 18
+  example_operations:
+  - createPolicies
+  - createRuleGroups
+  - createRules
+  - createScheduledExclusions
+  - deletePolicies
+- scope: 'Falcon Id: READ'
+  service: Falcon Id
+  access: READ
+  operation_count: 2
+  example_operations:
+  - GetThirdPartyPasskeyRegistry
+  - QueryThirdPartyPasskeyRegistry
+- scope: 'Falcon Id: WRITE'
+  service: Falcon Id
+  access: WRITE
+  operation_count: 2
+  example_operations:
+  - DeleteThirdPartyPasskeyRegistry
+  - UpdateThirdPartyPasskeyRegistry
+- scope: 'Falcon Indicator Graph: READ'
+  service: Falcon Indicator Graph
+  access: READ
+  operation_count: 5
+  example_operations:
+  - DownloadFeedArchive
+  - ListFeedTypes
+  - QueryFeedArchives
+  - LookupIndicators
+  - SearchIndicators
+- scope: 'Firewall management: READ'
+  service: Firewall management
+  access: READ
+  operation_count: 20
+  example_operations:
+  - get-events
+  - get-firewall-fields
+  - get-network-locations
+  - get-network-locations-details
+  - get-platforms
+- scope: 'Firewall management: WRITE'
+  service: Firewall management
+  access: WRITE
+  operation_count: 23
+  example_operations:
+  - aggregate-events
+  - aggregate-policy-rules
+  - aggregate-rule-groups
+  - aggregate-rules
+  - create-network-locations
+- scope: 'Flight Control: READ'
+  service: Flight Control
+  access: READ
+  operation_count: 17
+  example_operations:
+  - getChildren
+  - getChildrenV2
+  - getCIDGroupByIdV1
+  - getCIDGroupByIdV2
+  - getCIDGroupMembersByV1
+- scope: 'Flight Control: WRITE'
+  service: Flight Control
+  access: WRITE
+  operation_count: 13
+  example_operations:
+  - addCIDGroupMembers
+  - addRole
+  - addUserGroupMembers
+  - createCIDGroups
+  - createUserGroups
+- scope: 'Host Migration: READ'
+  service: Host Migration
+  access: READ
+  operation_count: 5
+  example_operations:
+  - GetHostMigrationIDsV1
+  - GetHostMigrationsV1
+  - GetMigrationDestinationsV1
+  - GetMigrationIDsV1
+  - GetMigrationsV1
+- scope: 'Host Migration: WRITE'
+  service: Host Migration
+  access: WRITE
+  operation_count: 5
+  example_operations:
+  - CreateMigrationV1
+  - HostMigrationAggregatesV1
+  - HostMigrationsActionsV1
+  - MigrationAggregatesV1
+  - MigrationsActionsV1
+- scope: 'Host groups: READ'
+  service: Host groups
+  access: READ
+  operation_count: 5
+  example_operations:
+  - getHostGroups
+  - queryCombinedGroupMembers
+  - queryCombinedHostGroups
+  - queryGroupMembers
+  - queryHostGroups
+- scope: 'Host groups: WRITE'
+  service: Host groups
+  access: WRITE
+  operation_count: 5
+  example_operations:
+  - createHostGroups
+  - deleteHostGroups
+  - performGroupAction
+  - updateHostGroups
+  - entities.perform_action
+- scope: 'Hosts: READ'
+  service: Hosts
+  access: READ
+  operation_count: 12
+  example_operations:
+  - CombinedDevicesByFilter
+  - CombinedHiddenDevicesByFilter
+  - GetDeviceDetails
+  - GetDeviceDetailsV2
+  - GetOnlineState.V1
+- scope: 'Hosts: WRITE'
+  service: Hosts
+  access: WRITE
+  operation_count: 2
+  example_operations:
+  - PerformActionV2
+  - UpdateDeviceTags
+- scope: 'IOA Exclusions: READ'
+  service: IOA Exclusions
+  access: READ
+  operation_count: 4
+  example_operations:
+  - getIOAExclusionsV1
+  - queryIOAExclusionsV1
+  - ss-ioa-exclusions.get.v2
+  - ss-ioa-exclusions.search.v2
+- scope: 'IOA Exclusions: WRITE'
+  service: IOA Exclusions
+  access: WRITE
+  operation_count: 10
+  example_operations:
+  - createIOAExclusionsV1
+  - deleteIOAExclusionsV1
+  - ss-ioa-exclusions.aggregates.v2
+  - ss-ioa-exclusions.create.v2
+  - ss-ioa-exclusions.delete.v2
+- scope: 'IOC Management: READ'
+  service: IOC Management
+  access: READ
+  operation_count: 13
+  example_operations:
+  - action.get.v1
+  - action.query.v1
+  - GetIndicatorsReport
+  - indicator.aggregate.v1
+  - indicator.combined.v1
+- scope: 'IOC Management: WRITE'
+  service: IOC Management
+  access: WRITE
+  operation_count: 4
+  example_operations:
+  - indicator.create.v1
+  - indicator.delete.v1
+  - indicator.sdmf-query.v1
+  - indicator.update.v1
+- scope: 'IOCs (Indicators of Compromise): READ'
+  service: IOCs (Indicators of Compromise)
+  access: READ
+  operation_count: 4
+  example_operations:
+  - DevicesCount
+  - DevicesRanOn
+  - entities.processes
+  - ProcessesRanOn
+- scope: 'IT Automation - Policies: READ'
+  service: IT Automation - Policies
+  access: READ
+  operation_count: 2
+  example_operations:
+  - ITAutomationGetPolicies
+  - ITAutomationQueryPolicies
+- scope: 'IT Automation - Policies: WRITE'
+  service: IT Automation - Policies
+  access: WRITE
+  operation_count: 5
+  example_operations:
+  - ITAutomationCreatePolicy
+  - ITAutomationDeletePolicy
+  - ITAutomationUpdatePolicies
+  - ITAutomationUpdatePoliciesPrecedence
+  - ITAutomationUpdatePolicyHostGroups
+- scope: 'IT Automation - Task Executions: READ'
+  service: IT Automation - Task Executions
+  access: READ
+  operation_count: 10
+  example_operations:
+  - ITAutomationCombinedScheduledTasks
+  - ITAutomationGetExecutionResults
+  - ITAutomationGetExecutionResultsSearchStatus
+  - ITAutomationGetScheduledTasks
+  - ITAutomationGetTaskExecution
+- scope: 'IT Automation - Task Executions: WRITE'
+  service: IT Automation - Task Executions
+  access: WRITE
+  operation_count: 7
+  example_operations:
+  - ITAutomationCancelTaskExecution
+  - ITAutomationCreateScheduledTask
+  - ITAutomationDeleteScheduledTasks
+  - ITAutomationRerunTaskExecution
+  - ITAutomationRunLiveQuery
+- scope: 'IT Automation - Tasks: READ'
+  service: IT Automation - Tasks
+  access: READ
+  operation_count: 7
+  example_operations:
+  - ITAutomationGetAssociatedTasks
+  - ITAutomationGetTaskGroups
+  - ITAutomationGetTaskGroupsByQuery
+  - ITAutomationGetTasks
+  - ITAutomationGetTasksByQuery
+- scope: 'IT Automation - Tasks: WRITE'
+  service: IT Automation - Tasks
+  access: WRITE
+  operation_count: 6
+  example_operations:
+  - ITAutomationCreateTask
+  - ITAutomationCreateTaskGroup
+  - ITAutomationDeleteTask
+  - ITAutomationDeleteTaskGroups
+  - ITAutomationUpdateTask
+- scope: 'IT Automation - User Groups: READ'
+  service: IT Automation - User Groups
+  access: READ
+  operation_count: 2
+  example_operations:
+  - ITAutomationGetUserGroup
+  - ITAutomationSearchUserGroup
+- scope: 'IT Automation - User Groups: WRITE'
+  service: IT Automation - User Groups
+  access: WRITE
+  operation_count: 3
+  example_operations:
+  - ITAutomationCreateUserGroup
+  - ITAutomationDeleteUserGroup
+  - ITAutomationUpdateUserGroup
+- scope: 'Identity Protection Entities: READ'
+  service: Identity Protection Entities
+  access: READ
+  operation_count: 3
+  example_operations:
+  - GetSensorAggregates
+  - GetSensorDetails
+  - QuerySensorsByFilter
+- scope: 'Identity Protection GraphQL: WRITE'
+  service: Identity Protection GraphQL
+  access: WRITE
+  operation_count: 1
+  example_operations:
+  - api_preempt_proxy_post_graphql
+- scope: 'Identity Protection Policy Rules: READ'
+  service: Identity Protection Policy Rules
+  access: READ
+  operation_count: 4
+  example_operations:
+  - get_policy_rules
+  - get_policy_rules
+  - get_policy_rules_query
+  - get_policy_rules_query
+- scope: 'Identity Protection Policy Rules: WRITE'
+  service: Identity Protection Policy Rules
+  access: WRITE
+  operation_count: 4
+  example_operations:
+  - delete_policy_rules
+  - delete_policy_rules
+  - post_policy_rules
+  - post_policy_rules
+- scope: 'Indicators (Falcon Intelligence): READ'
+  service: Indicators (Falcon Intelligence)
+  access: READ
+  operation_count: 3
+  example_operations:
+  - GetIntelIndicatorEntities
+  - QueryIntelIndicatorEntities
+  - QueryIntelIndicatorIds
+- scope: 'Infrastructure as Code (IaC): READ'
+  service: Infrastructure as Code (IaC)
+  access: READ
+  operation_count: 5
+  example_operations:
+  - CombinedDetections
+  - GetCredentialsIAC
+  - DownloadFile
+  - EnumerateFile
+  - FetchFilesDownloadInfo
+- scope: 'Installation Tokens Settings: WRITE'
+  service: Installation Tokens Settings
+  access: WRITE
+  operation_count: 1
+  example_operations:
+  - customer-settings-update
+- scope: 'Installation Tokens: READ'
+  service: Installation Tokens
+  access: READ
+  operation_count: 5
+  example_operations:
+  - audit-events-query
+  - audit-events-read
+  - customer-settings-read
+  - tokens-query
+  - tokens-read
+- scope: 'Installation Tokens: WRITE'
+  service: Installation Tokens
+  access: WRITE
+  operation_count: 3
+  example_operations:
+  - tokens-create
+  - tokens-delete
+  - tokens-update
+- scope: 'Kubernetes Protection: READ'
+  service: Kubernetes Protection
+  access: READ
+  operation_count: 10
+  example_operations:
+  - GetAWSAccountsMixin0
+  - GetAzureInstallScript
+  - GetAzureTenantConfig
+  - GetAzureTenantIDs
+  - GetClusters
+- scope: 'Kubernetes Protection: WRITE'
+  service: Kubernetes Protection
+  access: WRITE
+  operation_count: 8
+  example_operations:
+  - CreateAWSAccount
+  - CreateAzureSubscription
+  - DeleteAWSAccountsMixin0
+  - DeleteAzureSubscription
+  - PatchAzureServicePrincipal
+- scope: 'Machine Learning Exclusions: READ'
+  service: Machine Learning Exclusions
+  access: READ
+  operation_count: 8
+  example_operations:
+  - cb-exclusions.get.v1
+  - cb-exclusions.query.v1
+  - certificates.get.v1
+  - exclusions.get-all.v2
+  - exclusions.get.v2
+- scope: 'Machine Learning Exclusions: WRITE'
+  service: Machine Learning Exclusions
+  access: WRITE
+  operation_count: 13
+  example_operations:
+  - cb-exclusions.create.v1
+  - cb-exclusions.delete.v1
+  - cb-exclusions.update.v1
+  - createMLExclusionsV1
+  - deleteMLExclusionsV1
+- scope: 'MalQuery: READ'
+  service: MalQuery
+  access: READ
+  operation_count: 5
+  example_operations:
+  - GetMalQueryDownloadV1
+  - GetMalQueryEntitiesSamplesFetchV1
+  - GetMalQueryMetadataV1
+  - GetMalQueryQuotasV1
+  - GetMalQueryRequestV1
+- scope: 'MalQuery: WRITE'
+  service: MalQuery
+  access: WRITE
+  operation_count: 4
+  example_operations:
+  - PostMalQueryEntitiesSamplesMultidownloadV1
+  - PostMalQueryExactSearchV1
+  - PostMalQueryFuzzySearchV1
+  - PostMalQueryHuntV1
+- scope: 'Malware Families (Falcon Intelligence): READ'
+  service: Malware Families (Falcon Intelligence)
+  access: READ
+  operation_count: 5
+  example_operations:
+  - GetMalwareEntities
+  - GetMalwareMitreReport
+  - QueryMalware
+  - QueryMalwareEntities
+  - QueryMitreAttacksForMalware
+- scope: 'Message Center: READ'
+  service: Message Center
+  access: READ
+  operation_count: 6
+  example_operations:
+  - AggregateCases
+  - CaseDownloadAttachment
+  - GetCaseActivityByIds
+  - GetCaseEntitiesByIDs
+  - QueryActivityByCaseID
+- scope: 'Message Center: WRITE'
+  service: Message Center
+  access: WRITE
+  operation_count: 3
+  example_operations:
+  - CaseAddActivity
+  - CaseAddAttachment
+  - CreateCaseV2
+- scope: 'Mobile Enrollment: WRITE'
+  service: Mobile Enrollment
+  access: WRITE
+  operation_count: 2
+  example_operations:
+  - RequestDeviceEnrollmentV3
+  - RequestDeviceEnrollmentV4
+- scope: 'Monitoring rules (Falcon Intelligence Recon): READ'
+  service: Monitoring rules (Falcon Intelligence Recon)
+  access: READ
+  operation_count: 16
+  example_operations:
+  - AggregateNotificationsExposedDataRecordsV1
+  - AggregateNotificationsV1
+  - GetActionsV1
+  - GetExportJobsV1
+  - GetFileContentForExportJobsV1
+- scope: 'Monitoring rules (Falcon Intelligence Recon): WRITE'
+  service: Monitoring rules (Falcon Intelligence Recon)
+  access: WRITE
+  operation_count: 10
+  example_operations:
+  - CreateActionsV1
+  - CreateExportJobsV1
+  - CreateRulesV1
+  - DeleteActionV1
+  - DeleteExportJobsV1
+- scope: 'NGSIEM Dashboards: READ'
+  service: NGSIEM Dashboards
+  access: READ
+  operation_count: 2
+  example_operations:
+  - GetDashboardTemplate
+  - ListDashboards
+- scope: 'NGSIEM Dashboards: WRITE'
+  service: NGSIEM Dashboards
+  access: WRITE
+  operation_count: 11
+  example_operations:
+  - addDashboardLabels
+  - bulkAddDashboardLabels
+  - BulkCreateDashboardsFromTemplate
+  - bulkRemoveDashboardLabels
+  - bulkUpdateDashboardLabels
+- scope: 'NGSIEM Data Connections API: READ'
+  service: NGSIEM Data Connections API
+  access: READ
+  operation_count: 6
+  example_operations:
+  - ExternalGetDataConnectionByID
+  - ExternalGetDataConnectionStatus
+  - ExternalGetDataConnectionToken
+  - ExternalListConnectorConfigs
+  - ExternalListDataConnections
+- scope: 'NGSIEM Data Connections API: WRITE'
+  service: NGSIEM Data Connections API
+  access: WRITE
+  operation_count: 11
+  example_operations:
+  - DeleteFederatedConnectionsConfig
+  - PatchFederatedConnectionsConfig
+  - PostFederatedConnectionsConfig
+  - ExternalCreateConnectorConfig
+  - ExternalCreateDataConnection
+- scope: 'NGSIEM Lookup Files: READ'
+  service: NGSIEM Lookup Files
+  access: READ
+  operation_count: 3
+  example_operations:
+  - BulkGetLookupFiles
+  - GetLookupFile
+  - ListLookupFiles
+- scope: 'NGSIEM Lookup Files: WRITE'
+  service: NGSIEM Lookup Files
+  access: WRITE
+  operation_count: 12
+  example_operations:
+  - addFileLabels
+  - bulkAddLookupFileLabels
+  - BulkCreateLookupFiles
+  - bulkRemoveLookupFileLabels
+  - bulkUpdateLookupFileLabels
+- scope: 'NGSIEM Parsers: READ'
+  service: NGSIEM Parsers
+  access: READ
+  operation_count: 4
+  example_operations:
+  - GetParser
+  - GetParserTemplate
+  - ListParsers
+  - TestParserFromTemplate
+- scope: 'NGSIEM Parsers: WRITE'
+  service: NGSIEM Parsers
+  access: WRITE
+  operation_count: 11
+  example_operations:
+  - BulkInstallParsers
+  - CloneParser
+  - CreateParser
+  - CreateParserExtension
+  - CreateParserFromTemplate
+- scope: 'NGSIEM Saved Queries: READ'
+  service: NGSIEM Saved Queries
+  access: READ
+  operation_count: 2
+  example_operations:
+  - GetSavedQueryTemplate
+  - ListSavedQueries
+- scope: 'NGSIEM Saved Queries: WRITE'
+  service: NGSIEM Saved Queries
+  access: WRITE
+  operation_count: 11
+  example_operations:
+  - addSavedQueryLabels
+  - bulkAddSavedQueryLabels
+  - BulkCreateSavedQueriesFromTemplate
+  - bulkRemoveSavedQueryLabels
+  - BulkUpdateSavedQueriesFromTemplate
+- scope: 'NGSIEM: READ'
+  service: NGSIEM
+  access: READ
+  operation_count: 4
+  example_operations:
+  - GetLookupFromPackageV1
+  - GetLookupFromPackageWithNamespaceV1
+  - GetLookupV1
+  - GetSearchStatusV1
+- scope: 'NGSIEM: WRITE'
+  service: NGSIEM
+  access: WRITE
+  operation_count: 3
+  example_operations:
+  - StartSearchV1
+  - StopSearchV1
+  - UploadLookupV1
+- scope: 'Network scanning: READ'
+  service: Network scanning
+  access: READ
+  operation_count: 21
+  example_operations:
+  - get-global-configs
+  - aggregate-networks
+  - get-networks
+  - query-networks
+  - get-scan-run-reports
+- scope: 'Network scanning: WRITE'
+  service: Network scanning
+  access: WRITE
+  operation_count: 16
+  example_operations:
+  - update-global-configs
+  - create-networks
+  - delete-networks
+  - update-networks
+  - create-scan-runs
+- scope: 'On-demand scans (ODS): READ'
+  service: On-demand scans (ODS)
+  access: READ
+  operation_count: 11
+  example_operations:
+  - aggregate-scans
+  - aggregate-scheduled-scans
+  - get-malicious-files-by-ids
+  - get-scan-host-metadata-by-ids
+  - get-scans-by-scan-ids
+- scope: 'On-demand scans (ODS): WRITE'
+  service: On-demand scans (ODS)
+  access: WRITE
+  operation_count: 5
+  example_operations:
+  - aggregate-query-scan-host-metadata
+  - cancel-scans
+  - create-scan
+  - delete-scheduled-scans
+  - schedule-scan
+- scope: 'Prevention policies: READ'
+  service: Prevention policies
+  access: READ
+  operation_count: 5
+  example_operations:
+  - getPreventionPolicies
+  - queryCombinedPreventionPolicies
+  - queryCombinedPreventionPolicyMembers
+  - queryPreventionPolicies
+  - queryPreventionPolicyMembers
+- scope: 'Prevention policies: WRITE'
+  service: Prevention policies
+  access: WRITE
+  operation_count: 5
+  example_operations:
+  - createPreventionPolicies
+  - deletePreventionPolicies
+  - performPreventionPoliciesAction
+  - setPreventionPoliciesPrecedence
+  - updatePreventionPolicies
+- scope: 'Quarantined Files: READ'
+  service: Quarantined Files
+  access: READ
+  operation_count: 4
+  example_operations:
+  - ActionUpdateCount
+  - GetAggregateFiles
+  - GetQuarantineFiles
+  - QueryQuarantineFiles
+- scope: 'Quarantined Files: WRITE'
+  service: Quarantined Files
+  access: WRITE
+  operation_count: 2
+  example_operations:
+  - UpdateQfByQuery
+  - UpdateQuarantinedDetectsByIds
+- scope: 'Quick Scan (Falcon Intelligence): READ'
+  service: Quick Scan (Falcon Intelligence)
+  access: READ
+  operation_count: 3
+  example_operations:
+  - GetScans
+  - GetScansAggregates
+  - QuerySubmissionsMixin0
+- scope: 'Quick Scan (Falcon Intelligence): WRITE'
+  service: Quick Scan (Falcon Intelligence)
+  access: WRITE
+  operation_count: 1
+  example_operations:
+  - ScanSamples
+- scope: 'QuickScan Pro: READ'
+  service: QuickScan Pro
+  access: READ
+  operation_count: 2
+  example_operations:
+  - GetScanResult
+  - QueryScanResults
+- scope: 'QuickScan Pro: WRITE'
+  service: QuickScan Pro
+  access: WRITE
+  operation_count: 5
+  example_operations:
+  - DeleteFile
+  - DeleteScanResult
+  - LaunchScan
+  - UploadFileMixin0Mixin94
+  - UploadFileQuickScanPro
+- scope: 'Real time response (admin): WRITE'
+  service: Real time response (admin)
+  access: WRITE
+  operation_count: 20
+  example_operations:
+  - BatchAdminCmd
+  - RTR-CheckAdminCommandStatus
+  - RTR-CreatePut-Files
+  - RTR-CreatePut-FilesV2
+  - RTR-CreateScripts
+- scope: 'Real time response audit: READ'
+  service: Real time response audit
+  access: READ
+  operation_count: 1
+  example_operations:
+  - RTRAuditSessions
+- scope: 'Real time response: READ'
+  service: Real time response
+  access: READ
+  operation_count: 13
+  example_operations:
+  - BatchCmd
+  - BatchInitSessions
+  - BatchRefreshSessions
+  - RTR-AggregateSessions
+  - RTR-CheckCommandStatus
+- scope: 'Real time response: WRITE'
+  service: Real time response
+  access: WRITE
+  operation_count: 10
+  example_operations:
+  - BatchActiveResponderCmd
+  - BatchGetCmd
+  - BatchGetCmdStatus
+  - RTR-CheckActiveResponderCommandStatus
+  - RTR-DeleteFile
+- scope: 'Reports (Falcon Intelligence): READ'
+  service: Reports (Falcon Intelligence)
+  access: READ
+  operation_count: 4
+  example_operations:
+  - GetIntelReportEntities
+  - GetIntelReportPDF
+  - QueryIntelReportEntities
+  - QueryIntelReportIds
+- scope: 'Response policies: READ'
+  service: Response policies
+  access: READ
+  operation_count: 5
+  example_operations:
+  - getRTResponsePolicies
+  - queryCombinedRTResponsePolicies
+  - queryCombinedRTResponsePolicyMembers
+  - queryRTResponsePolicies
+  - queryRTResponsePolicyMembers
+- scope: 'Response policies: WRITE'
+  service: Response policies
+  access: WRITE
+  operation_count: 5
+  example_operations:
+  - createRTResponsePolicies
+  - deleteRTResponsePolicies
+  - performRTResponsePoliciesAction
+  - setRTResponsePoliciesPrecedence
+  - updateRTResponsePolicies
+- scope: 'Risk Platform - Risk: READ'
+  service: Risk Platform - Risk
+  access: READ
+  operation_count: 2
+  example_operations:
+  - combinedSupportedEvaluationExt
+  - combineVulnMetadataExt
+- scope: 'Rules (Falcon Intelligence): READ'
+  service: Rules (Falcon Intelligence)
+  access: READ
+  operation_count: 4
+  example_operations:
+  - GetIntelRuleEntities
+  - GetIntelRuleFile
+  - GetLatestIntelRuleFile
+  - QueryIntelRuleIds
+- scope: 'SaaS Security (Falcon Shield): READ'
+  service: SaaS Security (Falcon Shield)
+  access: READ
+  operation_count: 16
+  example_operations:
+  - GetActivityMonitorV3
+  - GetAlertsV3
+  - GetAppInventory
+  - GetAppInventoryUsers
+  - GetAssetInventoryV3
+- scope: 'SaaS Security (Falcon Shield): WRITE'
+  service: SaaS Security (Falcon Shield)
+  access: WRITE
+  operation_count: 5
+  example_operations:
+  - DismissAffectedEntityV3
+  - DismissSecurityCheckV3
+  - IntegrationBuilderEndTransactionV3
+  - IntegrationBuilderResetV3
+  - IntegrationBuilderUploadV3
+- scope: 'Sample uploads: READ'
+  service: Sample uploads
+  access: READ
+  operation_count: 5
+  example_operations:
+  - ArchiveGetV1
+  - ArchiveListV1
+  - ExtractionGetV1
+  - ExtractionListV1
+  - GetSampleV3
+- scope: 'Sample uploads: WRITE'
+  service: Sample uploads
+  access: WRITE
+  operation_count: 6
+  example_operations:
+  - ArchiveDeleteV1
+  - ArchiveUploadV1
+  - ArchiveUploadV2
+  - DeleteSampleV3
+  - ExtractionCreateV1
+- scope: 'Sandbox (Falcon Intelligence): READ'
+  service: Sandbox (Falcon Intelligence)
+  access: READ
+  operation_count: 11
+  example_operations:
+  - GetArtifacts
+  - GetMemoryDump
+  - GetMemoryDumpExtractedStrings
+  - GetMemoryDumpHexDump
+  - GetReports
+- scope: 'Sandbox (Falcon Intelligence): WRITE'
+  service: Sandbox (Falcon Intelligence)
+  access: WRITE
+  operation_count: 4
+  example_operations:
+  - DeleteReport
+  - DeleteSampleV2
+  - Submit
+  - UploadSampleV2
+- scope: 'Scheduled Reports: READ'
+  service: Scheduled Reports
+  access: READ
+  operation_count: 7
+  example_operations:
+  - report-executions-download.get
+  - report-executions.get
+  - report-executions.query
+  - report-executions.retry
+  - scheduled-reports.get
+- scope: 'Sensor Download: READ'
+  service: Sensor Download
+  access: READ
+  operation_count: 13
+  example_operations:
+  - DownloadSensorInstallerById
+  - DownloadSensorInstallerByIdV2
+  - DownloadSensorInstallerByIdV3
+  - GetCombinedSensorInstallersByQuery
+  - GetCombinedSensorInstallersByQueryV2
+- scope: 'Sensor Usage: READ'
+  service: Sensor Usage
+  access: READ
+  operation_count: 2
+  example_operations:
+  - GetSensorUsageHourly
+  - GetSensorUsageWeekly
+- scope: 'Sensor Visibility Exclusions: READ'
+  service: Sensor Visibility Exclusions
+  access: READ
+  operation_count: 2
+  example_operations:
+  - getSensorVisibilityExclusionsV1
+  - querySensorVisibilityExclusionsV1
+- scope: 'Sensor Visibility Exclusions: WRITE'
+  service: Sensor Visibility Exclusions
+  access: WRITE
+  operation_count: 3
+  example_operations:
+  - createSVExclusionsV1
+  - deleteSensorVisibilityExclusionsV1
+  - updateSensorVisibilityExclusionsV1
+- scope: 'Sensor update policies: READ'
+  service: Sensor update policies
+  access: READ
+  operation_count: 10
+  example_operations:
+  - getSensorUpdatePolicies
+  - getSensorUpdatePoliciesV2
+  - queryCombinedSensorUpdateBuilds
+  - queryCombinedSensorUpdateKernels
+  - queryCombinedSensorUpdatePolicies
+- scope: 'Sensor update policies: WRITE'
+  service: Sensor update policies
+  access: WRITE
+  operation_count: 8
+  example_operations:
+  - createSensorUpdatePolicies
+  - createSensorUpdatePoliciesV2
+  - deleteSensorUpdatePolicies
+  - performSensorUpdatePoliciesAction
+  - revealUninstallToken
+- scope: 'Snapshot Scanner Image Download: READ'
+  service: Snapshot Scanner Image Download
+  access: READ
+  operation_count: 1
+  example_operations:
+  - GetCredentialsMixin0
+- scope: 'Snapshot: READ'
+  service: Snapshot
+  access: READ
+  operation_count: 3
+  example_operations:
+  - GetScanReport
+  - ReadDeploymentsCombined
+  - ReadDeploymentsEntities
+- scope: 'Snapshot: WRITE'
+  service: Snapshot
+  access: WRITE
+  operation_count: 2
+  example_operations:
+  - CreateDeploymentEntity
+  - RegisterCspmSnapshotAccount
+- scope: 'Tailored Intelligence: READ'
+  service: Tailored Intelligence
+  access: READ
+  operation_count: 5
+  example_operations:
+  - GetEventsBody
+  - GetEventsEntities
+  - GetRulesEntities
+  - QueryEvents
+  - QueryRules
+- scope: 'Threatgraph: READ'
+  service: Threatgraph
+  access: READ
+  operation_count: 6
+  example_operations:
+  - combined_edges_get
+  - combined_ran_on_get
+  - combined_summary_get
+  - entities_vertices_get
+  - entities_vertices_getv2
+- scope: 'User management: READ'
+  service: User management
+  access: READ
+  operation_count: 19
+  example_operations:
+  - GetGroupsV1Mixin0
+  - GetGroupUsersV1
+  - GetUserGroupsV1
+  - QueryGroupsV1Mixin0
+  - combinedUserRolesV1
+- scope: 'User management: WRITE'
+  service: User management
+  access: WRITE
+  operation_count: 16
+  example_operations:
+  - CreateGroupV1Mixin0
+  - DeleteGroupsV1
+  - GroupActionsV1Mixin0
+  - GroupUsersActionsV1Mixin0
+  - UpdateGroupV1Mixin0
+- scope: 'Vulnerabilities (Falcon Intelligence): READ'
+  service: Vulnerabilities (Falcon Intelligence)
+  access: READ
+  operation_count: 2
+  example_operations:
+  - GetVulnerabilities
+  - QueryVulnerabilities
+- scope: 'Vulnerabilities: READ'
+  service: Vulnerabilities
+  access: READ
+  operation_count: 8
+  example_operations:
+  - combinedQueryEvaluationLogic
+  - getEvaluationLogic
+  - queryEvaluationLogic
+  - combinedQueryVulnerabilities
+  - getRemediations
+- scope: 'Workflow: READ'
+  service: Workflow
+  access: READ
+  operation_count: 9
+  example_operations:
+  - v1.child-executions.query
+  - WorkflowActivitiesCombined
+  - WorkflowActivitiesContentCombined
+  - WorkflowDefinitionsCombined
+  - WorkflowDefinitionsExport
+- scope: 'Workflow: WRITE'
+  service: Workflow
+  access: WRITE
+  operation_count: 12
+  example_operations:
+  - WorkflowDefinitionsAction
+  - WorkflowDefinitionsDelete
+  - WorkflowDefinitionsImport
+  - WorkflowDefinitionsUpdate
+  - WorkflowExecute
+- scope: 'Zero Trust Assessment: READ'
+  service: Zero Trust Assessment
+  access: READ
+  operation_count: 3
+  example_operations:
+  - getAssessmentsByScoreV1
+  - getAssessmentV1
+  - getAuditV1
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

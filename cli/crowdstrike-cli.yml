@@ -1,0 +1,133 @@
+specification: API Commons CLI
+specificationVersion: '0.1'
+provider: CrowdStrike
+providerId: crowdstrike
+generated: '2026-09-19'
+method: searched
+source: https://developer.crowdstrike.com/foundry/reference/cli-reference/
+description: CrowdStrike ships two first-party command-line tools on its developer surface. The Foundry CLI is the
+  app-platform tool — it creates, deploys and releases Falcon Foundry apps and is the only way to add several app
+  capabilities. falcon-mcp is the MCP server's own CLI. There is no general-purpose Falcon API CLI; the PowerShell
+  module PSFalcon is the closest equivalent and is catalogued in packages/ as an SDK.
+clis:
+- name: foundry
+  title: Falcon Foundry CLI
+  docs: https://developer.crowdstrike.com/foundry/reference/cli-reference/
+  quickstart: https://developer.crowdstrike.com/foundry/getting-started/quickstart-cli/
+  repository: https://github.com/CrowdStrike/foundry-cli
+  install:
+  - method: homebrew
+    commands:
+    - brew tap crowdstrike/foundry-cli
+    - brew install crowdstrike/foundry-cli/foundry
+  - method: scoop
+    commands:
+    - scoop bucket add foundry https://github.com/crowdstrike/scoop-foundry-cli.git
+    - scoop install foundry
+  - method: archive
+    note: Per-OS archives for macOS (arm/Intel), Linux (arm/x86_64) and Windows (x86_64); extract and add to PATH.
+  verify: foundry version
+  auth: foundry login + a CLI profile (foundry profile create); talks to the Falcon console APIs
+  modes:
+  - non-interactive (flags)
+  - interactive (prompts); --no-prompt disables prompting
+  commands:
+  - group: api-integrations
+    subcommands:
+    - create
+    - run
+    - view
+    note: create takes --spec, a file path or URL to an OpenAPI specification; view starts a local Swagger Editor
+      UI
+  - group: apps
+    subcommands:
+    - clone
+    - create
+    - delete
+    - deploy
+    - list-deployments
+    - list-usecases
+    - release
+    - run
+    - sync
+    - validate
+    note: deploy supports --diff-only to preview without deploying; delete is documented as irreversible
+  - group: auth
+    subcommands:
+    - roles
+    - scopes
+  - group: collections
+    subcommands: []
+  - group: completion
+    subcommands:
+    - bash
+    - fish
+    - oh-my-zsh
+    - powershell
+    - zsh
+  - group: docs
+    subcommands:
+    - add
+    - create
+  - group: functions
+    subcommands:
+    - create
+    - run
+  - group: login
+    subcommands: []
+  - group: profile
+    subcommands:
+    - activate
+    - create
+    - delete
+    - list
+  - group: rtr-scripts
+    subcommands:
+    - create
+    - run
+  - group: saved-searches
+    subcommands:
+    - create
+    - delete
+    - edit
+    - list
+    - upload
+  - group: ui
+    subcommands:
+    - extensions
+    - navigation
+    - pages
+    - run
+    - set-homepage
+  - group: workflows
+    subcommands: []
+  gov_cloud:
+    env:
+    - FOUNDRY_UI_DOMAIN=https://falcon.laggar.gcw.crowdstrike.com
+    - FOUNDRY_API_GW_DOMAIN=https://api.laggar.gcw.crowdstrike.com
+  version: null
+  version_note: Distributed through a Homebrew tap and a Scoop bucket; neither exposes a version metadata endpoint
+    and the documented install commands are unpinned.
+- name: falcon-mcp
+  title: Falcon MCP server CLI
+  docs: https://developer.crowdstrike.com/falcon-mcp/usage/cli/
+  install:
+  - uv tool install falcon-mcp
+  - pip install falcon-mcp
+  - uvx falcon-mcp
+  version: 0.19.0
+  flags:
+  - --transport stdio|sse|streamable-http
+  - --host
+  - --port
+  - --api-key
+  - --stateless-http
+  - --modules <csv>
+  - --read-only
+  - --tools
+  - --exclude-tools
+  security_note: 'The docs carry an explicit caution: HTTP transports have no authentication by default, and binding
+    --host 0.0.0.0 exposes an unauthenticated server driven by your CrowdStrike credentials.'
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

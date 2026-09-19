@@ -1,0 +1,1394 @@
+specification: API Commons Tool Crosswalk
+specificationVersion: '0.1'
+provider: CrowdStrike
+providerId: crowdstrike
+generated: '2026-09-19'
+method: derived
+source: mcp/crowdstrike-mcp.yml + https://developer.crowdstrike.com/api-reference/all-operations/ (via /llms-full.txt)
+description: 'Binds the 166 documented falcon-mcp tools to the CrowdStrike Falcon REST operations that back them.
+  CrowdStrike publishes NO OpenAPI document, so the REST side of this crosswalk is the provider''s own documented
+  operation registry (operationId + method + path + required scope for 1,463 operations, harvested from developer.crowdstrike.com/llms-full.txt),
+  not a spec file. Bindings are scope-constrained: an operation is only considered for a tool when it carries one
+  of the scopes that tool''s module documents as required. Because both the live tools/list schema and the underlying
+  swagger are gated, no binding here is schema-verified — confidence is recorded honestly and the unbound tools
+  are listed rather than guessed at.'
+surfaces:
+  openapi:
+    present: false
+    note: No OpenAPI/Swagger is published. The SDK repos are generated from an internal swagger.json that is explicitly
+      not committed (gofalcon Makefile).
+  rest_registry:
+    url: https://developer.crowdstrike.com/api-reference/all-operations/
+    operations: 1463
+    collections: 128
+    gated: false
+  graphql:
+    endpoint: https://api.crowdstrike.com/identity-protection/combined/graphql/v1
+    gated: true
+    note: Identity Protection GraphQL. Anonymous introspection returns HTTP 401 (probed 2026-09-19); schema requires
+      an authenticated OAuth2 token.
+  mcp:
+    product: falcon-mcp
+    mode: local-stdio
+    gated: true
+    note: tools/list requires the operator's own Falcon credentials; tool metadata below came from the provider's
+      per-module docs.
+coverage:
+  tools_documented: 166
+  tools_bound: 69
+  tools_unbound: 97
+  rest_operations_total: 1463
+  rest_operations_with_a_tool: 124
+  note: 'A low bound-percentage is expected: falcon-mcp curates ~166 agent-facing tools over a 1,463-operation platform.'
+  binding_rule: 'A candidate is recorded only when the operation carries one of the tool''s documented required
+    scopes, shares >=2 name tokens with the tool, matches the tool verb''s HTTP-method class, and is not marked
+    deprecated. Every binding is confidence: low by construction — nothing here is schema-verified, because CrowdStrike
+    publishes no OpenAPI and both tools/list and GraphQL introspection are auth-gated.'
+crosswalk:
+- tool: falcon_search_agentworks_agent_versions
+  category: agentworks
+  rest:
+  - GetAgentVersionsV1
+  - QueryAgentVersionsV1
+  binding: rest
+  confidence: low
+  scopes: 'Charlotte AI Agent Definition: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 2 operations tie, so the tool may wrap any or all of them
+- tool: falcon_get_cases
+  category: cases
+  rest:
+  - queries.cases.get.v1
+  binding: rest
+  confidence: low
+  scopes: 'Cases: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_add_case_alert_evidence
+  category: cases
+  rest:
+  - entities.alert-evidence.post.v1
+  binding: rest
+  confidence: low
+  scopes: 'Cases: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_add_case_event_evidence
+  category: cases
+  rest:
+  - entities.event-evidence.post.v1
+  binding: rest
+  confidence: low
+  scopes: 'Cases: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_manage_case_tags
+  category: cases
+  rest:
+  - entities.case-tags.delete.v1
+  - entities.case-tags.post.v1
+  binding: rest
+  confidence: low
+  scopes: 'Cases: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 2 operations tie, so the tool may wrap any or all of them
+- tool: falcon_aggregate_case_access_tags
+  category: cases
+  rest:
+  - aggregates.access-tags.post.v1
+  - entities.access-tags.get.v1
+  - entities.case-tags.post.v1
+  - queries.access-tags.get.v1
+  binding: rest
+  confidence: low
+  scopes: 'Case Templates: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_aggregate_case_notification_groups
+  category: cases
+  rest:
+  - aggregates.notification-groups.post.v1
+  - aggregates.notification-groups.post.v2
+  - entities.notification-groups.get.v1
+  - entities.notification-groups.get.v2
+  binding: rest
+  confidence: low
+  scopes: 'Case Templates: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_aggregate_case_file_details
+  category: cases
+  rest:
+  - aggregates.file-details.post.v1
+  - combined.file-details.get.v1
+  - entities.file-details.get.v1
+  - queries.file-details.get.v1
+  binding: rest
+  confidence: low
+  scopes: 'Cases: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_get_cloud_asset_insights
+  category: cloud
+  rest:
+  - cloud-security-assets-entities-get
+  binding: rest
+  confidence: low
+  scopes: 'Cloud Security API Assets: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_count_kubernetes_containers
+  category: cloud
+  rest:
+  - FindContainersCountAffectedByZeroDayVulnerabilities
+  - ReadClustersByKubernetesVersionCount
+  - ReadContainerCount
+  - ReadContainerCountByRegistry
+  binding: rest
+  confidence: low
+  scopes: 'Falcon Container Image: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_search_images_vulnerabilities
+  category: cloud
+  rest:
+  - CombinedImageVulnerabilitySummary
+  binding: rest
+  confidence: low
+  scopes: 'Falcon Container Image: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_search_cspm_suppression_rules
+  category: cloud
+  rest:
+  - CreateSuppressionRule
+  - GetSuppressionRules
+  - QuerySuppressionRules
+  binding: rest
+  confidence: low
+  scopes: 'Cloud Security Policies: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 3 operations tie, so the tool may wrap any or all of them
+- tool: falcon_delete_cspm_suppression_rules
+  category: cloud
+  rest:
+  - DeleteSuppressionRules
+  binding: rest
+  confidence: low
+  scopes: 'Cloud Security Policies: WRITE'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_search_cloud_risks
+  category: cloud
+  rest:
+  - cloud-security-timeline-risks-enriched
+  - combined-cloud-risks
+  binding: rest
+  confidence: low
+  scopes: 'Cloud Security API Risks: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 2 operations tie, so the tool may wrap any or all of them
+- tool: falcon_get_cloud_groups
+  category: cloud
+  rest:
+  - cloud-security-assets-entities-get
+  binding: rest
+  confidence: low
+  scopes: 'Cloud Groups V2: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_search_correlation_rules
+  category: correlationrules
+  rest:
+  - aggregates.rule-versions.post.v1
+  - combined.rules.get.v1
+  - combined.rules.get.v2
+  - entities.latest-rules.get.v1
+  binding: rest
+  confidence: low
+  scopes: 'Correlation Rules: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_create_correlation_rule
+  category: correlationrules
+  rest:
+  - aggregates.rule-versions.post.v1
+  - entities.rule-versions_export.post.v1
+  - entities.rule-versions_import.post.v1
+  binding: rest
+  confidence: low
+  scopes: 'Correlation Rules: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 3 operations tie, so the tool may wrap any or all of them
+- tool: falcon_update_correlation_rule
+  category: correlationrules
+  rest:
+  - aggregates.rule-versions.post.v1
+  - entities.rule-versions_export.post.v1
+  - entities.rule-versions_import.post.v1
+  - entities.rule-versions_publish.patch.v1
+  binding: rest
+  confidence: low
+  scopes: 'Correlation Rules: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_delete_correlation_rules
+  category: correlationrules
+  rest:
+  - entities.rule-versions.delete.v1
+  - entities.rules.delete.v1
+  binding: rest
+  confidence: low
+  scopes: 'Correlation Rules: WRITE'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 2 operations tie, so the tool may wrap any or all of them
+- tool: falcon_search_ioa_rule_groups
+  category: custom-ioa
+  rest:
+  - create-rule-groupMixin0
+  - get-rule-groupsMixin0
+  - query-rule-groups-full
+  - query-rule-groupsMixin0
+  binding: rest
+  confidence: low
+  scopes: 'Custom IOA Rules: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_get_ioa_platforms
+  category: custom-ioa
+  rest:
+  - get-platformsMixin0
+  binding: rest
+  confidence: low
+  scopes: 'Custom IOA Rules: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_get_ioa_rule_types
+  category: custom-ioa
+  rest:
+  - get-rule-types
+  binding: rest
+  confidence: low
+  scopes: 'Custom IOA Rules: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_create_ioa_rule_group
+  category: custom-ioa
+  rest:
+  - create-rule
+  - create-rule-groupMixin0
+  binding: rest
+  confidence: low
+  scopes: 'Custom IOA Rules: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 2 operations tie, so the tool may wrap any or all of them
+- tool: falcon_update_ioa_rule_group
+  category: custom-ioa
+  rest:
+  - update-rule-groupMixin0
+  binding: rest
+  confidence: low
+  scopes: 'Custom IOA Rules: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_delete_ioa_rule_groups
+  category: custom-ioa
+  rest:
+  - delete-rule-groupsMixin0
+  binding: rest
+  confidence: low
+  scopes: 'Custom IOA Rules: WRITE'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_create_ioa_rule
+  category: custom-ioa
+  rest:
+  - create-rule
+  - create-rule-groupMixin0
+  binding: rest
+  confidence: low
+  scopes: 'Custom IOA Rules: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 2 operations tie, so the tool may wrap any or all of them
+- tool: falcon_update_ioa_rule
+  category: custom-ioa
+  rest:
+  - update-rule-groupMixin0
+  binding: rest
+  confidence: low
+  scopes: 'Custom IOA Rules: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_delete_ioa_rules
+  category: custom-ioa
+  rest:
+  - delete-rules
+  binding: rest
+  confidence: low
+  scopes: 'Custom IOA Rules: WRITE'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_search_data_protection_classifications
+  category: data-protection
+  rest:
+  - entities.classification.get.v2
+  - queries.classification.get.v2
+  binding: rest
+  confidence: low
+  scopes: 'Data Protection: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 2 operations tie, so the tool may wrap any or all of them
+- tool: falcon_search_data_protection_policies
+  category: data-protection
+  rest:
+  - entities.policy.get.v2
+  - queries.policy.get.v2
+  binding: rest
+  confidence: low
+  scopes: 'Data Protection: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 2 operations tie, so the tool may wrap any or all of them
+- tool: falcon_search_data_protection_content_patterns
+  category: data-protection
+  rest:
+  - entities.content-pattern.get
+  - queries.content-pattern.get-v2
+  binding: rest
+  confidence: low
+  scopes: 'Data Protection: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 2 operations tie, so the tool may wrap any or all of them
+- tool: falcon_search_exclusions
+  category: exclusions
+  rest:
+  - exclusions.search.v2
+  - ss-ioa-exclusions.search.v2
+  binding: rest
+  confidence: low
+  scopes: 'IOA Exclusions: READ, Machine Learning Exclusions: READ, Sensor Visibility Exclusions: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 2 operations tie, so the tool may wrap any or all of them
+- tool: falcon_delete_exclusions
+  category: exclusions
+  rest:
+  - cb-exclusions.delete.v1
+  - exclusions.delete.v2
+  - ss-ioa-exclusions.delete.v2
+  binding: rest
+  confidence: low
+  scopes: 'IOA Exclusions: WRITE, Machine Learning Exclusions: WRITE, Sensor Visibility Exclusions: WRITE'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 3 operations tie, so the tool may wrap any or all of them
+- tool: falcon_search_firewall_rule_groups
+  category: firewall
+  rest:
+  - aggregate-rule-groups
+  - create-rule-group
+  - create-rule-group-validation
+  - get-rule-groups
+  binding: rest
+  confidence: low
+  scopes: 'Firewall Management: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_search_firewall_policy_rules
+  category: firewall
+  rest:
+  - aggregate-policy-rules
+  - createFirewallPolicies
+  - getFirewallPolicies
+  - performFirewallPoliciesAction
+  binding: rest
+  confidence: low
+  scopes: 'Firewall Management: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_create_firewall_rule_group
+  category: firewall
+  rest:
+  - create-rule-group
+  - create-rule-group-validation
+  binding: rest
+  confidence: low
+  scopes: 'Firewall Management: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 2 operations tie, so the tool may wrap any or all of them
+- tool: falcon_delete_firewall_rule_groups
+  category: firewall
+  rest:
+  - delete-rule-groups
+  binding: rest
+  confidence: low
+  scopes: 'Firewall Management: WRITE'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_search_host_groups
+  category: host-groups
+  rest:
+  - createHostGroups
+  - getHostGroups
+  - queryCombinedHostGroups
+  - queryHostGroups
+  binding: rest
+  confidence: low
+  scopes: 'Host Groups: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_search_host_group_members
+  category: host-groups
+  rest:
+  - queryCombinedGroupMembers
+  - queryGroupMembers
+  binding: rest
+  confidence: low
+  scopes: 'Host Groups: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 2 operations tie, so the tool may wrap any or all of them
+- tool: falcon_create_host_group
+  category: host-groups
+  rest:
+  - performGroupAction
+  binding: rest
+  confidence: low
+  scopes: 'Host Groups: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_update_host_group
+  category: host-groups
+  rest:
+  - performGroupAction
+  binding: rest
+  confidence: low
+  scopes: 'Host Groups: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_delete_host_groups
+  category: host-groups
+  rest:
+  - deleteHostGroups
+  binding: rest
+  confidence: low
+  scopes: 'Host Groups: WRITE'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_perform_host_group_action
+  category: host-groups
+  rest:
+  - entities.perform_action
+  binding: rest
+  confidence: low
+  scopes: 'Host Groups: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_search_iocs
+  category: ioc
+  rest:
+  - indicator.search.v1
+  binding: rest
+  confidence: low
+  scopes: 'IOC Management: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_search_policy_members
+  category: policies
+  rest:
+  - queryCombinedDeviceControlPolicyMembers
+  - queryCombinedFirewallPolicyMembers
+  - queryCombinedPreventionPolicyMembers
+  - queryCombinedRTResponsePolicyMembers
+  binding: rest
+  confidence: low
+  scopes: 'Content Update Policies: READ, Device Control Policies: READ, Firewall Management: READ, Prevention Policies:
+    READ, Response Policies: READ, Sensor Update Policies: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_update_policy
+  category: policies
+  rest:
+  - createSensorUpdatePolicies
+  - createSensorUpdatePoliciesV2
+  - performSensorUpdatePoliciesAction
+  - setSensorUpdatePoliciesPrecedence
+  binding: rest
+  confidence: low
+  scopes: 'Content Update Policies: WRITE, Device Control Policies: WRITE, Firewall Management: WRITE, Prevention
+    Policies: WRITE, Response Policies: WRITE, Sensor Update Policies: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_set_policy_precedence
+  category: policies
+  rest:
+  - setDeviceControlPoliciesPrecedence
+  - setFirewallPoliciesPrecedence
+  - setPreventionPoliciesPrecedence
+  - setRTResponsePoliciesPrecedence
+  binding: rest
+  confidence: low
+  scopes: 'Content Update Policies: WRITE, Device Control Policies: WRITE, Firewall Management: WRITE, Prevention
+    Policies: WRITE, Response Policies: WRITE, Sensor Update Policies: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_search_quarantined_files
+  category: quarantine
+  rest:
+  - GetAggregateFiles
+  - GetQuarantineFiles
+  - QueryQuarantineFiles
+  binding: rest
+  confidence: low
+  scopes: 'Quarantined Files: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 3 operations tie, so the tool may wrap any or all of them
+- tool: falcon_update_quarantined_files
+  category: quarantine
+  rest:
+  - GetAggregateFiles
+  - GetQuarantineFiles
+  - UpdateQfByQuery
+  - UpdateQuarantinedDetectsByIds
+  binding: rest
+  confidence: low
+  scopes: 'Quarantined Files: WRITE'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_search_recon_notifications
+  category: recon
+  rest:
+  - AggregateNotificationsExposedDataRecordsV1
+  - AggregateNotificationsV1
+  - GetNotificationsDetailedTranslatedV1
+  - GetNotificationsDetailedV1
+  binding: rest
+  confidence: low
+  scopes: 'Monitoring rules (Falcon Intelligence Recon): READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_search_recon_rules
+  category: recon
+  rest:
+  - GetRulesV1
+  - PreviewRuleV1
+  - QueryRulesV1
+  binding: rest
+  confidence: low
+  scopes: 'Monitoring rules (Falcon Intelligence Recon): READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 3 operations tie, so the tool may wrap any or all of them
+- tool: falcon_search_recon_exposed_data_records
+  category: recon
+  rest:
+  - AggregateNotificationsExposedDataRecordsV1
+  - GetNotificationsExposedDataRecordsV1
+  - QueryNotificationsExposedDataRecordsV1
+  binding: rest
+  confidence: low
+  scopes: 'Monitoring rules (Falcon Intelligence Recon): READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 3 operations tie, so the tool may wrap any or all of them
+- tool: falcon_aggregate_recon_notifications
+  category: recon
+  rest:
+  - AggregateNotificationsExposedDataRecordsV1
+  - AggregateNotificationsV1
+  - GetNotificationsDetailedTranslatedV1
+  - GetNotificationsDetailedV1
+  binding: rest
+  confidence: low
+  scopes: 'Monitoring rules (Falcon Intelligence Recon): READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_aggregate_recon_exposed_data_records
+  category: recon
+  rest:
+  - AggregateNotificationsExposedDataRecordsV1
+  - GetNotificationsExposedDataRecordsV1
+  - QueryNotificationsExposedDataRecordsV1
+  binding: rest
+  confidence: low
+  scopes: 'Monitoring rules (Falcon Intelligence Recon): READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 3 operations tie, so the tool may wrap any or all of them
+- tool: falcon_preview_recon_rule
+  category: recon
+  rest:
+  - PreviewRuleV1
+  binding: rest
+  confidence: low
+  scopes: 'Monitoring rules (Falcon Intelligence Recon): READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_search_rtr_sessions
+  category: rtr
+  rest:
+  - RTR-AggregateSessions
+  - RTR-InitSession
+  - RTR-ListAllSessions
+  - RTR-ListQueuedSessions
+  binding: rest
+  confidence: low
+  scopes: 'Real time response: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_search_rtr_audit_sessions
+  category: rtr
+  rest:
+  - RTR-AggregateSessions
+  - RTR-InitSession
+  - RTR-ListAllSessions
+  - RTR-ListQueuedSessions
+  binding: rest
+  confidence: low
+  scopes: 'real-time-response-audit: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_aggregate_rtr_sessions
+  category: rtr
+  rest:
+  - RTR-AggregateSessions
+  - RTR-InitSession
+  - RTR-ListAllSessions
+  - RTR-ListQueuedSessions
+  binding: rest
+  confidence: low
+  scopes: 'Real time response: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_get_rtr_session_details
+  category: rtr
+  rest:
+  - RTR-AggregateSessions
+  - RTR-ListQueuedSessions
+  - RTR-ListSessions
+  - RTR-PulseSession
+  binding: rest
+  confidence: low
+  scopes: 'Real time response: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_init_rtr_session
+  category: rtr
+  rest:
+  - BatchInitSessions
+  - RTR-PulseSession
+  binding: rest
+  confidence: low
+  scopes: 'Real time response: READ'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 2 operations tie, so the tool may wrap any or all of them
+- tool: falcon_pulse_rtr_session
+  category: rtr
+  rest:
+  - RTR-PulseSession
+  binding: rest
+  confidence: low
+  scopes: 'Real time response: READ'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_execute_rtr_read_only_command
+  category: rtr
+  rest:
+  - RTR-ExecuteActiveResponderCommand
+  - RTR-ExecuteCommand
+  binding: rest
+  confidence: low
+  scopes: 'Real time response: READ'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 2 operations tie, so the tool may wrap any or all of them
+- tool: falcon_run_rtr_read_only_command_and_wait
+  category: rtr
+  rest:
+  - RTR-ExecuteActiveResponderCommand
+  - RTR-ExecuteCommand
+  binding: rest
+  confidence: low
+  scopes: 'Real time response: READ'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 2 operations tie, so the tool may wrap any or all of them
+- tool: falcon_check_rtr_command_status
+  category: rtr
+  rest:
+  - RTR-CheckActiveResponderCommandStatus
+  - RTR-CheckCommandStatus
+  - RTR-DeleteQueuedSession
+  - RTR-ExecuteActiveResponderCommand
+  binding: rest
+  confidence: low
+  scopes: 'Real time response: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_list_rtr_session_files
+  category: rtr
+  rest:
+  - RTR-PulseSession
+  binding: rest
+  confidence: low
+  scopes: 'Real time response: WRITE'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_search_scheduled_reports
+  category: scheduled-reports
+  rest:
+  - scheduled-reports.get
+  - scheduled-reports.launch
+  - scheduled-reports.query
+  binding: rest
+  confidence: low
+  scopes: 'Scheduled Reports: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 3 operations tie, so the tool may wrap any or all of them
+- tool: falcon_launch_scheduled_report
+  category: scheduled-reports
+  rest:
+  - scheduled-reports.launch
+  binding: rest
+  confidence: low
+  scopes: 'Scheduled Reports: READ'
+  modifies_data: true
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+- tool: falcon_search_report_executions
+  category: scheduled-reports
+  rest:
+  - report-executions-download.get
+  - report-executions.get
+  - report-executions.query
+  - report-executions.retry
+  binding: rest
+  confidence: low
+  scopes: 'Scheduled Reports: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it; 4 operations tie, so the tool may wrap any or all of them
+- tool: falcon_download_report_execution
+  category: scheduled-reports
+  rest:
+  - report-executions-download.get
+  binding: rest
+  confidence: low
+  scopes: 'Scheduled Reports: READ'
+  modifies_data: false
+  note: CANDIDATE binding. Aligned on three signals only — the tool's documented required scope, shared name tokens
+    with the operationId/path, and HTTP-method class. Neither the MCP inputSchema nor an OpenAPI exists publicly
+    to verify it.
+mcp_only:
+- tool: falcon_idp_investigate_entity
+  reason: Backed by the Identity Protection GraphQL endpoint (api_preempt_proxy_post_graphql), not by a resource-shaped
+    REST operation — the tool composes GraphQL queries server-side.
+- tool: falcon_search_tools
+  reason: Dynamic-mode discovery tool implemented inside the MCP server; no Falcon API equivalent.
+- tool: falcon_execute_tool
+  reason: Dynamic-mode dispatch tool implemented inside the MCP server; no Falcon API equivalent.
+- tool: falcon_list_enabled_tools
+  reason: Server-side inventory of what the running instance enabled; no Falcon API equivalent.
+unbound:
+- tool: falcon_get_agentworks_agent_invocation
+  category: agentworks
+  scopes: 'Charlotte AI Agent Definition: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_invoke_agentworks_agent
+  category: agentworks
+  scopes: 'Charlotte AI Agent Definition: READ, Charlotte AI Agent Definition: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_agentworks_agents
+  category: agentworks
+  scopes: 'Charlotte AI Agent Definition: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_agentworks_spans
+  category: agentworks
+  scopes: 'Charlotte AI Agent Definition: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_aggregate_case_slas
+  category: cases
+  scopes: 'Case Templates: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_aggregate_case_templates
+  category: cases
+  scopes: 'Case Templates: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_create_case
+  category: cases
+  scopes: 'Cases: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_list_case_templates
+  category: cases
+  scopes: 'Case Templates: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_cases
+  category: cases
+  scopes: 'Cases: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_update_case
+  category: cases
+  scopes: 'Cases: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_create_cspm_suppression_rule
+  category: cloud
+  scopes: 'Cloud Security Policies: READ, Cloud Security Policies: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_list_cloud_insight_definitions
+  category: cloud
+  scopes: 'Cloud Security Policies: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_cloud_groups
+  category: cloud
+  scopes: 'Cloud Groups V2: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_cloud_insights
+  category: cloud
+  scopes: 'Cloud Security API Assets: READ, Cloud Security Policies: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_cspm_assets
+  category: cloud
+  scopes: 'Cloud Security API Assets: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_iom_findings
+  category: cloud
+  scopes: 'Cloud Security API Detections: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_kubernetes_containers
+  category: cloud
+  scopes: 'Falcon Container Image: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_aggregate_detections
+  category: detections
+  scopes: 'Alerts: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_detection_details
+  category: detections
+  scopes: 'Alerts: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_detections
+  category: detections
+  scopes: 'Alerts: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_update_detections
+  category: detections
+  scopes: 'Alerts: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_applications
+  category: discover
+  scopes: 'Assets: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_managed_assets
+  category: discover
+  scopes: 'Assets: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_unmanaged_assets
+  category: discover
+  scopes: 'Assets: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_create_exclusion
+  category: exclusions
+  scopes: 'IOA Exclusions: WRITE, Machine Learning Exclusions: WRITE, Sensor Visibility Exclusions: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_certificate_details
+  category: exclusions
+  scopes: 'Machine Learning Exclusions: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_update_exclusion
+  category: exclusions
+  scopes: 'IOA Exclusions: WRITE, Machine Learning Exclusions: WRITE, Sensor Visibility Exclusions: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_firewall_rules
+  category: firewall
+  scopes: 'Firewall Management: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_execute_workflow
+  category: fusion
+  scopes: 'Workflows: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_workflow_execution_results
+  category: fusion
+  scopes: 'Workflows: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_workflow_definitions
+  category: fusion
+  scopes: 'Workflows: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_workflow_executions
+  category: fusion
+  scopes: 'Workflows: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_generate_guardian_report
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_guardian_agent
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_guardian_agent_sessions
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_guardian_classified_file_access
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_guardian_detection_scores
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_guardian_file_events
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_guardian_fleet_skill_inventory
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_guardian_inventory
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_guardian_network_events
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_guardian_process_tree
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_guardian_session_activity
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_guardian_session_detail
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_pivot_on_guardian_attribute
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_guardian_agents
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_guardian_detections
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_guardian_executions
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_guardian_installs
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_guardian_mcp_servers
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_guardian_models
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_guardian_os_users
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_guardian_prompts
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_guardian_skill_usage
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_guardian_skills
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_guardian_tool_usage
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_guardian_tools
+  category: guardian
+  scopes: 'AIDR: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_host_details
+  category: hosts
+  scopes: 'Hosts: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_manage_host_grouping_tags
+  category: hosts
+  scopes: 'Hosts: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_hosts
+  category: hosts
+  scopes: 'Hosts: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_idp_investigate_entity
+  category: idp
+  scopes: 'Identity Protection Assessment: READ, Identity Protection Detections: READ, Identity Protection Entities:
+    READ, Identity Protection Timeline: READ, Identity Protection GraphQL: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_mitre_report
+  category: intel
+  scopes: 'Actors (Falcon Intelligence): READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_actors
+  category: intel
+  scopes: 'Actors (Falcon Intelligence): READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_indicators
+  category: intel
+  scopes: 'Indicators (Falcon Intelligence): READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_reports
+  category: intel
+  scopes: 'Reports (Falcon Intelligence): READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_add_ioc
+  category: ioc
+  scopes: 'IOC Management: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_remove_iocs
+  category: ioc
+  scopes: 'IOC Management: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_ngsiem
+  category: ngsiem
+  scopes: 'NGSIEM: READ, NGSIEM: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_create_policy
+  category: policies
+  scopes: 'Content Update Policies: WRITE, Device Control Policies: WRITE, Firewall Management: WRITE, Prevention
+    Policies: WRITE, Response Policies: WRITE, Sensor Update Policies: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_delete_policies
+  category: policies
+  scopes: 'Content Update Policies: WRITE, Device Control Policies: WRITE, Firewall Management: WRITE, Prevention
+    Policies: WRITE, Response Policies: WRITE, Sensor Update Policies: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_perform_policy_action
+  category: policies
+  scopes: 'Content Update Policies: WRITE, Device Control Policies: WRITE, Firewall Management: WRITE, Prevention
+    Policies: WRITE, Response Policies: WRITE, Sensor Update Policies: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_policies
+  category: policies
+  scopes: 'Content Update Policies: READ, Device Control Policies: READ, Firewall Management: READ, Prevention Policies:
+    READ, Response Policies: READ, Sensor Update Policies: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_delete_quarantined_files
+  category: quarantine
+  scopes: 'Quarantined Files: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_preview_quarantine_actions
+  category: quarantine
+  scopes: 'Quarantined Files: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_delete_rtr_session
+  category: rtr
+  scopes: 'Real time response: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_sensor_usage
+  category: sensor-usage
+  scopes: 'Sensor Usage: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_serverless_vulnerabilities
+  category: serverless
+  scopes: 'Falcon Container Image: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_dismiss_shield_check
+  category: shield
+  scopes: 'SaaS Security: WRITE'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_shield_activity_monitor
+  category: shield
+  scopes: 'SaaS Security: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_shield_app_users
+  category: shield
+  scopes: 'SaaS Security: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_shield_check_affected_entities
+  category: shield
+  scopes: 'SaaS Security: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_shield_check_compliance
+  category: shield
+  scopes: 'SaaS Security: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_shield_integrations
+  category: shield
+  scopes: 'SaaS Security: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_shield_posture_metrics
+  category: shield
+  scopes: 'SaaS Security: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_shield_supported_saas
+  category: shield
+  scopes: 'SaaS Security: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_shield_system_logs
+  category: shield
+  scopes: 'SaaS Security: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_shield_system_users
+  category: shield
+  scopes: 'SaaS Security: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_shield_alerts
+  category: shield
+  scopes: 'SaaS Security: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_shield_apps
+  category: shield
+  scopes: 'SaaS Security: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_shield_checks
+  category: shield
+  scopes: 'SaaS Security: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_shield_data_shares
+  category: shield
+  scopes: 'SaaS Security: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_shield_devices
+  category: shield
+  scopes: 'SaaS Security: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_shield_users
+  category: shield
+  scopes: 'SaaS Security: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_vulnerabilities
+  category: spotlight
+  scopes: 'Vulnerabilities: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_zta_assessments
+  category: zero-trust-assessment
+  scopes: 'Zero Trust Assessment: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_get_zta_audit
+  category: zero-trust-assessment
+  scopes: 'Zero Trust Assessment: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+- tool: falcon_search_zta_assessments
+  category: zero-trust-assessment
+  scopes: 'Zero Trust Assessment: READ'
+  reason: no operation inside this tool's documented scope aligned on both name tokens and method class; not guessed
+rest_only:
+- collection: Ngsiem
+  operations_without_a_tool: 77
+- collection: Kubernetes Protection
+  operations_without_a_tool: 60
+- collection: Aspm
+  operations_without_a_tool: 47
+- collection: Data Protection Configuration
+  operations_without_a_tool: 46
+- collection: It Automation
+  operations_without_a_tool: 42
+- collection: Cspm Registration
+  operations_without_a_tool: 41
+- collection: Case Management
+  operations_without_a_tool: 39
+- collection: Filevantage
+  operations_without_a_tool: 31
+- collection: Mssp
+  operations_without_a_tool: 30
+- collection: Firewall Management
+  operations_without_a_tool: 27
+- collection: Intel
+  operations_without_a_tool: 27
+- collection: Cloud Policies
+  operations_without_a_tool: 26
+- collection: User Management
+  operations_without_a_tool: 26
+- collection: Saas Security
+  operations_without_a_tool: 21
+- collection: Workflows
+  operations_without_a_tool: 21
+- collection: D4c Registration
+  operations_without_a_tool: 20
+- collection: Real Time Response Admin
+  operations_without_a_tool: 20
+- collection: Falcon Container
+  operations_without_a_tool: 19
+- collection: Custom Storage
+  operations_without_a_tool: 18
+- collection: Cloud Azure Registration
+  operations_without_a_tool: 17
+- collection: Falcon Complete Dashboard
+  operations_without_a_tool: 17
+- collection: Ods
+  operations_without_a_tool: 17
+- collection: Recon
+  operations_without_a_tool: 17
+- collection: Device Control Policies
+  operations_without_a_tool: 16
+- collection: Hosts
+  operations_without_a_tool: 16
+- collection: IOC
+  operations_without_a_tool: 16
+- collection: Admission Control Policies
+  operations_without_a_tool: 15
+- collection: Falconx Sandbox
+  operations_without_a_tool: 15
+- collection: Sensor Update Policy
+  operations_without_a_tool: 15
+- collection: Discover
+  operations_without_a_tool: 13
+- collection: ML Exclusions
+  operations_without_a_tool: 13
+- collection: Sensor Download
+  operations_without_a_tool: 13
+- collection: Container Images
+  operations_without_a_tool: 12
+- collection: Exposure Management
+  operations_without_a_tool: 12
+- collection: IOA Exclusions
+  operations_without_a_tool: 12
+- collection: Identity Protection
+  operations_without_a_tool: 12
+- collection: Container Image Compliance
+  operations_without_a_tool: 11
+- collection: Content Update Policies
+  operations_without_a_tool: 11
+- collection: Image Assessment Policies
+  operations_without_a_tool: 11
+- collection: Real Time Response
+  operations_without_a_tool: 11
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

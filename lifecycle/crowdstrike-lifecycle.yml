@@ -1,0 +1,243 @@
+specification: API Commons Lifecycle
+specificationVersion: '0.1'
+provider: CrowdStrike
+providerId: crowdstrike
+generated: '2026-09-19'
+method: searched
+source: https://developer.crowdstrike.com/api-reference/all-operations/
+description: CrowdStrike versions each operation independently in the URI path (/v1 … /v4) rather than versioning
+  the platform API as a whole, and signals retirement in the operation summary itself. 33 of 1,463 documented operations
+  carry a Deprecated notice, most naming the replacement operation; a handful name a decommission DATE. No separate
+  deprecation-policy page, no Sunset/Deprecation response headers are documented, and no public status page was
+  found.
+versioning:
+  scheme: uri-path-per-operation
+  current: mixed
+  distribution:
+    v1: 1271
+    v2: 154
+    v3: 32
+    v4: 1
+    unversioned: 5
+  docs: https://developer.crowdstrike.com/api-reference/all-operations/
+  note: A single collection commonly exposes v1, v2 and v3 of the same operation simultaneously; the v1 is usually
+    the deprecated one.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  signal: operation summary text
+  pattern:
+  - '''Deprecated: please use version vN of this endpoint.'''
+  - '''Deprecated : Please use <METHOD> <path>.'''
+  - '''Deprecated: This endpoint will be decommissioned on <date>.'''
+  deprecated_operation_count: 33
+  dated_decommissions:
+  - date: '2025-09-30'
+    operations:
+    - GetAggregateDetects
+    - GetDetectSummaries
+    - QueryDetects
+    - UpdateDetectsByIdsV2
+    note: The four legacy Detects operations name a decommission date that has already passed; they are still listed
+      in the reference as of 2026-09-19.
+  note: No published deprecation POLICY (notice period, support window) was found on any public CrowdStrike surface
+    — only per-operation notices.
+deprecated_operations:
+- operationId: GetQueriesAlertsV1
+  method: GET
+  path: /alerts/queries/alerts/v1
+  note: 'Deprecated: please use version v2 of this endpoint.'
+  collection: Alerts
+- operationId: PatchEntitiesAlertsV2
+  method: PATCH
+  path: /alerts/entities/alerts/v2
+  note: 'Deprecated: Please use version v3 of this endpoint.'
+  collection: Alerts
+- operationId: PostAggregatesAlertsV1
+  method: POST
+  path: /alerts/aggregates/alerts/v1
+  note: 'Deprecated: Please use version v2 of this endpoint.'
+  collection: Alerts
+- operationId: PostEntitiesAlertsV1
+  method: POST
+  path: /alerts/entities/alerts/v1
+  note: 'Deprecated: please use version v2 of this endpoint.'
+  collection: Alerts
+- operationId: getCloudEventIDs
+  method: GET
+  path: /detects/queries/cloud-events/v1
+  note: 'Deprecated: use cdrapi entities/event-details/v1 ''logscale_related_events_query'' instead.'
+  collection: Cspm Registration
+- operationId: GetAggregateDetects
+  method: POST
+  path: /detects/aggregates/detects/GET/v1
+  note: 'Deprecated: This endpoint will be decommissioned on September 30, 2025.'
+  collection: Detects
+- operationId: GetDetectSummaries
+  method: POST
+  path: /detects/entities/summaries/GET/v1
+  note: 'Deprecated: This endpoint will be decommissioned on September 30, 2025.'
+  collection: Detects
+- operationId: QueryDetects
+  method: GET
+  path: /detects/queries/detects/v1
+  note: 'Deprecated: This endpoint will be decommissioned on September 30, 2025.'
+  collection: Detects
+- operationId: UpdateDetectsByIdsV2
+  method: PATCH
+  path: /detects/entities/detects/v2
+  note: 'Deprecated: This endpoint will be decommissioned on September 30, 2025.'
+  collection: Detects
+- operationId: CreateIOC
+  method: POST
+  path: /indicators/entities/iocs/v1
+  note: Create a new IOC. *** Deprecated - Use the new IOC Management endpoint (POST /iocs/entities/indicators/v1).
+    ***
+  collection: Iocs
+- operationId: DeleteIOC
+  method: DELETE
+  path: /indicators/entities/iocs/v1
+  note: Delete an IOC by providing a type and value. *** Deprecated - Use the new IOC Management endpoint (DELETE
+    /iocs/entities/indicators/v1). ***
+  collection: Iocs
+- operationId: GetIOC
+  method: GET
+  path: /indicators/entities/iocs/v1
+  note: Get an IOC by providing a type and value. *** Deprecated - Use the new IOC Management endpoint (GET /iocs/entities/indicators/v1).
+    ***
+  collection: Iocs
+- operationId: QueryIOCs
+  method: GET
+  path: /indicators/queries/iocs/v1
+  note: Search the custom IOCs in your customer account. *** Deprecated - Use the new IOC Management endpoint (GET
+    /iocs/queries/indicators/v1). ***
+  collection: Iocs
+- operationId: UpdateIOC
+  method: PATCH
+  path: /indicators/entities/iocs/v1
+  note: Update an IOC by providing a type and value. *** Deprecated - Use the new IOC Management endpoint (PATCH
+    /iocs/entities/indicators/v1). ***
+  collection: Iocs
+- operationId: deleteCIDGroupMembersV1
+  method: DELETE
+  path: /mssp/entities/cid-group-members/v1
+  note: 'Deprecated : Please use DELETE /entities/cid-group-members/v2.'
+  collection: Mssp
+- operationId: getCIDGroupByIdV1
+  method: GET
+  path: /mssp/entities/cid-groups/v1
+  note: 'Deprecated : Please use GET /mssp/entities/cid-groups/v2.'
+  collection: Mssp
+- operationId: getCIDGroupMembersByV1
+  method: GET
+  path: /mssp/entities/cid-group-members/v1
+  note: 'Deprecated : Please use GET /mssp/entities/cid-group-members/v2.'
+  collection: Mssp
+- operationId: getUserGroupMembersByIDV1
+  method: GET
+  path: /mssp/entities/user-group-members/v1
+  note: 'Deprecated : Please use GET /mssp/entities/user-group-members/v2.'
+  collection: Mssp
+- operationId: getUserGroupsByIDV1
+  method: GET
+  path: /mssp/entities/user-groups/v1
+  note: 'Deprecated : Please use GET /entities/user-groups/v2.'
+  collection: Mssp
+- operationId: combinedUserRolesV1
+  method: GET
+  path: /user-management/combined/user-roles/v1
+  note: 'Deprecated : Please use GET /user-management/combined/user-roles/v2.'
+  collection: User Management
+- operationId: CreateUser
+  method: POST
+  path: /users/entities/users/v1
+  note: 'Deprecated : Please use POST /user-management/entities/users/v1.'
+  collection: User Management
+- operationId: DeleteUser
+  method: DELETE
+  path: /users/entities/users/v1
+  note: 'Deprecated : Please use DELETE /user-management/entities/users/v1.'
+  collection: User Management
+- operationId: GetAvailableRoleIds
+  method: GET
+  path: /user-roles/queries/user-role-ids-by-cid/v1
+  note: 'Deprecated : Please use GET /user-management/queries/roles/v1.'
+  collection: User Management
+- operationId: GetRoles
+  method: GET
+  path: /user-roles/entities/user-roles/v1
+  note: 'Deprecated : Please use GET /user-management/entities/roles/v1.'
+  collection: User Management
+- operationId: GetUserRoleIds
+  method: GET
+  path: /user-roles/queries/user-role-ids-by-user-uuid/v1
+  note: 'Deprecated : Please use GET /user-management/combined/user-roles/v1.'
+  collection: User Management
+- operationId: GrantUserRoleIds
+  method: POST
+  path: /user-roles/entities/user-roles/v1
+  note: 'Deprecated : Please use POST /user-management/entities/user-role-actions/v1.'
+  collection: User Management
+- operationId: RetrieveEmailsByCID
+  method: GET
+  path: /users/queries/emails-by-cid/v1
+  note: 'Deprecated : Please use POST /user-management/entities/users/GET/v1.'
+  collection: User Management
+- operationId: retrieveUser
+  method: GET
+  path: /users/entities/users/v1
+  note: 'Deprecated : Please use POST /user-management/entities/users/GET/v1.'
+  collection: User Management
+- operationId: RetrieveUser
+  method: GET
+  path: /users/entities/users/v1
+  note: 'Deprecated : Please use retrieveUsersGETV1.'
+  collection: User Management
+- operationId: RetrieveUserUUID
+  method: GET
+  path: /users/queries/user-uuids-by-email/v1
+  note: 'Deprecated : Please use GET /user-management/queries/users/v1.'
+  collection: User Management
+- operationId: RetrieveUserUUIDsByCID
+  method: GET
+  path: /users/queries/user-uuids-by-cid/v1
+  note: 'Deprecated : Please use GET /user-management/queries/users/v1.'
+  collection: User Management
+- operationId: RevokeUserRoleIds
+  method: DELETE
+  path: /user-roles/entities/user-roles/v1
+  note: 'Deprecated : Please use POST /user-management/entities/user-role-actions/v1.'
+  collection: User Management
+- operationId: UpdateUser
+  method: PATCH
+  path: /users/entities/users/v1
+  note: 'Deprecated : Please use PATCH /user-management/entities/users/v1.'
+  collection: User Management
+status_page: null
+status_page_note: No public status page found. status.crowdstrike.com does not resolve (DNS failure, probed 2026-09-19)
+  and https://www.crowdstrike.com/status/ returns 404. Platform status is inside the Falcon console and the support
+  portal (https://supportportal.crowdstrike.com/), both of which require a customer login.
+sla:
+  url: null
+  note: No public uptime SLA page found; SLAs are contractual (Falcon Complete carries a breach-prevention warranty,
+    terms not published).
+support:
+  portal: https://supportportal.crowdstrike.com/
+  community: https://reddit.com/r/crowdstrike
+  note: community.crowdstrike.com redirects to a private login.
+x-evidence:
+  probed: '2026-09-19'
+  requests:
+  - url: https://status.crowdstrike.com/
+    status: 0
+    note: no DNS resolution
+  - url: https://www.crowdstrike.com/status/
+    status: 404
+  - url: https://supportportal.crowdstrike.com/
+    status: 200
+  - url: https://community.crowdstrike.com/
+    status: 200
+    note: redirects to /private/login
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,79 @@
+specification: API Commons ChangeLog
+specificationVersion: '0.1'
+provider: CrowdStrike
+providerId: crowdstrike
+generated: '2026-09-19'
+method: searched
+source: https://developer.crowdstrike.com/falcon-mcp/changelog/
+description: CrowdStrike publishes NO changelog for the Falcon platform API itself — /changelog/, /whats-new/ and
+  /api-reference/changelog/ on the developer center all return the site's 404 shell, and release notes for the platform
+  live behind the Falcon console (the /deployment-coordinator/ release-notes operations are themselves authenticated
+  API calls). The one dated, public, machine-readable changelog CrowdStrike publishes for a developer product is
+  the Falcon MCP server's, mirrored from the repo's release-please output. Recent window only.
+scope: falcon-mcp server (developer product) — NOT the Falcon platform API
+scheme: semver, release-please generated
+current_version: 0.19.0
+entries:
+- version: 0.19.0
+  date: '2026-09-01'
+  additions:
+  - 'modules/guardian: AI agent activity module'
+  fixes:
+  - 'dynamic: stop generic words deciding which tools are reachable'
+  breaking: []
+- version: 0.18.0
+  date: '2026-08-28'
+  additions:
+  - 'modules/cloud: cloud insights — mixin package, filter-only search, definitions catalog'
+  fixes:
+  - 'modules: reject sort expressions the policy APIs cannot serve'
+  - 'scripts: resolve operation names behind constants and helper chains'
+  breaking: []
+- version: 0.17.0
+  date: '2026-08-22'
+  additions:
+  - 'modules/agentworks: AgentWorks module for Charlotte AI agents'
+  - 'modules/fusion: Fusion SOAR module'
+  - 'modules/zero-trust-assessment: ZTA module'
+  - 'modules/discover: falcon_search_managed_assets'
+  - 'modules/recon: aggregation and rule-preview tools'
+  fixes:
+  - 'modules/firewall: drop ignored q param'
+  - 'modules/ngsiem: reject repository values that break path construction'
+  breaking: []
+- version: 0.16.1
+  date: '2026-08-10'
+  additions: []
+  fixes:
+  - 'modules/detections: chunk update_detections requests over 1000 ids'
+  - 'modules: return FQL guide on filter errors'
+  breaking: []
+- version: 0.16.0
+  date: '2026-08-05'
+  additions:
+  - 'server: concurrent request handling'
+  - 'server: --read-only, --tools, --exclude-tools filtering'
+  - 'modules/hosts: Falcon Grouping Tag management tool'
+  - 'modules/cases: aggregate tools'
+  fixes: []
+  breaking:
+  - 'modules/detections: falcon_aggregate_alerts renamed to falcon_aggregate_detections'
+platform_api_changelog:
+  public: false
+  note: Operation-level change is visible only by diffing the reference; deprecations are announced in operation
+    summaries (see lifecycle/crowdstrike-lifecycle.yml).
+x-evidence:
+  probed: '2026-09-19'
+  requests:
+  - url: https://developer.crowdstrike.com/changelog/
+    status: 200
+    note: site 404 shell
+  - url: https://developer.crowdstrike.com/whats-new/
+    status: 200
+    note: site 404 shell
+  - url: https://developer.crowdstrike.com/falcon-mcp/changelog/
+    status: 200
+    note: real dated changelog
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

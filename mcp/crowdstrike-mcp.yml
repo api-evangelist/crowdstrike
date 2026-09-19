@@ -1,0 +1,1246 @@
+specification: API Commons MCP Server
+specificationVersion: '0.1'
+provider: CrowdStrike
+providerId: crowdstrike
+generated: '2026-09-19'
+method: searched
+status: published
+source: https://developer.crowdstrike.com/falcon-mcp/overview/
+description: 'CrowdStrike publishes falcon-mcp, a first-party open-source MCP server that connects agents to the
+  Falcon platform. It is a LOCAL STDIO product: installed with uv/pip/uvx and run by the operator, authenticating
+  with the operator''s own Falcon OAuth2 client credentials. CrowdStrike also operates a separate HOSTED Falcon
+  MCP (discovery-shaped: search_tools then execute_tool) which its own docs compare against this one, but publishes
+  no anonymous endpoint URL for it — so no remote endpoint is recorded here.'
+deployment:
+  mode: local-stdio
+  install: uvx falcon-mcp
+  package: https://pypi.org/project/falcon-mcp/
+  auth: api-key
+  verified: searched
+  notes:
+  - 'Installs documented verbatim: `uv tool install falcon-mcp`, `pip install falcon-mcp`, `uvx falcon-mcp` (recommended
+    for editor integrations).'
+  - Auth is a Falcon OAuth2 API client (FALCON_CLIENT_ID / FALCON_CLIENT_SECRET) created in the Falcon console —
+    an operator-held credential, not a delegated OAuth flow.
+  - The server can also be started with sse or streamable-http transport on a host/port the OPERATOR chooses (FALCON_MCP_TRANSPORT);
+    that is still self-hosted, not a CrowdStrike-operated endpoint.
+  - A CrowdStrike-hosted Falcon MCP exists and is documented by contrast in /falcon-mcp/modules/overview/, but no
+    public endpoint URL is published, so `mode` stays local-stdio rather than `both`.
+  - Deployment guides exist for Docker, Amazon Bedrock AgentCore and Google Cloud Run / Vertex AI Agent Engine —
+    all operator-run.
+server:
+  name: io.github.CrowdStrike/falcon-mcp
+  title: CrowdStrike Falcon MCP Server
+  version: 0.19.0
+  transport:
+  - stdio
+  - sse
+  - streamable-http
+  repository: https://github.com/CrowdStrike/falcon-mcp
+  registry_manifest: https://raw.githubusercontent.com/CrowdStrike/falcon-mcp/main/server.json
+  registries:
+  - https://registry.modelcontextprotocol.io/?q=io.github.CrowdStrike%2Ffalcon-mcp&all=1
+  - https://github.com/mcp/CrowdStrike/falcon-mcp
+  - https://geminicli.com/extensions/?name=CrowdStrikefalcon-mcp
+  docs: https://developer.crowdstrike.com/falcon-mcp/overview/
+  changelog: https://developer.crowdstrike.com/falcon-mcp/changelog/
+modes:
+  default: every enabled module's falcon_* tool is registered up front
+  dynamic: FALCON_MCP tool surface collapses to falcon_search_tools, falcon_execute_tool and falcon_list_enabled_tools
+  filters:
+  - --read-only
+  - --tools
+  - --exclude-tools
+tool_count: 166
+module_count: 28
+modules:
+- name: agentworks
+  title: AgentWorks
+  description: Calling, listing, and observing CrowdStrike AgentWorks (agentic-studio) Charlotte AI agents and their
+    execution traces
+  scopes:
+  - 'Charlotte AI Agent Definition: READ'
+  - 'Charlotte AI Agent Definition: WRITE'
+  tool_count: 5
+- name: cases
+  title: Case Management
+  description: Managing CrowdStrike cases, including searching, creating, updating, and managing evidence and tags
+  scopes:
+  - 'Case Templates: READ'
+  - 'Cases: READ'
+  - 'Cases: WRITE'
+  tool_count: 13
+- name: cloud
+  title: Cloud Security
+  description: Accessing and analyzing CrowdStrike Falcon cloud resources like Kubernetes & Containers Inventory,
+    Images Vulnerabilities, Cloud Assets, IOM Findings, CSPM Suppression Rules, Cloud Risks, Cloud Groups, and Cloud
+    Insights
+  scopes:
+  - 'Cloud Groups V2: READ'
+  - 'Cloud Security API Assets: READ'
+  - 'Cloud Security API Detections: READ'
+  - 'Cloud Security API Risks: READ'
+  - 'Cloud Security Policies: READ'
+  - 'Falcon Container Image: READ'
+  - 'Cloud Security Policies: WRITE'
+  tool_count: 14
+- name: correlationrules
+  title: Correlation Rules
+  description: Correlation Rules module for CrowdStrike Falcon.
+  scopes:
+  - 'Correlation Rules: READ'
+  - 'Correlation Rules: WRITE'
+  tool_count: 4
+- name: custom-ioa
+  title: Custom IOA
+  description: Searching, creating, updating, and deleting Custom IOA (Indicators of Attack) behavioral rules and
+    rule groups using Falcon Custom IOA Service Collection endpoints
+  scopes:
+  - 'Custom IOA Rules: READ'
+  - 'Custom IOA Rules: WRITE'
+  tool_count: 9
+- name: data-protection
+  title: Data Protection
+  description: Provides read-only access to Data Protection configuration data — classifications, policies, and
+    content patterns — so an LLM can reason about why a Data Protection detection fired
+  scopes:
+  - 'Data Protection: READ'
+  tool_count: 3
+- name: detections
+  title: Detections
+  description: Accessing and analyzing CrowdStrike Falcon detections
+  scopes:
+  - 'Alerts: READ'
+  - 'Alerts: WRITE'
+  tool_count: 4
+- name: discover
+  title: Discover
+  description: Accessing and managing CrowdStrike Falcon Discover applications, managed assets, and unmanaged assets
+  scopes:
+  - 'Assets: READ'
+  tool_count: 3
+- name: exclusions
+  title: Exclusions
+  description: This module provides a unified set of tools for managing CrowdStrike exclusions across four types
+    — IOA, Machine Learning, Sensor Visibility, and Certificate-Based — behind a single `exclusion_type` discriminator
+  scopes:
+  - 'IOA Exclusions: READ'
+  - 'Machine Learning Exclusions: READ'
+  - 'Sensor Visibility Exclusions: READ'
+  - 'IOA Exclusions: WRITE'
+  - 'Machine Learning Exclusions: WRITE'
+  - 'Sensor Visibility Exclusions: WRITE'
+  tool_count: 5
+- name: firewall
+  title: Firewall Management
+  description: Searching and managing firewall rules and rule groups
+  scopes:
+  - 'Firewall Management: READ'
+  - 'Firewall Management: WRITE'
+  tool_count: 5
+- name: fusion
+  title: Fusion SOAR
+  description: Searching Fusion SOAR workflow definitions and executions, reading what an execution produced, and
+    running an on-demand workflow
+  scopes:
+  - 'Workflows: READ'
+  - 'Workflows: WRITE'
+  tool_count: 4
+- name: guardian
+  title: Guardian
+  description: Provides tools for querying AI agent inventory and activity data
+  scopes:
+  - 'AIDR: READ'
+  tool_count: 25
+- name: host-groups
+  title: Host Groups
+  description: Searching, creating, updating, and deleting CrowdStrike Falcon host groups, as well as managing group
+    membership
+  scopes:
+  - 'Host Groups: READ'
+  - 'Host Groups: WRITE'
+  tool_count: 6
+- name: hosts
+  title: Hosts
+  description: Accessing and managing CrowdStrike Falcon hosts/devices
+  scopes:
+  - 'Hosts: READ'
+  - 'Hosts: WRITE'
+  tool_count: 3
+- name: idp
+  title: Identity Protection
+  description: Accessing and managing CrowdStrike Falcon Identity Protection capabilities
+  scopes:
+  - 'Identity Protection Assessment: READ'
+  - 'Identity Protection Detections: READ'
+  - 'Identity Protection Entities: READ'
+  - 'Identity Protection Timeline: READ'
+  - 'Identity Protection GraphQL: WRITE'
+  tool_count: 1
+- name: intel
+  title: Intel
+  description: Accessing and analyzing CrowdStrike Falcon intelligence data
+  scopes:
+  - 'Actors (Falcon Intelligence): READ'
+  - 'Indicators (Falcon Intelligence): READ'
+  - 'Reports (Falcon Intelligence): READ'
+  tool_count: 4
+- name: ioc
+  title: IOC
+  description: Searching, creating, and deleting custom IOCs using Falcon IOC Service Collection endpoints
+  scopes:
+  - 'IOC Management: READ'
+  - 'IOC Management: WRITE'
+  tool_count: 3
+- name: ngsiem
+  title: NGSIEM
+  description: Running search queries against CrowdStrike's Next-Gen SIEM via the asynchronous job-based search
+    API
+  scopes:
+  - 'NGSIEM: READ'
+  - 'NGSIEM: WRITE'
+  tool_count: 1
+- name: policies
+  title: Policies
+  description: This module provides a unified set of tools for managing CrowdStrike host-based policies across all
+    six policy types — prevention, sensor_update, firewall, device_control, response, and content_update — behind
+    a single `policy_type` discriminator
+  scopes:
+  - 'Content Update Policies: READ'
+  - 'Device Control Policies: READ'
+  - 'Firewall Management: READ'
+  - 'Prevention Policies: READ'
+  - 'Response Policies: READ'
+  - 'Sensor Update Policies: READ'
+  - 'Content Update Policies: WRITE'
+  - 'Device Control Policies: WRITE'
+  - 'Firewall Management: WRITE'
+  - 'Prevention Policies: WRITE'
+  - 'Response Policies: WRITE'
+  - 'Sensor Update Policies: WRITE'
+  tool_count: 7
+- name: quarantine
+  title: Quarantine
+  description: Investigating quarantined files and applying quarantine actions during triage and remediation workflows
+  scopes:
+  - 'Quarantined Files: READ'
+  - 'Quarantined Files: WRITE'
+  tool_count: 4
+- name: recon
+  title: Recon
+  description: Searching Falcon Intelligence Recon notifications, monitoring rules, and exposed-data records
+  scopes:
+  - 'Monitoring rules (Falcon Intelligence Recon): READ'
+  tool_count: 6
+- name: rtr
+  title: Real Time Response
+  description: Initiating and inspecting RTR sessions and for executing read-only RTR commands during host investigations
+  scopes:
+  - 'Real time response: READ'
+  - 'real-time-response-audit: READ'
+  - 'Real time response: WRITE'
+  tool_count: 11
+- name: scheduled-reports
+  title: Scheduled Reports
+  description: Accessing and managing CrowdStrike Falcon scheduled reports and scheduled searches
+  scopes:
+  - 'Scheduled Reports: READ'
+  tool_count: 4
+- name: sensor-usage
+  title: Sensor Usage
+  description: Accessing CrowdStrike Falcon sensor usage data
+  scopes:
+  - 'Sensor Usage: READ'
+  tool_count: 1
+- name: serverless
+  title: Serverless
+  description: Accessing and managing CrowdStrike Falcon Serverless Vulnerabilities
+  scopes:
+  - 'Falcon Container Image: READ'
+  tool_count: 1
+- name: shield
+  title: Shield
+  description: Shield module for CrowdStrike Falcon.
+  scopes:
+  - 'SaaS Security: READ'
+  - 'SaaS Security: WRITE'
+  tool_count: 16
+- name: spotlight
+  title: Spotlight
+  description: Accessing and managing CrowdStrike Falcon Spotlight vulnerabilities
+  scopes:
+  - 'Vulnerabilities: READ'
+  tool_count: 1
+- name: zero-trust-assessment
+  title: Zero Trust Assessment
+  description: Retrieving Zero Trust Assessment posture scores and sensor and OS hardening signals for hosts
+  scopes:
+  - 'Zero Trust Assessment: READ'
+  tool_count: 3
+tools:
+- name: falcon_search_agentworks_agents
+  module: agentworks
+  description: Search for AgentWorks (Charlotte AI) agents in your CrowdStrike environment.
+  scopes: 'Charlotte AI Agent Definition: READ'
+  modifies_data: false
+- name: falcon_search_agentworks_agent_versions
+  module: agentworks
+  description: Search for versions of AgentWorks agents.
+  scopes: 'Charlotte AI Agent Definition: READ'
+  modifies_data: false
+- name: falcon_search_agentworks_spans
+  module: agentworks
+  description: Search AgentWorks execution spans (traces) for observability.
+  scopes: 'Charlotte AI Agent Definition: READ'
+  modifies_data: false
+- name: falcon_get_agentworks_agent_invocation
+  module: agentworks
+  description: Get the current state of an AgentWorks agent invocation by ID.
+  scopes: 'Charlotte AI Agent Definition: READ'
+  modifies_data: false
+- name: falcon_invoke_agentworks_agent
+  module: agentworks
+  description: Invoke an AgentWorks (Charlotte AI) agent and return its reply.
+  scopes: 'Charlotte AI Agent Definition: READ, Charlotte AI Agent Definition: WRITE'
+  modifies_data: true
+- name: falcon_search_cases
+  module: cases
+  description: Find cases by criteria and return their complete details.
+  scopes: 'Cases: READ'
+  modifies_data: false
+- name: falcon_get_cases
+  module: cases
+  description: Retrieve details for case IDs you already have.
+  scopes: 'Cases: READ'
+  modifies_data: false
+- name: falcon_create_case
+  module: cases
+  description: Create a new case in CrowdStrike.
+  scopes: 'Cases: WRITE'
+  modifies_data: true
+- name: falcon_update_case
+  module: cases
+  description: Update an existing case's fields.
+  scopes: 'Cases: WRITE'
+  modifies_data: true
+- name: falcon_add_case_alert_evidence
+  module: cases
+  description: Attach alert evidence to an existing case.
+  scopes: 'Cases: WRITE'
+  modifies_data: true
+- name: falcon_add_case_event_evidence
+  module: cases
+  description: Attach LogScale event evidence to an existing case.
+  scopes: 'Cases: WRITE'
+  modifies_data: true
+- name: falcon_manage_case_tags
+  module: cases
+  description: Add or remove tags on a case.
+  scopes: 'Cases: WRITE'
+  modifies_data: true
+- name: falcon_list_case_templates
+  module: cases
+  description: List available case templates.
+  scopes: 'Case Templates: READ'
+  modifies_data: false
+- name: falcon_aggregate_case_slas
+  module: cases
+  description: Count case SLA definitions grouped by a field.
+  scopes: 'Case Templates: READ'
+  modifies_data: false
+- name: falcon_aggregate_case_templates
+  module: cases
+  description: Count case templates grouped by a field.
+  scopes: 'Case Templates: READ'
+  modifies_data: false
+- name: falcon_aggregate_case_access_tags
+  module: cases
+  description: Count case access tags grouped by a field.
+  scopes: 'Case Templates: READ'
+  modifies_data: false
+- name: falcon_aggregate_case_notification_groups
+  module: cases
+  description: Count case notification groups grouped by a field.
+  scopes: 'Case Templates: READ'
+  modifies_data: false
+- name: falcon_aggregate_case_file_details
+  module: cases
+  description: Report the files attached to cases, grouped and counted by a field.
+  scopes: 'Cases: READ'
+  modifies_data: false
+- name: falcon_search_cloud_insights
+  module: cloud
+  description: Search for cloud security insights using FQL.
+  scopes: 'Cloud Security API Assets: READ, Cloud Security Policies: READ'
+  modifies_data: false
+- name: falcon_get_cloud_asset_insights
+  module: cloud
+  description: Retrieve the full insight detail for one or more cloud ASSET IDs.
+  scopes: 'Cloud Security API Assets: READ'
+  modifies_data: false
+- name: falcon_list_cloud_insight_definitions
+  module: cloud
+  description: Return all available cloud insight definitions, deduplicated by insight_id.
+  scopes: 'Cloud Security Policies: READ'
+  modifies_data: false
+- name: falcon_search_cspm_assets
+  module: cloud
+  description: Search for cloud assets in your CrowdStrike CSPM inventory.
+  scopes: 'Cloud Security API Assets: READ'
+  modifies_data: false
+- name: falcon_search_kubernetes_containers
+  module: cloud
+  description: Search for Kubernetes containers in your CrowdStrike container inventory.
+  scopes: 'Falcon Container Image: READ'
+  modifies_data: false
+- name: falcon_count_kubernetes_containers
+  module: cloud
+  description: Count Kubernetes containers matching filter criteria.
+  scopes: 'Falcon Container Image: READ'
+  modifies_data: false
+- name: falcon_search_images_vulnerabilities
+  module: cloud
+  description: Search for container image vulnerabilities in CrowdStrike Image Assessments.
+  scopes: 'Falcon Container Image: READ'
+  modifies_data: false
+- name: falcon_search_iom_findings
+  module: cloud
+  description: Search for CSPM Indicators of Misconfiguration (IOM) findings.
+  scopes: 'Cloud Security API Detections: READ'
+  modifies_data: false
+- name: falcon_search_cspm_suppression_rules
+  module: cloud
+  description: Search for CSPM IOM suppression rules.
+  scopes: 'Cloud Security Policies: READ'
+  modifies_data: false
+- name: falcon_create_cspm_suppression_rule
+  module: cloud
+  description: Create a CSPM IOM suppression rule to hide matching findings.
+  scopes: 'Cloud Security Policies: READ, Cloud Security Policies: WRITE'
+  modifies_data: false
+- name: falcon_delete_cspm_suppression_rules
+  module: cloud
+  description: Delete CSPM IOM suppression rules by ID.
+  scopes: 'Cloud Security Policies: WRITE'
+  modifies_data: false
+- name: falcon_search_cloud_risks
+  module: cloud
+  description: Search for cloud risks in your CrowdStrike environment.
+  scopes: 'Cloud Security API Risks: READ'
+  modifies_data: false
+- name: falcon_search_cloud_groups
+  module: cloud
+  description: List cloud groups in your CrowdStrike environment.
+  scopes: 'Cloud Groups V2: READ'
+  modifies_data: false
+- name: falcon_get_cloud_groups
+  module: cloud
+  description: Get detailed information for cloud groups by ID.
+  scopes: 'Cloud Groups V2: READ'
+  modifies_data: false
+- name: falcon_search_correlation_rules
+  module: correlationrules
+  description: Search NG-SIEM Correlation Rules and return full rule details.
+  scopes: 'Correlation Rules: READ'
+  modifies_data: false
+- name: falcon_create_correlation_rule
+  module: correlationrules
+  description: Create a new NG-SIEM Correlation Rule.
+  scopes: 'Correlation Rules: WRITE'
+  modifies_data: true
+- name: falcon_update_correlation_rule
+  module: correlationrules
+  description: Update an existing NG-SIEM Correlation Rule.
+  scopes: 'Correlation Rules: WRITE'
+  modifies_data: true
+- name: falcon_delete_correlation_rules
+  module: correlationrules
+  description: Permanently delete NG-SIEM Correlation Rules by rule ID.
+  scopes: 'Correlation Rules: WRITE'
+  modifies_data: false
+- name: falcon_search_ioa_rule_groups
+  module: custom-ioa
+  description: Search Custom IOA rule groups and return full details including their rules.
+  scopes: 'Custom IOA Rules: READ'
+  modifies_data: false
+- name: falcon_get_ioa_platforms
+  module: custom-ioa
+  description: Get all available platforms for Custom IOA rule groups.
+  scopes: 'Custom IOA Rules: READ'
+  modifies_data: false
+- name: falcon_get_ioa_rule_types
+  module: custom-ioa
+  description: Get all available Custom IOA rule types.
+  scopes: 'Custom IOA Rules: READ'
+  modifies_data: false
+- name: falcon_create_ioa_rule_group
+  module: custom-ioa
+  description: Create a new Custom IOA rule group.
+  scopes: 'Custom IOA Rules: WRITE'
+  modifies_data: true
+- name: falcon_update_ioa_rule_group
+  module: custom-ioa
+  description: Update an existing Custom IOA rule group.
+  scopes: 'Custom IOA Rules: WRITE'
+  modifies_data: true
+- name: falcon_delete_ioa_rule_groups
+  module: custom-ioa
+  description: Delete Custom IOA rule groups by ID.
+  scopes: 'Custom IOA Rules: WRITE'
+  modifies_data: false
+- name: falcon_create_ioa_rule
+  module: custom-ioa
+  description: Create a new Custom IOA behavioral detection rule within a rule group.
+  scopes: 'Custom IOA Rules: WRITE'
+  modifies_data: true
+- name: falcon_update_ioa_rule
+  module: custom-ioa
+  description: Update an existing Custom IOA behavioral detection rule.
+  scopes: 'Custom IOA Rules: WRITE'
+  modifies_data: true
+- name: falcon_delete_ioa_rules
+  module: custom-ioa
+  description: Delete Custom IOA behavioral detection rules from a rule group.
+  scopes: 'Custom IOA Rules: WRITE'
+  modifies_data: false
+- name: falcon_search_data_protection_classifications
+  module: data-protection
+  description: Search for Data Protection classifications in your CrowdStrike environment.
+  scopes: 'Data Protection: READ'
+  modifies_data: false
+- name: falcon_search_data_protection_policies
+  module: data-protection
+  description: Search for Data Protection policies in your CrowdStrike environment.
+  scopes: 'Data Protection: READ'
+  modifies_data: false
+- name: falcon_search_data_protection_content_patterns
+  module: data-protection
+  description: Search for Data Protection content patterns in your CrowdStrike environment.
+  scopes: 'Data Protection: READ'
+  modifies_data: false
+- name: falcon_search_detections
+  module: detections
+  description: Find detections (also called alerts) by criteria and return their complete details.
+  scopes: 'Alerts: READ'
+  modifies_data: false
+- name: falcon_get_detection_details
+  module: detections
+  description: Retrieve details for detection IDs you already have.
+  scopes: 'Alerts: READ'
+  modifies_data: false
+- name: falcon_aggregate_detections
+  module: detections
+  description: Count and summarize detections (also called alerts) without retrieving each record.
+  scopes: 'Alerts: READ'
+  modifies_data: false
+- name: falcon_update_detections
+  module: detections
+  description: Update the status, assignment, visibility, comments, and tags of one or more detections.
+  scopes: 'Alerts: WRITE'
+  modifies_data: true
+- name: falcon_search_applications
+  module: discover
+  description: Search for applications discovered in your CrowdStrike environment.
+  scopes: 'Assets: READ'
+  modifies_data: false
+- name: falcon_search_unmanaged_assets
+  module: discover
+  description: Search for unmanaged assets (hosts without Falcon sensor) in your environment.
+  scopes: 'Assets: READ'
+  modifies_data: false
+- name: falcon_search_managed_assets
+  module: discover
+  description: 'Search hosts by asset and configuration posture: drive encryption status, encrypted/unencrypted
+    drives, OS security settings (Secure Boot, Credential Guard, IOMMU), disk/memory/CPU usage, asset criticality,
+    and internet exposure.'
+  scopes: 'Assets: READ'
+  modifies_data: false
+- name: falcon_search_exclusions
+  module: exclusions
+  description: Search exclusions of a given type and return full exclusion records.
+  scopes: 'IOA Exclusions: READ, Machine Learning Exclusions: READ, Sensor Visibility Exclusions: READ'
+  modifies_data: false
+- name: falcon_create_exclusion
+  module: exclusions
+  description: Create an exclusion of the given type.
+  scopes: 'IOA Exclusions: WRITE, Machine Learning Exclusions: WRITE, Sensor Visibility Exclusions: WRITE'
+  modifies_data: true
+- name: falcon_update_exclusion
+  module: exclusions
+  description: Update an existing exclusion of the given type.
+  scopes: 'IOA Exclusions: WRITE, Machine Learning Exclusions: WRITE, Sensor Visibility Exclusions: WRITE'
+  modifies_data: true
+- name: falcon_delete_exclusions
+  module: exclusions
+  description: Delete one or more exclusions of the given type.
+  scopes: 'IOA Exclusions: WRITE, Machine Learning Exclusions: WRITE, Sensor Visibility Exclusions: WRITE'
+  modifies_data: false
+- name: falcon_get_certificate_details
+  module: exclusions
+  description: Retrieve the code-signing certificate metadata for a file by SHA256.
+  scopes: 'Machine Learning Exclusions: READ'
+  modifies_data: false
+- name: falcon_search_firewall_rules
+  module: firewall
+  description: Search firewall rules and return full rule details.
+  scopes: 'Firewall Management: READ'
+  modifies_data: false
+- name: falcon_search_firewall_rule_groups
+  module: firewall
+  description: Search firewall rule groups and return full rule group details.
+  scopes: 'Firewall Management: READ'
+  modifies_data: false
+- name: falcon_search_firewall_policy_rules
+  module: firewall
+  description: Search firewall rules within a specific policy container.
+  scopes: 'Firewall Management: READ'
+  modifies_data: false
+- name: falcon_create_firewall_rule_group
+  module: firewall
+  description: Create a firewall rule group.
+  scopes: 'Firewall Management: WRITE'
+  modifies_data: true
+- name: falcon_delete_firewall_rule_groups
+  module: firewall
+  description: Delete firewall rule groups by ID.
+  scopes: 'Firewall Management: WRITE'
+  modifies_data: false
+- name: falcon_search_workflow_definitions
+  module: fusion
+  description: Search Fusion SOAR workflow definitions in your CrowdStrike environment.
+  scopes: 'Workflows: READ'
+  modifies_data: false
+- name: falcon_search_workflow_executions
+  module: fusion
+  description: Search Fusion SOAR workflow execution history in your CrowdStrike environment.
+  scopes: 'Workflows: READ'
+  modifies_data: false
+- name: falcon_get_workflow_execution_results
+  module: fusion
+  description: Read what one or more Fusion SOAR workflow executions produced.
+  scopes: 'Workflows: READ'
+  modifies_data: false
+- name: falcon_execute_workflow
+  module: fusion
+  description: Start a Fusion SOAR workflow by definition ID.
+  scopes: 'Workflows: WRITE'
+  modifies_data: false
+- name: falcon_search_guardian_agents
+  module: guardian
+  description: List AI agents from the AIAgent entity store.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_get_guardian_agent
+  module: guardian
+  description: Get a specific AI agent's record from the AIAgent entity store.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_search_guardian_mcp_servers
+  module: guardian
+  description: List MCP server names observed across the fleet (MCPServerName entity).
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_get_guardian_agent_sessions
+  module: guardian
+  description: List AI agent sessions across the fleet, filtered by product.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_get_guardian_session_detail
+  module: guardian
+  description: Get detailed information about a specific AI session.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_get_guardian_session_activity
+  module: guardian
+  description: Get activity for one or more AI sessions.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_search_guardian_tools
+  module: guardian
+  description: List AI tools from the AITool entity store — the inventory of which tools exist.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_search_guardian_tool_usage
+  module: guardian
+  description: List AI tool usage from LogScale AgenticToolRequest events.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_search_guardian_executions
+  module: guardian
+  description: List AI agent process executions, with the model and token counts for each.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_search_guardian_prompts
+  module: guardian
+  description: Search for AI prompts within a session (LogScale AgenticUserPromptSubmit).
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_get_guardian_inventory
+  module: guardian
+  description: Get a summary overview of AI activity in your environment.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_search_guardian_skills
+  module: guardian
+  description: List AI skill frontmatters (AISkillFrontmatterView entity).
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_search_guardian_skill_usage
+  module: guardian
+  description: List per-invocation AI skill events (LogScale AgenticToolRequest).
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_get_guardian_fleet_skill_inventory
+  module: guardian
+  description: Get a fleet-wide skill usage rollup by name (AISkill aggregate).
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_search_guardian_os_users
+  module: guardian
+  description: List OS users that have run AI agents (AIAgentOSUser entity).
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_pivot_on_guardian_attribute
+  module: guardian
+  description: Pivot from a known attribute value to the agents or activity carrying it.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_get_guardian_process_tree
+  module: guardian
+  description: Get the spawned process tree for an AI session.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_get_guardian_network_events
+  module: guardian
+  description: Get outbound network connections from an AI session's processes.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_get_guardian_file_events
+  module: guardian
+  description: Get file activity for processes spawned from an AI session.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_get_guardian_classified_file_access
+  module: guardian
+  description: Get classified/sensitive file access for an AI agent process.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_generate_guardian_report
+  module: guardian
+  description: Generate a structured Guardian report.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_search_guardian_detections
+  module: guardian
+  description: List detections involving AI agent processes.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_get_guardian_detection_scores
+  module: guardian
+  description: Get the Agentic Threat Score for each agent.
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_search_guardian_installs
+  module: guardian
+  description: List AI agent installations (AIAgentInstallationView entity).
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_search_guardian_models
+  module: guardian
+  description: List AI model names (AIModelName entity).
+  scopes: 'AIDR: READ'
+  modifies_data: false
+- name: falcon_search_host_groups
+  module: host-groups
+  description: Search for host groups in your CrowdStrike environment.
+  scopes: 'Host Groups: READ'
+  modifies_data: false
+- name: falcon_search_host_group_members
+  module: host-groups
+  description: Search for the host members of a specific host group.
+  scopes: 'Host Groups: READ'
+  modifies_data: false
+- name: falcon_create_host_group
+  module: host-groups
+  description: Create a host group.
+  scopes: 'Host Groups: WRITE'
+  modifies_data: true
+- name: falcon_update_host_group
+  module: host-groups
+  description: Update an existing host group.
+  scopes: 'Host Groups: WRITE'
+  modifies_data: true
+- name: falcon_delete_host_groups
+  module: host-groups
+  description: Delete one or more host groups.
+  scopes: 'Host Groups: WRITE'
+  modifies_data: false
+- name: falcon_perform_host_group_action
+  module: host-groups
+  description: Add or remove hosts from one or more host groups.
+  scopes: 'Host Groups: WRITE'
+  modifies_data: true
+- name: falcon_search_hosts
+  module: hosts
+  description: 'Search hosts and their sensor state: filter by hostname, platform, IP, sensor version, containment
+    (network-quarantine) status, assigned policies, or grouping tags.'
+  scopes: 'Hosts: READ'
+  modifies_data: false
+- name: falcon_get_host_details
+  module: hosts
+  description: Retrieve detailed information for one or more host device IDs.
+  scopes: 'Hosts: READ'
+  modifies_data: false
+- name: falcon_manage_host_grouping_tags
+  module: hosts
+  description: Add or remove Falcon Grouping Tags on one or more hosts.
+  scopes: 'Hosts: WRITE'
+  modifies_data: true
+- name: falcon_idp_investigate_entity
+  module: idp
+  description: Investigate one or more Identity Protection entities by ID, name, email, IP, or domain.
+  scopes: 'Identity Protection Assessment: READ, Identity Protection Detections: READ, Identity Protection Entities:
+    READ, Identity Protection Timeline: READ, Identity Protection GraphQL: WRITE'
+  modifies_data: false
+- name: falcon_search_actors
+  module: intel
+  description: Research threat actors and adversary groups tracked by CrowdStrike intelligence.
+  scopes: 'Actors (Falcon Intelligence): READ'
+  modifies_data: false
+- name: falcon_search_indicators
+  module: intel
+  description: Search for threat indicators and IOCs from CrowdStrike intelligence.
+  scopes: 'Indicators (Falcon Intelligence): READ'
+  modifies_data: false
+- name: falcon_search_reports
+  module: intel
+  description: Search CrowdStrike intelligence publications and threat reports.
+  scopes: 'Reports (Falcon Intelligence): READ'
+  modifies_data: false
+- name: falcon_get_mitre_report
+  module: intel
+  description: Generate a MITRE ATT&CK report for a given threat actor.
+  scopes: 'Actors (Falcon Intelligence): READ'
+  modifies_data: false
+- name: falcon_search_iocs
+  module: ioc
+  description: Search custom IOCs and return full IOC details.
+  scopes: 'IOC Management: READ'
+  modifies_data: false
+- name: falcon_add_ioc
+  module: ioc
+  description: Create one or more custom IOCs.
+  scopes: 'IOC Management: WRITE'
+  modifies_data: true
+- name: falcon_remove_iocs
+  module: ioc
+  description: Remove custom IOCs by IDs or FQL filter.
+  scopes: 'IOC Management: WRITE'
+  modifies_data: false
+- name: falcon_search_ngsiem
+  module: ngsiem
+  description: Execute a CQL (CrowdStrike Query Language) query against CrowdStrike Next-Gen SIEM.
+  scopes: 'NGSIEM: READ, NGSIEM: WRITE'
+  modifies_data: false
+- name: falcon_search_policies
+  module: policies
+  description: Search host-based policies of a given type and return full policy records.
+  scopes: 'Content Update Policies: READ, Device Control Policies: READ, Firewall Management: READ, Prevention Policies:
+    READ, Response Policies: READ, Sensor Update Policies: READ'
+  modifies_data: false
+- name: falcon_search_policy_members
+  module: policies
+  description: Search for the host members governed by a specific policy.
+  scopes: 'Content Update Policies: READ, Device Control Policies: READ, Firewall Management: READ, Prevention Policies:
+    READ, Response Policies: READ, Sensor Update Policies: READ'
+  modifies_data: false
+- name: falcon_create_policy
+  module: policies
+  description: Create a host-based policy of the given type.
+  scopes: 'Content Update Policies: WRITE, Device Control Policies: WRITE, Firewall Management: WRITE, Prevention
+    Policies: WRITE, Response Policies: WRITE, Sensor Update Policies: WRITE'
+  modifies_data: true
+- name: falcon_update_policy
+  module: policies
+  description: Update an existing host-based policy of the given type.
+  scopes: 'Content Update Policies: WRITE, Device Control Policies: WRITE, Firewall Management: WRITE, Prevention
+    Policies: WRITE, Response Policies: WRITE, Sensor Update Policies: WRITE'
+  modifies_data: true
+- name: falcon_delete_policies
+  module: policies
+  description: Delete one or more host-based policies of the given type.
+  scopes: 'Content Update Policies: WRITE, Device Control Policies: WRITE, Firewall Management: WRITE, Prevention
+    Policies: WRITE, Response Policies: WRITE, Sensor Update Policies: WRITE'
+  modifies_data: false
+- name: falcon_perform_policy_action
+  module: policies
+  description: Perform an action on one or more policies of the given type.
+  scopes: 'Content Update Policies: WRITE, Device Control Policies: WRITE, Firewall Management: WRITE, Prevention
+    Policies: WRITE, Response Policies: WRITE, Sensor Update Policies: WRITE'
+  modifies_data: true
+- name: falcon_set_policy_precedence
+  module: policies
+  description: Set the precedence (evaluation order) of policies for a platform.
+  scopes: 'Content Update Policies: WRITE, Device Control Policies: WRITE, Firewall Management: WRITE, Prevention
+    Policies: WRITE, Response Policies: WRITE, Sensor Update Policies: WRITE'
+  modifies_data: true
+- name: falcon_search_quarantined_files
+  module: quarantine
+  description: Search quarantined files and return full quarantine metadata.
+  scopes: 'Quarantined Files: READ'
+  modifies_data: false
+- name: falcon_preview_quarantine_actions
+  module: quarantine
+  description: Estimate how many quarantine records each action would affect for a given filter.
+  scopes: 'Quarantined Files: READ'
+  modifies_data: false
+- name: falcon_update_quarantined_files
+  module: quarantine
+  description: Apply a reversible quarantine action to records selected by IDs or filter.
+  scopes: 'Quarantined Files: WRITE'
+  modifies_data: true
+- name: falcon_delete_quarantined_files
+  module: quarantine
+  description: Delete quarantine records selected by IDs or filter.
+  scopes: 'Quarantined Files: WRITE'
+  modifies_data: false
+- name: falcon_search_recon_notifications
+  module: recon
+  description: Search Falcon Intelligence Recon notifications (also called recon alerts) and return their full details.
+  scopes: 'Monitoring rules (Falcon Intelligence Recon): READ'
+  modifies_data: false
+- name: falcon_search_recon_rules
+  module: recon
+  description: Search Falcon Intelligence Recon monitoring rules and return their full details.
+  scopes: 'Monitoring rules (Falcon Intelligence Recon): READ'
+  modifies_data: false
+- name: falcon_search_recon_exposed_data_records
+  module: recon
+  description: Search Falcon Intelligence Recon exposed-data records and return their full details.
+  scopes: 'Monitoring rules (Falcon Intelligence Recon): READ'
+  modifies_data: false
+- name: falcon_aggregate_recon_notifications
+  module: recon
+  description: Count and group Falcon Intelligence Recon notifications into summary buckets.
+  scopes: 'Monitoring rules (Falcon Intelligence Recon): READ'
+  modifies_data: false
+- name: falcon_aggregate_recon_exposed_data_records
+  module: recon
+  description: Count and group Falcon Intelligence Recon exposed-data records into summary buckets.
+  scopes: 'Monitoring rules (Falcon Intelligence Recon): READ'
+  modifies_data: false
+- name: falcon_preview_recon_rule
+  module: recon
+  description: Estimate how many notifications a prospective Recon monitoring rule would generate.
+  scopes: 'Monitoring rules (Falcon Intelligence Recon): READ'
+  modifies_data: false
+- name: falcon_search_rtr_sessions
+  module: rtr
+  description: Search RTR sessions and return full session details.
+  scopes: 'Real time response: READ'
+  modifies_data: false
+- name: falcon_search_rtr_audit_sessions
+  module: rtr
+  description: Search RTR audit sessions for accountability and timeline evidence.
+  scopes: 'real-time-response-audit: READ'
+  modifies_data: false
+- name: falcon_aggregate_rtr_sessions
+  module: rtr
+  description: Summarize RTR session activity with Falcon aggregation buckets.
+  scopes: 'Real time response: READ'
+  modifies_data: false
+- name: falcon_get_rtr_session_details
+  module: rtr
+  description: Retrieve detailed metadata for one or more RTR sessions.
+  scopes: 'Real time response: READ'
+  modifies_data: false
+- name: falcon_init_rtr_session
+  module: rtr
+  description: Initialize or reuse an RTR session for a single host.
+  scopes: 'Real time response: READ'
+  modifies_data: true
+- name: falcon_pulse_rtr_session
+  module: rtr
+  description: Refresh an RTR session timeout for a single host.
+  scopes: 'Real time response: READ'
+  modifies_data: true
+- name: falcon_execute_rtr_read_only_command
+  module: rtr
+  description: Execute a read-only RTR command on a single host.
+  scopes: 'Real time response: READ'
+  modifies_data: true
+- name: falcon_run_rtr_read_only_command_and_wait
+  module: rtr
+  description: Execute a read-only RTR command and poll until completion.
+  scopes: 'Real time response: READ'
+  modifies_data: true
+- name: falcon_check_rtr_command_status
+  module: rtr
+  description: Get the status and output for an RTR command execution.
+  scopes: 'Real time response: READ'
+  modifies_data: false
+- name: falcon_list_rtr_session_files
+  module: rtr
+  description: List files extracted during an RTR session.
+  scopes: 'Real time response: WRITE'
+  modifies_data: false
+- name: falcon_delete_rtr_session
+  module: rtr
+  description: Close an RTR session and release the host connection.
+  scopes: 'Real time response: READ'
+  modifies_data: false
+- name: falcon_search_scheduled_reports
+  module: scheduled-reports
+  description: Search for scheduled reports and searches in your CrowdStrike environment.
+  scopes: 'Scheduled Reports: READ'
+  modifies_data: false
+- name: falcon_launch_scheduled_report
+  module: scheduled-reports
+  description: Launch a scheduled report or search on demand.
+  scopes: 'Scheduled Reports: READ'
+  modifies_data: true
+- name: falcon_search_report_executions
+  module: scheduled-reports
+  description: Search for report/search execution history.
+  scopes: 'Scheduled Reports: READ'
+  modifies_data: false
+- name: falcon_download_report_execution
+  module: scheduled-reports
+  description: Download the results of a completed report execution.
+  scopes: 'Scheduled Reports: READ'
+  modifies_data: false
+- name: falcon_search_sensor_usage
+  module: sensor-usage
+  description: Search for weekly sensor usage data in your CrowdStrike environment.
+  scopes: 'Sensor Usage: READ'
+  modifies_data: false
+- name: falcon_search_serverless_vulnerabilities
+  module: serverless
+  description: Search for vulnerabilities in serverless functions across all cloud providers.
+  scopes: 'Falcon Container Image: READ'
+  modifies_data: false
+- name: falcon_search_shield_checks
+  module: shield
+  description: Search individual Falcon Shield (SaaS Security) posture checks with filtering.
+  scopes: 'SaaS Security: READ'
+  modifies_data: false
+- name: falcon_get_shield_check_affected_entities
+  module: shield
+  description: Retrieve the specific entities (users, apps, or devices) that are violating a given Falcon Shield
+    posture check.
+  scopes: 'SaaS Security: READ'
+  modifies_data: false
+- name: falcon_get_shield_posture_metrics
+  module: shield
+  description: Get aggregated Falcon Shield (SaaS Security) posture metrics for a dashboard or summary view.
+  scopes: 'SaaS Security: READ'
+  modifies_data: false
+- name: falcon_get_shield_check_compliance
+  module: shield
+  description: Retrieve the compliance framework mappings for a specific Falcon Shield posture check.
+  scopes: 'SaaS Security: READ'
+  modifies_data: false
+- name: falcon_search_shield_alerts
+  module: shield
+  description: Search Falcon Shield (SaaS Security) alerts for monitored SaaS applications.
+  scopes: 'SaaS Security: READ'
+  modifies_data: false
+- name: falcon_get_shield_activity_monitor
+  module: shield
+  description: Get events from the Falcon Shield (SaaS Security) activity monitor; data is retained for 180 days.
+  scopes: 'SaaS Security: READ'
+  modifies_data: false
+- name: falcon_search_shield_users
+  module: shield
+  description: List end-users discovered across Falcon Shield (SaaS Security) connected SaaS applications.
+  scopes: 'SaaS Security: READ'
+  modifies_data: false
+- name: falcon_search_shield_devices
+  module: shield
+  description: List devices registered to users in Falcon Shield (SaaS Security) connected SaaS applications.
+  scopes: 'SaaS Security: READ'
+  modifies_data: false
+- name: falcon_search_shield_apps
+  module: shield
+  description: List third-party applications (OAuth apps, API tokens, browser extensions, service principals) with
+    access to Falcon Shield (SaaS Security) monitored platforms.
+  scopes: 'SaaS Security: READ'
+  modifies_data: false
+- name: falcon_get_shield_app_users
+  module: shield
+  description: Retrieve the users who have authorized or are associated with a specific third-party app in Falcon
+    Shield.
+  scopes: 'SaaS Security: READ'
+  modifies_data: false
+- name: falcon_search_shield_data_shares
+  module: shield
+  description: List files and resources shared externally across Falcon Shield (SaaS Security) monitored applications.
+  scopes: 'SaaS Security: READ'
+  modifies_data: false
+- name: falcon_get_shield_integrations
+  module: shield
+  description: List all SaaS integrations connected to Falcon Shield and their current connection status.
+  scopes: 'SaaS Security: READ'
+  modifies_data: false
+- name: falcon_get_shield_system_users
+  module: shield
+  description: List Falcon Shield (SaaS Security) platform administrators.
+  scopes: 'SaaS Security: READ'
+  modifies_data: false
+- name: falcon_get_shield_supported_saas
+  module: shield
+  description: List SaaS platforms supported by Falcon Shield for integration.
+  scopes: 'SaaS Security: READ'
+  modifies_data: false
+- name: falcon_get_shield_system_logs
+  module: shield
+  description: Retrieve Falcon Shield (SaaS Security) system audit logs; data is retained for 90 days.
+  scopes: 'SaaS Security: READ'
+  modifies_data: false
+- name: falcon_dismiss_shield_check
+  module: shield
+  description: Dismiss a Falcon Shield (SaaS Security) posture check to suppress it from the failed checks list.
+  scopes: 'SaaS Security: WRITE'
+  modifies_data: false
+- name: falcon_search_vulnerabilities
+  module: spotlight
+  description: Search for vulnerabilities in your CrowdStrike environment.
+  scopes: 'Vulnerabilities: READ'
+  modifies_data: false
+- name: falcon_search_zta_assessments
+  module: zero-trust-assessment
+  description: Search Zero Trust Assessment scores and return full assessment details.
+  scopes: 'Zero Trust Assessment: READ'
+  modifies_data: false
+- name: falcon_get_zta_assessments
+  module: zero-trust-assessment
+  description: Get Zero Trust Assessment details for specific hosts by agent ID (AID).
+  scopes: 'Zero Trust Assessment: READ'
+  modifies_data: false
+- name: falcon_get_zta_audit
+  module: zero-trust-assessment
+  description: Get the tenant-wide Zero Trust Assessment summary.
+  scopes: 'Zero Trust Assessment: READ'
+  modifies_data: false
+resources:
+- module: agentworks
+  uri: falcon://agentworks/agents/fql-guide
+- module: agentworks
+  uri: falcon://agentworks/agent-versions/fql-guide
+- module: agentworks
+  uri: falcon://agentworks/spans/fql-guide
+- module: cases
+  uri: falcon://cases/search/fql-guide
+- module: cases
+  uri: falcon://cases/aggregates/fql-guide
+- module: cases
+  uri: falcon://cases/file-aggregates/fql-guide
+- module: cloud
+  uri: falcon://cloud/cloud-insights/fql-guide
+- module: cloud
+  uri: falcon://cloud/cspm-assets/fql-guide
+- module: cloud
+  uri: falcon://cloud/kubernetes-containers/fql-guide
+- module: cloud
+  uri: falcon://cloud/images-vulnerabilities/fql-guide
+- module: cloud
+  uri: falcon://cloud/cspm-iom-findings/fql-guide
+- module: cloud
+  uri: falcon://cloud/cloud-risks/fql-guide
+- module: correlationrules
+  uri: falcon://correlation-rules/search/fql-guide
+- module: custom-ioa
+  uri: falcon://custom-ioa/rule-groups/fql-guide
+- module: data-protection
+  uri: falcon://data-protection/classifications/fql-guide
+- module: data-protection
+  uri: falcon://data-protection/policies/fql-guide
+- module: data-protection
+  uri: falcon://data-protection/content-patterns/fql-guide
+- module: detections
+  uri: falcon://detections/search/fql-guide
+- module: discover
+  uri: falcon://discover/applications/fql-guide
+- module: discover
+  uri: falcon://discover/hosts/fql-guide
+- module: discover
+  uri: falcon://discover/managed-assets/fql-guide
+- module: exclusions
+  uri: falcon://exclusions/search/fql-guide
+- module: firewall
+  uri: falcon://firewall/rules/fql-guide
+- module: fusion
+  uri: falcon://fusion/workflow-definitions/fql-guide
+- module: fusion
+  uri: falcon://fusion/workflow-executions/fql-guide
+- module: guardian
+  uri: falcon://guardian/events/query-guide
+- module: guardian
+  uri: falcon://guardian/entities/schema-guide
+- module: guardian
+  uri: falcon://guardian/inventory/schema-guide
+- module: guardian
+  uri: falcon://guardian/events/examples-guide
+- module: host-groups
+  uri: falcon://host-groups/search/fql-guide
+- module: hosts
+  uri: falcon://hosts/search/fql-guide
+- module: intel
+  uri: falcon://intel/actors/fql-guide
+- module: intel
+  uri: falcon://intel/indicators/fql-guide
+- module: intel
+  uri: falcon://intel/reports/fql-guide
+- module: ioc
+  uri: falcon://ioc/search/fql-guide
+- module: ngsiem
+  uri: falcon://ngsiem/search/cql-guide
+- module: policies
+  uri: falcon://policies/search/fql-guide
+- module: quarantine
+  uri: falcon://quarantine/files/search/fql-guide
+- module: recon
+  uri: falcon://recon/notifications/search/fql-guide
+- module: recon
+  uri: falcon://recon/rules/search/fql-guide
+- module: recon
+  uri: falcon://recon/exposed-data-records/search/fql-guide
+- module: recon
+  uri: falcon://recon/notifications/aggregate-guide
+- module: recon
+  uri: falcon://recon/exposed-data-records/aggregate-guide
+- module: recon
+  uri: falcon://recon/rules/preview-guide
+- module: rtr
+  uri: falcon://rtr/sessions/search/fql-guide
+- module: rtr
+  uri: falcon://rtr/audit/sessions/search/fql-guide
+- module: rtr
+  uri: falcon://rtr/sessions/aggregate-guide
+- module: rtr
+  uri: falcon://rtr/workflows/investigation-guide
+- module: scheduled-reports
+  uri: falcon://scheduled-reports/search/fql-guide
+- module: scheduled-reports
+  uri: falcon://scheduled-reports/executions/search/fql-guide
+- module: sensor-usage
+  uri: falcon://sensor-usage/weekly/fql-guide
+- module: serverless
+  uri: falcon://serverless/vulnerabilities/fql-guide
+- module: shield
+  uri: falcon://shield/search/query-guide
+- module: spotlight
+  uri: falcon://spotlight/vulnerabilities/fql-guide
+x-evidence:
+  fetched: '2026-09-19'
+  sources:
+  - https://developer.crowdstrike.com/falcon-mcp/modules/overview.md
+  - https://developer.crowdstrike.com/falcon-mcp/getting-started/installation.md
+  - https://raw.githubusercontent.com/CrowdStrike/falcon-mcp/main/server.json
+  note: 'Tool names, descriptions, required scopes and the modifies-data flag were read from the provider''s own
+    per-module documentation pages (28 pages fetched as markdown). Live tools/list introspection was NOT run: the
+    server is stdio and requires the operator''s Falcon credentials, so no anonymous introspection exists. inputSchema
+    per tool therefore needs authenticated introspection and is not recorded.'
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

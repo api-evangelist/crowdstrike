@@ -1,3 +1,17 @@
+---
+generated: '2026-09-19'
+method: generated
+source: CrowdStrike REST API documentation
+x-authored-by: API Evangelist
+x-generated-from: documentation
+x-provenance: >-
+  NOT A CROWDSTRIKE ARTIFACT. A conceptual GraphQL model API Evangelist wrote from CrowdStrike's REST
+  documentation. CrowdStrike publishes no GraphQL schema. Its one real GraphQL surface (Identity Protection,
+  POST /identity-protection/combined/graphql/v1) is auth-gated — anonymous introspection returned 401 on
+  2026-09-19. Quarantined to graphql/_scaffold/ on 2026-09-19 and de-pointered from apis.yml so it no longer
+  scores as a provider contract.
+---
+
 # CrowdStrike GraphQL Schema
 
 ## Overview

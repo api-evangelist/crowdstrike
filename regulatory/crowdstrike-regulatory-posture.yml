@@ -1,0 +1,125 @@
+specification: API Commons Regulatory Posture
+specificationVersion: '0.1'
+provider: CrowdStrike
+providerId: crowdstrike
+generated: '2026-09-19'
+method: searched
+probe: true
+description: 'HARVEST ONLY — the horizontal regulatory evidence CrowdStrike actually publishes on public surfaces.
+  Three signals verified: a Global Privacy Control commitment stated in the privacy notice, a data-subject request
+  route (OneTrust web forms plus privacy@crowdstrike.com), and a publicly reachable Data Protection Agreement. Everything
+  else probed came back absent: no public subprocessor list, no VPAT or accessibility conformance report, no SBOM,
+  no transparency report, no stated support lifetime, no AI transparency or training-data page. The trust portal
+  at trust.crowdstrike.com returns 403 to non-browser clients, so any subprocessor or certification detail behind
+  it could not be verified anonymously and is not recorded.'
+signals:
+  global_privacy_control:
+    honored: true
+    url: https://www.crowdstrike.com/en-us/legal/privacy-notice/
+    statement: '"You may also opt out by using an opt-out preference signal, such as the Global Privacy Control
+      (GPC)." — CrowdStrike Privacy Notice, section 10, Individual Privacy Rights.'
+    evidence:
+    - source: https://www.crowdstrike.com/en-us/legal/privacy-notice/
+      status: 200
+      keywords:
+      - global privacy control
+      - opt-out preference signal
+    note: Set from the published statement only. No Sec-GPC header was sent; a header probe tests one request, not
+      a commitment.
+  data_subject_request:
+    url: https://www.crowdstrike.com/en-us/legal/privacy-notice/
+    forms:
+    - https://privacyportal.onetrust.com/webform/c109dae9-46f3-4e91-a59e-7844ef645107/0a633ee9-e30a-48bb-a551-6d13b4bd28ae
+    - https://privacyportal.onetrust.com/webform/c109dae9-46f3-4e91-a59e-7844ef645107/8b2b8114-13de-4bde-8cb4-8f82dca0bdba
+    email: privacy@crowdstrike.com
+    rights:
+    - access
+    - correction
+    - deletion
+    - objection
+    - restriction
+    - portability
+    - withdraw consent
+    - CCPA opt-out of sale/share
+    - limit use of sensitive data
+    note: The notice states that where the requester's employer is the CrowdStrike customer, CrowdStrike cannot
+      respond directly and the request must go to the customer — the processor posture, stated explicitly.
+    evidence:
+    - source: https://www.crowdstrike.com/en-us/legal/privacy-notice/
+      status: 200
+      keywords:
+      - individual privacy right request form
+      - privacy@crowdstrike.com
+  data_processing_agreement:
+    url: https://www.crowdstrike.com/en-us/legal/data-protection-agreement/
+    anonymous: true
+    localizations:
+    - en-us
+    - de-de
+    evidence:
+    - source: https://www.crowdstrike.com/en-us/legal/data-protection-agreement/
+      status: 200
+    note: Reachable without a login. Recorded as a published DPA; no incident-notification SLA is extracted from
+      it because the clause text is rendered client-side and could not be read anonymously — see incident_notification
+      below.
+absent:
+- signal: subprocessors
+  probed:
+  - https://www.crowdstrike.com/en-us/legal/subprocessors/
+  - https://www.crowdstrike.com/en-us/legal/sub-processors/
+  - https://www.crowdstrike.com/en-us/legal/subprocessor-list/
+  - https://www.crowdstrike.com/en-us/legal/data-subprocessors/
+  - https://www.crowdstrike.com/en-us/legal/crowdstrike-subprocessors/
+  status: 404
+  note: No dated subprocessor table found on any conventional path or linked from the DPA or privacy notice.
+- signal: accessibility_conformance
+  probed:
+  - https://www.crowdstrike.com/en-us/accessibility/
+  - https://www.crowdstrike.com/en-us/legal/accessibility/
+  - https://www.crowdstrike.com/en-us/legal/vpat/
+  - https://www.crowdstrike.com/en-us/legal/accessibility-statement/
+  status: 404
+  note: The site footer carries an 'Accessibility' control, but it opens an in-page accessibility WIDGET (cs-uw-accessibilityWidget,
+    href="#") rather than linking a VPAT or conformance report. A widget is not a conformance claim, so no signal
+    is recorded.
+- signal: sbom
+  probed:
+  - https://www.crowdstrike.com/en-us/security/sbom
+  - https://www.crowdstrike.com/.well-known/security.txt
+  note: No SBOM referenced from security.txt or any public security page. Never derived.
+- signal: transparency_report
+  probed:
+  - https://www.crowdstrike.com/en-us/transparency/
+  - https://www.crowdstrike.com/en-us/legal/transparency-report/
+  status: 404
+- signal: support_lifetime
+  note: No public versioning or support-period page exists for the platform API; deprecation is per-operation prose
+    with no notice period — see lifecycle/crowdstrike-lifecycle.yml.
+- signal: incident_notification
+  note: The DPA is published but its clause text did not render to an anonymous fetch; no verbatim breach-notification
+    SLA could be read, so none is recorded.
+- signal: data_residency
+  note: Four named clouds (us-1, us-2, eu-1, us-gov-1) are documented as API base URLs in the developer docs, but
+    no data-residency or data-location policy page was found. The region list is recorded in authentication/ as
+    routing, not as a residency commitment.
+- signal: ai_transparency
+  note: No AI transparency, model or training-data disclosure page found, despite Charlotte AI and AgentWorks being
+    shipping products.
+- signal: training_data_summary
+  note: Not published.
+- signal: age_assurance
+  note: Not applicable surface; not published.
+- signal: notice_and_action
+  note: Not published.
+- signal: exit_assistance
+  note: No export/portability or cloud-switching page found; FDR is a product feature, not an exit commitment.
+x-evidence:
+  checked: '2026-09-19'
+  method: live probes with a browser User-Agent; 403s and soft-404s were read as bodies, not status codes
+  trust_portal:
+    url: https://trust.crowdstrike.com/
+    status: 403
+    note: Bot challenge to non-browser clients. Certifications recorded separately in security/crowdstrike-trust-center.yml.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

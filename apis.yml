@@ -29,11 +29,25 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/crowdstrik
 tags:
 - Cybersecurity
 - Endpoint Security
-description: CrowdStrike is a major US corporation and Fortune 1000 company. The CrowdStrike
-  API provides programmatic access to its platform services, data, and integrations
-  for enterprise customers and partners.
+- EDR
+- Threat Intelligence
+- Cloud Security
+- Identity Protection
+- Vulnerability Management
+- SIEM
+- Security Operations
+- MCP
+description: 'CrowdStrike is a US cybersecurity company and Fortune 1000 constituent whose Falcon platform
+  delivers endpoint, cloud, identity and data protection from a single cloud-native agent. Its developer
+  surface is substantial and public: a 1,463-operation OAuth2 REST API spanning 128 service collections,
+  documented operation by operation on developer.crowdstrike.com, with 187 named permission scopes; six
+  official SDKs (Python, PowerShell, Go, TypeScript/JavaScript, Rust, Ruby); a Terraform provider for
+  Configuration as Code; Falcon Foundry, an app platform with its own CLI; a first-party open-source MCP
+  server (falcon-mcp) exposing 166 agent tools across 28 modules; and a published set of Agent Skills
+  for building Foundry apps. CrowdStrike does not publish an OpenAPI document, and API access requires
+  a Falcon subscription — the API itself is included in every paid bundle.'
 created: '2026-04-19'
-modified: '2026-04-19'
+modified: '2026-09-19'
 specificationVersion: '0.23'
 apis:
 - aid: crowdstrike:crowdstrike-api
@@ -45,29 +59,158 @@ apis:
   baseURL: https://api.crowdstrike.com
   humanURL: https://developer.crowdstrike.com
   properties:
-  - url: https://developer.crowdstrike.com/docs
+  - url: https://developer.crowdstrike.com/
     type: Documentation
-  - url: graphql/crowdstrike-graphql.md
-    type: GraphQL
-  description: The CrowdStrike API provides access to platform services and data for
-    enterprise integration and automation.
+  - url: https://developer.crowdstrike.com/api-reference/overview/
+    type: APIReference
+  - url: https://developer.crowdstrike.com/api-reference/all-operations/
+    type: OperationsList
+    name: All operations (1,463)
+  - url: https://developer.crowdstrike.com/api-reference/falcon-query-language/
+    type: QueryLanguage
+    name: Falcon Query Language (FQL)
+  - url: authentication/crowdstrike-authentication.yml
+    type: Authentication
+  - url: scopes/crowdstrike-scopes.yml
+    type: OAuthScopes
+  - url: errors/crowdstrike-problem-types.yml
+    type: ErrorCatalog
+  - url: conventions/crowdstrike-conventions.yml
+    type: Conventions
+  - url: rate-limits/crowdstrike-rate-limits.yml
+    type: RateLimits
+  - url: lifecycle/crowdstrike-lifecycle.yml
+    type: Lifecycle
+  - url: asyncapi/crowdstrike-event-streams.yml
+    type: StreamingEndpoint
+    name: Falcon Event Streams (no AsyncAPI published)
+  description: The CrowdStrike Falcon API — 1,463 documented operations across 128 service collections
+    covering hosts, detections, incidents, real-time response, threat intelligence, cloud and container
+    security, identity protection, Next-Gen SIEM and MSSP Flight Control. OAuth2 client credentials; scope-gated
+    per service collection; region-specific base URLs (us-1, us-2, eu-1, us-gov-1).
+- aid: crowdstrike:falcon-mcp
+  name: Falcon MCP Server
+  tags:
+  - MCP
+  - Security Operations
+  - Cybersecurity
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.crowdstrike.com/falcon-mcp/overview/
+  baseURL: https://api.crowdstrike.com
+  description: CrowdStrike's first-party open-source MCP server. Self-hosted (uvx/pip/Docker/Bedrock/Cloud
+    Run) and authenticated with the operator's own Falcon API client; 166 tools across 28 modules. A separate
+    CrowdStrike-hosted Falcon MCP is documented but publishes no public endpoint.
+  properties:
+  - url: mcp/crowdstrike-mcp.yml
+    type: MCPServer
+  - url: mcp/crowdstrike-tool-crosswalk.yml
+    type: ToolCrosswalk
+  - url: https://developer.crowdstrike.com/falcon-mcp/overview/
+    type: Documentation
+  - url: https://github.com/CrowdStrike/falcon-mcp
+    type: SourceCode
+  - url: https://developer.crowdstrike.com/falcon-mcp/changelog/
+    type: ChangeLog
 common:
-- type: TrustCenter
-  url: security/crowdstrike-trust-center.yml
-- type: VulnerabilityDisclosure
-  url: security/crowdstrike-vulnerability-disclosure.yml
-- type: DomainSecurity
-  url: security/crowdstrike-domain-security.yml
+- type: Website
+  url: https://www.crowdstrike.com
+- type: DeveloperPortal
+  url: https://developer.crowdstrike.com/
+- type: Documentation
+  url: https://developer.crowdstrike.com/
+- type: APIReference
+  url: https://developer.crowdstrike.com/api-reference/overview/
+- type: GettingStarted
+  url: https://developer.crowdstrike.com/sdks/go/getting-started/
+- type: Support
+  url: https://supportportal.crowdstrike.com/
+- type: Blog
+  url: https://www.crowdstrike.com/blog/feed/
 - type: GitHubOrganization
   url: https://github.com/CrowdStrike
 - type: LinkedIn
   url: https://www.linkedin.com/company/crowdstrike
-- type: Website
-  url: https://www.crowdstrike.com
+- type: Newsroom
+  url: https://www.crowdstrike.com/en-us/press-releases/
+- type: Leadership
+  url: https://www.crowdstrike.com/en-us/about-us/executive-team/
+- type: Pricing
+  url: https://www.crowdstrike.com/en-us/pricing/
+- type: SignUp
+  url: https://www.crowdstrike.com/en-us/products/trials/try-falcon/
+- type: TermsOfService
+  url: https://www.crowdstrike.com/en-us/legal/website-terms-of-use/
+- type: PrivacyPolicy
+  url: https://www.crowdstrike.com/en-us/legal/privacy-notice/
 - type: LlmsText
   url: https://developer.crowdstrike.com/llms.txt
-- type: Blog
-  url: https://www.crowdstrike.com/blog/feed/
+- type: LLMsTxt
+  url: llms/crowdstrike-llms.txt
+- type: Packages
+  url: packages/crowdstrike-packages.yml
+- type: SDKs
+  url: packages/crowdstrike-packages.yml
+  name: Six official Falcon SDKs
+- type: CLI
+  url: cli/crowdstrike-cli.yml
+- type: Components
+  url: components/crowdstrike-components.yml
+- type: AgentSkill
+  url: skills/_index.yml
+  name: CrowdStrike-published Foundry Agent Skills
+- type: MCPServer
+  url: mcp/crowdstrike-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/crowdstrike-tool-crosswalk.yml
+- type: Authentication
+  url: authentication/crowdstrike-authentication.yml
+- type: OAuthScopes
+  url: scopes/crowdstrike-scopes.yml
+- type: Conventions
+  url: conventions/crowdstrike-conventions.yml
+- type: ErrorCatalog
+  url: errors/crowdstrike-problem-types.yml
+- type: RateLimits
+  url: rate-limits/crowdstrike-rate-limits.yml
+- type: Plans
+  url: plans/crowdstrike-plans-pricing.yml
+- type: Lifecycle
+  url: lifecycle/crowdstrike-lifecycle.yml
+- type: ChangeLog
+  url: changelog/crowdstrike-changelog.yml
+  name: Falcon MCP server changelog (no platform-API changelog is published)
+- type: Conformance
+  url: conformance/crowdstrike-conformance.yml
+- type: Compliance
+  url: https://trust.crowdstrike.com/
+  name: CrowdStrike Trust Center — SOC 2, ISO 27001/27017, PCI DSS, FedRAMP, CSA STAR
+- type: TrustCenter
+  url: security/crowdstrike-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/crowdstrike-vulnerability-disclosure.yml
+- type: Security
+  url: https://www.crowdstrike.com/en-us/report-a-security-bug/
+  name: Report a security bug
+- type: SecurityTxt
+  url: well-known/crowdstrike-security.txt
+- type: WellKnown
+  url: well-known/crowdstrike-well-known.yml
+- type: DomainSecurity
+  url: security/crowdstrike-domain-security.yml
+- type: RegulatoryPosture
+  url: regulatory/crowdstrike-regulatory-posture.yml
+- type: GlobalPrivacyControl
+  url: https://www.crowdstrike.com/en-us/legal/privacy-notice/
+- type: DataSubjectRequest
+  url: https://www.crowdstrike.com/en-us/legal/privacy-notice/
+- type: StreamingEndpoint
+  url: asyncapi/crowdstrike-event-streams.yml
+  name: Falcon Event Streams
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-19'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v3

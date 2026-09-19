@@ -1,0 +1,204 @@
+specification: API Commons Conventions
+specificationVersion: '0.1'
+provider: CrowdStrike
+providerId: crowdstrike
+generated: '2026-09-19'
+method: searched
+source: https://developer.crowdstrike.com/sdks/python/responses/
+description: 'Cross-cutting request/response semantics of the CrowdStrike Falcon API, read from the provider''s
+  own SDK and reference documentation and confirmed against live unauthenticated responses. The platform is resource-uniform:
+  every collection exposes /queries (ids), /entities (records) and /combined (both) routes, filtered with Falcon
+  Query Language, paginated with offset/limit, and wrapped in one meta/errors/resources envelope.'
+authentication:
+  style: oauth2-client-credentials
+  header: 'Authorization: Bearer <token>'
+  token_lifetime: 30 minutes
+  detail: See authentication/crowdstrike-authentication.yml
+route_shape:
+  pattern: /<service>/<queries|entities|combined|aggregates>/<resource>/v<N>
+  queries: returns ids only
+  entities: returns full records for ids
+  combined: returns records for a filter in one call
+  aggregates: returns bucketed counts
+  note: Several collections expose a POST .../GET/vN route so a long id list can travel in the body instead of the
+    query string.
+query_language:
+  name: Falcon Query Language (FQL)
+  docs: https://developer.crowdstrike.com/api-reference/falcon-query-language/
+  filter_param: filter
+  sort_param: sort
+  sort_syntax: sort:<property>.<asc|desc>
+  expression: <property>:[operator]<value>
+  operators:
+  - '!'
+  - '> '
+  - '>='
+  - <
+  - <=
+  - '~'
+  - '!~'
+  - '*'
+  limits: a maximum of 20 properties per FQL statement; property keys and values are case-sensitive
+  note: Available filters vary per service collection; the MCP server ships per-tool FQL guides as MCP resources
+    (falcon://<module>/search/fql-guide).
+pagination:
+  style: offset-limit
+  params:
+  - offset
+  - limit
+  response_fields:
+  - meta.pagination.offset
+  - meta.pagination.limit
+  - meta.pagination.total
+  alternate: some large collections also expose an `after` token alongside offset
+  note: meta.pagination.total is the count matching the filter and is what answers 'how many'; the MCP tools surface
+    it explicitly.
+envelope:
+  body:
+  - meta
+  - errors
+  - resources
+  meta:
+  - query_time
+  - pagination
+  - powered_by
+  - trace_id
+  resources: always a list or a dictionary of results
+  errors: always a list; each entry carries code + message (+ id)
+  detail: See errors/crowdstrike-problem-types.yml
+request_tracing:
+  response_header: X-Cs-Traceid
+  body_field: meta.trace_id
+  observed: true
+  note: Returned on success and failure; failure messages instruct the caller to quote it to support.
+region_routing:
+  response_header: X-Cs-Region
+  note: The base URL selects the cloud (us-1/us-2/eu-1/us-gov-1); a token is not portable between clouds.
+rate_limit_signaling:
+  headers:
+  - X-Ratelimit-Limit
+  - X-Ratelimit-Remaining
+  status: 429
+  observed: true
+  detail: See rate-limits/crowdstrike-rate-limits.yml
+versioning:
+  style: uri-path, per operation
+  detail: See lifecycle/crowdstrike-lifecycle.yml
+field_expansion:
+  supported: false
+  note: 'No expand/fields/sparse-fieldset parameter is documented. The /combined routes are the platform''s answer
+    to N+1 reads: they return entities for a filter without a second /entities call.'
+metadata:
+  supported: partial
+  note: Falcon Grouping Tags on hosts (falcon_manage_host_grouping_tags / PATCH device tags) and case tags are the
+    closest thing to user-defined metadata; there is no generic metadata map on resources.
+idempotency:
+  coverage: none
+  header: null
+  detail: No idempotency key, no request-deduplication window and no replay protection is documented anywhere on
+    the CrowdStrike developer surface. None of the 685 documented mutating operations accepts an Idempotency-Key
+    header or an equivalent client-supplied request id. Retrying a POST that created a case, an IOC, an exclusion
+    or a policy creates a second one. X-Cs-Traceid is assigned by the server per request and is a support-correlation
+    id, not a deduplication key.
+  mutating_operation_count: 685
+  mitigations:
+  - Many actions are declarative and naturally idempotent — PerformActionV2 contain/lift_containment set a state
+    rather than appending, and adding a grouping tag a host already has is documented as a no-op.
+  - Bulk operations take an ids[] array, so a whole batch is one request rather than N retryable ones.
+  source: absence of any idempotency documentation across developer.crowdstrike.com (llms-full.txt, 388KB, searched
+    2026-09-19)
+reversibility:
+  grade: documented
+  summary: Falcon's destructive endpoint actions are genuinely reversible and the reversal is a first-class documented
+    action, but CrowdStrike publishes no WINDOW for any of them — no retention period for a hidden host, no expiry
+    on a quarantine release, no deadline on restoring a deleted resource. An agent can learn that an action can
+    be undone; it cannot learn for how long.
+  write_surfaces:
+  - surface: Host containment
+    action:
+      operationId: PerformActionV2
+      action_name: contain
+    reversal:
+      operationId: PerformActionV2
+      action_name: lift_containment
+    window: null
+    window_note: No time limit stated; containment persists until lifted.
+    docs: https://developer.crowdstrike.com/api-reference/operations/PerformActionV2/
+  - surface: Host deletion (hide)
+    action:
+      operationId: PerformActionV2
+      action_name: hide_host
+    reversal:
+      operationId: PerformActionV2
+      action_name: unhide_host
+    window: null
+    window_note: Docs say a restored host resumes detection reporting, but state no retention period after which
+      unhide_host stops working.
+    docs: https://developer.crowdstrike.com/api-reference/operations/PerformActionV2/
+  - surface: OAuth2 token
+    action:
+      operationId: oauth2AccessToken
+    reversal:
+      operationId: oauth2RevokeToken
+    window: before the token's standard 30-minute lifespan elapses
+    window_note: This is the one stated window on the public surface, and it bounds the token, not a data change.
+    docs: https://developer.crowdstrike.com/api-reference/collections/oauth2/
+  - surface: On-demand scans
+    action:
+      operationId: ODS scan create
+    reversal:
+      operationId: cancel-scans
+    window: null
+    window_note: Cancellable while running; no stated deadline.
+  - surface: Fusion SOAR workflow execution
+    action:
+      operationId: workflow execution
+    reversal:
+      operationId: WorkflowExecutionsAction
+      actions:
+      - cancel
+      - stop
+      - resume
+      - retry
+    window: null
+    window_note: Applies to a currently running or failed execution; no stated deadline.
+  - surface: IT Automation task execution
+    action:
+      operationId: task execution
+    reversal:
+      operationId: ITAutomationCancelTaskExecution
+    window: null
+  - surface: User roles
+    action:
+      operationId: userRolesActionV1 (grant)
+    reversal:
+      operationId: userRolesActionV1 (revoke)
+    window: null
+  - surface: Cloud issue suppression
+    action:
+      operationId: cloud-registration-azure-create-suppressions
+    reversal:
+      operationId: cloud-registration-azure-delete-suppressions
+    window: null
+  irreversible:
+  - surface: Quarantined file deletion
+    note: Quarantine actions include delete; the reference documents no restore-from-deleted path.
+  - surface: Foundry app delete
+    note: '`foundry apps delete` is documented as irreversible — ''Use with caution — changes are irreversible.'''
+  note: 'NO WINDOW IS ASSERTED THAT THE DOCS DO NOT STATE. Every `window: null` above means the provider published
+    a reversal path and no deadline.'
+dry_run_mode:
+  supported: partial
+  detail: 'Two real rehearsal surfaces exist and are documented: `falcon_preview_quarantine_actions` / the quarantine
+    action-update-count endpoints return the count of files an action WOULD affect before it is applied, and `foundry
+    apps deploy --diff-only` previews a deployment without performing it. There is no platform-wide dry-run parameter
+    on the REST API.'
+cross_links:
+  errors: errors/crowdstrike-problem-types.yml
+  lifecycle: lifecycle/crowdstrike-lifecycle.yml
+  authentication: authentication/crowdstrike-authentication.yml
+  scopes: scopes/crowdstrike-scopes.yml
+  rate_limits: rate-limits/crowdstrike-rate-limits.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

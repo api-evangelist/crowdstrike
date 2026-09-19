@@ -1,0 +1,31 @@
+# Front Door AI Index — crowdstrike — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: crowdstrike
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.crowdstrike.com
+  final_host: www.crowdstrike.com
+  ownership: own
+  owner: crowdstrike
+  shares_host_with:
+  - adaptive-shield
+  inherited_from: null
+  verdict: scored
+  score: 22
+  host_score: 22
+  density: 9.73
+  words: 2260
+  tiers:
+    agentic: 6
+    core: 16
+    model: 0
+  ambiguous: 19
+  top_terms:
+    AI: 16
+    intelligence: 13
+    agent: 5
+    AI agent: 3
+    agentic: 3
+    automation: 1

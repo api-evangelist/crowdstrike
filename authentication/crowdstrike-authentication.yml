@@ -1,0 +1,93 @@
+specification: API Commons Authentication
+specificationVersion: '0.1'
+provider: CrowdStrike
+providerId: crowdstrike
+generated: '2026-09-19'
+method: searched
+source: https://developer.crowdstrike.com/api-reference/collections/oauth2/
+docs: https://developer.crowdstrike.com/falcon-mcp/getting-started/credentials/
+description: Every CrowdStrike Falcon API call is authenticated with an OAuth2 client-credentials bearer token.
+  API clients (client_id + client_secret) are created inside the Falcon console under Support and resources > API
+  Clients & Keys and are scoped at creation time; there is no anonymous, self-serve or delegated-user flow. Derived
+  from the provider's own OAuth2 service-collection reference rather than an OpenAPI document — CrowdStrike publishes
+  no spec.
+summary:
+  types:
+  - oauth2
+  api_key_in: []
+  oauth2_flows:
+  - clientCredentials
+  openid_connect: false
+  mutual_tls: false
+  note: An `id_token` field is present in the token response body, but no OIDC discovery document is served on any
+    CrowdStrike host (see well-known/crowdstrike-well-known.yml).
+schemes:
+- name: FalconOAuth2
+  type: oauth2
+  flow: clientCredentials
+  token_url: https://api.crowdstrike.com/oauth2/token
+  revoke_url: https://api.crowdstrike.com/oauth2/revoke
+  operations:
+    issue: oauth2AccessToken
+    revoke: oauth2RevokeToken
+  request:
+    method: POST
+    content_type: application/x-www-form-urlencoded
+    parameters:
+    - name: client_id
+      in: body
+      required: true
+    - name: client_secret
+      in: body
+      required: true
+    - name: member_cid
+      in: body
+      required: false
+      description: MSSP master CIDs may lock the token to act on behalf of a member CID
+    - name: alter_state
+      in: body
+      required: false
+  response:
+    status: 201
+    fields:
+    - access_token
+    - expires_in
+    - id_token
+    - issued_token_type
+    - refresh_token
+    - scope
+    - token_type
+  presentation: 'Authorization: Bearer <access_token>'
+  token_lifetime: 30 minutes (documented); revoke early with oauth2RevokeToken
+  error_statuses:
+  - 400
+  - 403
+  - 429
+  - 500
+  sources:
+  - https://developer.crowdstrike.com/api-reference/collections/oauth2/
+  - https://developer.crowdstrike.com/llms.txt
+regions:
+- cloud: us-1
+  base_url: https://api.crowdstrike.com
+  default: true
+- cloud: us-2
+  base_url: https://api.us-2.crowdstrike.com
+- cloud: eu-1
+  base_url: https://api.eu-1.crowdstrike.com
+- cloud: us-gov-1
+  base_url: https://api.laggar.gcw.crowdstrike.com
+authorization:
+  model: scope-per-service-collection
+  detail: 'Each API client is granted a set of named scopes of the form ''<Service>: READ'' or ''<Service>: WRITE''.
+    Every operation in the reference states the scope it requires. See scopes/crowdstrike-scopes.yml (187 scopes).'
+  console_path: Support and resources > API Clients & Keys
+x-evidence:
+  probed: '2026-09-19'
+  url: https://api.crowdstrike.com/oauth2/token
+  http_status: 401
+  note: Unauthenticated POST returns 401 with the Falcon error envelope and X-Cs-Traceid / X-Ratelimit-* headers
+    — the auth surface is live and rejects anonymous callers.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

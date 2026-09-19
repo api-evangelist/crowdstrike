@@ -1,0 +1,93 @@
+specification: API Commons Error Catalog
+specificationVersion: '0.1'
+provider: CrowdStrike
+providerId: crowdstrike
+generated: '2026-09-19'
+method: searched
+source: https://developer.crowdstrike.com/sdks/python/responses/
+description: 'CrowdStrike Falcon does not use RFC 9457 problem+json. Every response — success or failure — is the
+  same envelope: a `meta` block (query_time, pagination, powered_by, trace_id), an `errors` array, and a `resources`
+  array. Errors are objects carrying an integer `code`, a `message`, and sometimes an `id`. The status code is repeated
+  in `errors[].code`. The envelope and the status classes below are documented by the provider; the live 401 example
+  was observed directly.'
+format: vendor-envelope
+media_type: application/json
+envelope:
+  container: errors
+  fields:
+  - code
+  - id
+  - message
+  meta:
+    query_time: float
+    pagination:
+      offset: integer
+      limit: integer
+      total: integer
+    powered_by: string
+    trace_id: uuid
+  trace_field: meta.trace_id
+  trace_header: X-Cs-Traceid
+  note: Failure messages embed the trace id verbatim and tell the caller to quote it to support.
+status_classes:
+- range: 100-199
+  meaning: Informational
+- range: 200-299
+  meaning: Success
+- range: 300-399
+  meaning: Redirection
+- range: 400-499
+  meaning: Failure
+- range: 500-599
+  meaning: Server error
+problems:
+- status: 400
+  title: Bad Request
+  remediation: Malformed body or invalid FQL filter. FQL statements accept at most 20 properties and are case-sensitive.
+  source_operation: oauth2AccessToken
+- status: 401
+  title: Unauthorized
+  remediation: Present a bearer token from POST /oauth2/token. Tokens expire after 30 minutes; refresh rather than
+    retry.
+  observed: true
+  example:
+    meta:
+      trace_id: <uuid>
+    errors:
+    - code: 401
+      message: 'Unauthorized: Please provide trace-id=''<uuid>'' to support'
+  source_operation: any
+- status: 403
+  title: Forbidden
+  remediation: The API client exists but lacks the scope the operation requires — see scopes/crowdstrike-scopes.yml.
+  source_operation: oauth2AccessToken
+- status: 404
+  title: Not Found
+  remediation: Unknown route or id. The API host returns this envelope for unrouted paths too.
+  observed: true
+  example:
+    meta:
+      trace_id: <uuid>
+    errors:
+    - code: 404
+      message: 'Not Found: Please provide trace-id=''<uuid>'' to support'
+  source_operation: any
+- status: 429
+  title: Too Many Requests
+  remediation: Back off. Read X-Ratelimit-Limit / X-Ratelimit-Remaining; see rate-limits/crowdstrike-rate-limits.yml.
+  source_operation: oauth2AccessToken
+- status: 500
+  title: Internal Server Error
+  remediation: Retry with backoff and quote meta.trace_id to CrowdStrike support.
+  source_operation: oauth2AccessToken
+x-evidence:
+  probed: '2026-09-19'
+  requests:
+  - url: https://api.crowdstrike.com/devices/queries/devices/v1?limit=1
+    status: 401
+  - url: https://api.crowdstrike.com/openapi.json
+    status: 404
+  note: Both responses returned the documented envelope, confirming it applies to routed and unrouted paths alike.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
