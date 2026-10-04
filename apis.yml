@@ -3,15 +3,19 @@ url: https://raw.githubusercontent.com/api-evangelist/crowdstrike/refs/heads/mai
 name: CrowdStrike
 type: Index
 deliveryModel:
-  model: unknown
-  open_source: false
-  commercial: false
+  model: saas
+  license_evidence:
+    not_product:
+    - crowdstrike/falcon-mcp
+  open_source: unknown
+  commercial: true
   callable_host: false
-  label: Delivery model not determined — needs a product licence on record
+  label: Hosted service · you call their endpoint
   confidence: low
   source:
-  - none
-  generated: '2026-08-28'
+  - pricing
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: paid
