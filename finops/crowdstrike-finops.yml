@@ -128,10 +128,8 @@ apis:
 unitEconomics:
   - name: Cost per Protected Device
     metric: billed_cost / device_subscriptions
-    target: TBD
   - name: Cost per Detected Threat
     metric: billed_cost / detections
-    target: TBD
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
