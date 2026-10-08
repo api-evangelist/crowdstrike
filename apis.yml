@@ -116,6 +116,8 @@ apis:
   - url: https://developer.crowdstrike.com/falcon-mcp/changelog/
     type: ChangeLog
 common:
+- type: FinOps
+  url: finops/crowdstrike-finops.yml
 - type: Website
   url: https://www.crowdstrike.com
 - type: DeveloperPortal
