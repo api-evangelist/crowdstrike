@@ -220,3 +220,63 @@ verification:
   corrections:
   - Falcon Elite added — it is a published tier on the pricing page (contact sales) and was missing from the 2026-05
     capture.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - subscription
+  units:
+  - object
+  plans:
+  - name: Falcon Free Trial
+    access: trial
+    model: free
+    model_how: derived
+    units:
+    - object
+    periods:
+    - day
+  - name: Falcon Go
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - object
+    periods:
+    - month
+    - year
+  - name: Falcon Pro
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - object
+    periods:
+    - month
+    - year
+  - name: Falcon Enterprise
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - object
+    periods:
+    - month
+    - year
+  - name: Falcon Elite
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - object
+    periods:
+    - year
+  - name: Falcon Complete
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - object
+    periods:
+    - year
