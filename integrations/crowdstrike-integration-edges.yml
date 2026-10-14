@@ -15,6 +15,25 @@ marketplace_apps:
   listed: 487
   note: server-rendered listing pages; builder from 'Built by', partner domain from support mailto
 edges:
+- partner_name: GitHub Marketplace (actions)
+  partner: github-actions
+  partner_match: aggregator
+  type: marketplace
+  marketplace: github-actions
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://github.com/marketplace/actions/crowdstrike-fcs-cli-github-action
+  listing_count: 3
+  apps:
+  - CrowdStrike FCS CLI GitHub Action
+  - CrowdStrike Container Image Scan
+  - CrowdStrike Falconutil GitHub Action
+  publisher_name: CrowdStrike
+  badges:
+  - Verified creator
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
 - partner_name: 1Password
   app: "1Password Enterprise Password Manager for Falcon Next-Gen SIEM</title>\n    \n    <meta name=\"description\"\
     \ content=\"Turn 1Password Enterprise Password Manager activity into actionable security insights into CrowdStrike\
@@ -7125,9 +7144,9 @@ edges:
     \ type=\"text/css\">\n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-event.lc-b383a52a1a03473aa6f81df00cb25068-lc.min.css\"\
     \ type=\"text/css\">\n\n\n\n    \n\n    \n    <link rel=\"icon\" href=\"/content/dam/crowdstrike/marketplace/en-us/images/favicon.png\"\
     />\n    <!-- Custom SEO Scripts -->\n\n    \n        <script>\n    window.Userback = window.Userback"
-  partner: null
-  partner_match: null
-  partner_candidate: jit-fka-cbrix
+  partner: jit-fka-cbrix
+  partner_match: domain+verified
+  partner_candidate: null
   type: marketplace
   marketplace: own
   channel: partner-built
@@ -12809,23 +12828,4 @@ edges:
   category: null
   partner_domain: zscaler.com
   detected_by: sweep-security.py
-  detected: '2026-10-14'
-- partner_name: GitHub Marketplace (actions)
-  partner: github-actions
-  partner_match: aggregator
-  type: marketplace
-  marketplace: github-actions
-  channel: partner-built
-  relationship: platform-app
-  direction: third-party
-  evidence: https://github.com/marketplace/actions/crowdstrike-fcs-cli-github-action
-  listing_count: 3
-  apps:
-  - CrowdStrike FCS CLI GitHub Action
-  - CrowdStrike Container Image Scan
-  - CrowdStrike Falconutil GitHub Action
-  publisher_name: CrowdStrike
-  badges:
-  - Verified creator
-  detected_by: sweep-devtools.py
   detected: '2026-10-14'
