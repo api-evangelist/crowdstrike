@@ -1,6 +1,7 @@
 generated: '2026-10-14'
 method: searched
 checked:
+- https://github.com/marketplace?type=actions
 - https://marketplace.crowdstrike.com/listings/
 source:
 - https://marketplace.crowdstrike.com/listings/
@@ -12808,4 +12809,23 @@ edges:
   category: null
   partner_domain: zscaler.com
   detected_by: sweep-security.py
+  detected: '2026-10-14'
+- partner_name: GitHub Marketplace (actions)
+  partner: github-actions
+  partner_match: aggregator
+  type: marketplace
+  marketplace: github-actions
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://github.com/marketplace/actions/crowdstrike-fcs-cli-github-action
+  listing_count: 3
+  apps:
+  - CrowdStrike FCS CLI GitHub Action
+  - CrowdStrike Container Image Scan
+  - CrowdStrike Falconutil GitHub Action
+  publisher_name: CrowdStrike
+  badges:
+  - Verified creator
+  detected_by: sweep-devtools.py
   detected: '2026-10-14'
