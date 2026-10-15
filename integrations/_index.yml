@@ -4711,3 +4711,102 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: crowdstrike-pipedream
+  label: Pipedream
+  partner: pipedream
+  partner_name: Pipedream
+  type: marketplace
+  marketplace: pipedream-components
+  channel: open-source-node
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/crowdstrike_falcon
+  source: edge
+  relationship: ipaas-bridge
+  contract_reference:
+    register: Pipedream components (PipedreamHQ/pipedream components/)
+    spec_file: null
+    role: ipaas-connector:pipedream
+    registered_name: crowdstrike falcon
+    matched_domain: crowdstrike.com
+    matched_by: domain+name-among-holders
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: crowdstrike_falcon
+    actions: true
+    sources: true
+    builder: Pipedream repo (component)
+  status: pending-partner-spec
+  arazzo: null
+- slug: crowdstrike-fedramp
+  label: FedRAMP
+  partner_name: FedRAMP
+  category: FedRAMP authorization
+  type: contract
+  channel: regulator-register
+  evidence: https://marketplace.fedramp.gov/products/FR1807853629
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: FedRAMP Marketplace data (github.com/18F/fedramp-data data/data.json @4b73d9247f)
+    standard: FedRAMP
+    spec_file: null
+    role: fedramp-authorized
+    registered_name: CrowdStrike, Inc.
+    register_id: FR1807853629
+    matched_domain: crowdstrike.com
+    matched_by: domain+name-among-holders
+    domain_source: website
+    designations:
+    - Compliant
+    packages:
+    - Falcon Platform
+    service_models:
+    - SaaS
+    paths:
+    - Agency
+    signal_note: certified_products = one entry per AUTHORIZED impact level, never per package; packages, service
+      models, paths and leveraging agencies are context, never counted. The register lists current designations
+      only (revoked / expired are removed), so lapsed is always false
+    detected_by: sweep-gov-cloud.py
+    detected: '2026-10-15'
+    certified_products:
+    - product: FedRAMP Moderate
+      impact_level: Moderate
+      lapsed: false
+      latest_authorization: '2022-08-17'
+  status: not-a-workflow
+  arazzo: null
+- slug: crowdstrike-govramp
+  label: GovRAMP
+  partner_name: GovRAMP
+  category: GovRAMP authorization
+  type: register
+  channel: standard-directory
+  evidence: https://govramp.org/program-participants
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: GovRAMP Program Participants (govramp.org/program-participants)
+    standard: GovRAMP
+    spec_file: null
+    role: govramp-authorized
+    registered_name: CrowdStrike, Inc.
+    register_id: SR24071
+    matched_domain: crowdstrike.com
+    matched_by: domain+name-among-holders
+    domain_source: contact-email
+    statuses:
+    - Authorized
+    offerings:
+    - CrowdStrike Falcon Platform for Government
+    signal_note: certified_products = one entry per AUTHORIZED impact level (Authorized / Provisionally Authorized),
+      never per offering; Progressing / Pending / Ready / Core are participation only
+    detected_by: sweep-gov-cloud.py
+    detected: '2026-10-15'
+    certified_products:
+    - product: GovRAMP High
+      impact_level: High
+      lapsed: false
+      latest_authorization: '2025-12-22'
+  status: not-a-workflow
+  arazzo: null
