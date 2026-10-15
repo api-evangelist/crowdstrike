@@ -4735,7 +4735,7 @@
     actions: true
     sources: true
     builder: Pipedream repo (component)
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: crowdstrike-fedramp
   label: FedRAMP
