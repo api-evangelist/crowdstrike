@@ -33,6 +33,17 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/crowdstrik
 tags:
 - Cybersecurity
 - Endpoint Security
+- Endpoint Detection and Response
+- Threat Intelligence
+- Cloud Security
+- Identity Protection
+- Vulnerability Management
+- SIEM
+- Security Operations
+- MCP
+tags_raw:
+- Cybersecurity
+- Endpoint Security
 - EDR
 - Threat Intelligence
 - Cloud Security
