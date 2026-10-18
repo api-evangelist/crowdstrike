@@ -4810,3 +4810,16 @@
       latest_authorization: '2025-12-22'
   status: not-a-workflow
   arazzo: null
+- slug: crowdstrike-kong-own
+  label: Kong (own)
+  partner: kong
+  partner_name: Kong (own)
+  category: Kong Plugin Hub
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://developer.konghq.com/plugins/crowdstrike-aidr-mcp/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
