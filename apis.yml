@@ -1,7 +1,11 @@
 aid: crowdstrike
+
 url: https://raw.githubusercontent.com/api-evangelist/crowdstrike/refs/heads/main/apis.yml
+
 name: CrowdStrike
+
 type: Index
+
 deliveryModel:
   model: saas
   license_evidence:
@@ -17,6 +21,7 @@ deliveryModel:
   - repository-not-product
   generated: '2026-09-25'
   method: derived
+
 accessModel:
   pricing: paid
   onboarding: unknown
@@ -29,7 +34,9 @@ accessModel:
   - plans
   generated: '2026-07-22'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/crowdstrike.png
+
 tags:
 - Cybersecurity
 - Endpoint Security
@@ -41,6 +48,7 @@ tags:
 - SIEM
 - Security Operations
 - MCP
+
 tags_raw:
 - Cybersecurity
 - Endpoint Security
@@ -52,6 +60,7 @@ tags_raw:
 - SIEM
 - Security Operations
 - MCP
+
 description: 'CrowdStrike is a US cybersecurity company and Fortune 1000 constituent whose Falcon platform
   delivers endpoint, cloud, identity and data protection from a single cloud-native agent. Its developer
   surface is substantial and public: a 1,463-operation OAuth2 REST API spanning 128 service collections,
@@ -61,72 +70,34 @@ description: 'CrowdStrike is a US cybersecurity company and Fortune 1000 constit
   server (falcon-mcp) exposing 166 agent tools across 28 modules; and a published set of Agent Skills
   for building Foundry apps. CrowdStrike does not publish an OpenAPI document, and API access requires
   a Falcon subscription — the API itself is included in every paid bundle.'
+
 created: '2026-04-19'
+
 modified: '2026-09-19'
+
 specificationVersion: '0.23'
-apis:
-- aid: crowdstrike:crowdstrike-api
-  name: CrowdStrike API
-  tags:
-  - Cybersecurity
-  - Endpoint Security
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://api.crowdstrike.com
-  humanURL: https://developer.crowdstrike.com
-  properties:
-  - url: https://developer.crowdstrike.com/
-    type: Documentation
-  - url: https://developer.crowdstrike.com/api-reference/overview/
-    type: APIReference
-  - url: https://developer.crowdstrike.com/api-reference/all-operations/
-    type: OperationsList
-    name: All operations (1,463)
-  - url: https://developer.crowdstrike.com/api-reference/falcon-query-language/
-    type: QueryLanguage
-    name: Falcon Query Language (FQL)
-  - url: authentication/crowdstrike-authentication.yml
-    type: Authentication
-  - url: scopes/crowdstrike-scopes.yml
-    type: OAuthScopes
-  - url: errors/crowdstrike-problem-types.yml
-    type: ErrorCatalog
-  - url: conventions/crowdstrike-conventions.yml
-    type: Conventions
-  - url: rate-limits/crowdstrike-rate-limits.yml
-    type: RateLimits
-  - url: lifecycle/crowdstrike-lifecycle.yml
-    type: Lifecycle
-  - url: asyncapi/crowdstrike-event-streams.yml
-    type: StreamingEndpoint
-    name: Falcon Event Streams (no AsyncAPI published)
-  description: The CrowdStrike Falcon API — 1,463 documented operations across 128 service collections
-    covering hosts, detections, incidents, real-time response, threat intelligence, cloud and container
-    security, identity protection, Next-Gen SIEM and MSSP Flight Control. OAuth2 client credentials; scope-gated
-    per service collection; region-specific base URLs (us-1, us-2, eu-1, us-gov-1).
-- aid: crowdstrike:falcon-mcp
-  name: Falcon MCP Server
-  tags:
-  - MCP
-  - Security Operations
-  - Cybersecurity
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.crowdstrike.com/falcon-mcp/overview/
-  baseURL: https://api.crowdstrike.com
-  description: CrowdStrike's first-party open-source MCP server. Self-hosted (uvx/pip/Docker/Bedrock/Cloud
-    Run) and authenticated with the operator's own Falcon API client; 166 tools across 28 modules. A separate
-    CrowdStrike-hosted Falcon MCP is documented but publishes no public endpoint.
-  properties:
-  - url: mcp/crowdstrike-mcp.yml
-    type: MCPServer
-  - url: mcp/crowdstrike-tool-crosswalk.yml
-    type: ToolCrosswalk
-  - url: https://developer.crowdstrike.com/falcon-mcp/overview/
-    type: Documentation
-  - url: https://github.com/CrowdStrike/falcon-mcp
-    type: SourceCode
-  - url: https://developer.crowdstrike.com/falcon-mcp/changelog/
-    type: ChangeLog
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
 common:
+- type: Spectral
+  url: rules/crowdstrike-rules.yml
+- type: JSONLD
+  url: json-ld/crowdstrike-context.jsonld
+- type: Vocabulary
+  url: vocabulary/crowdstrike-vocabulary.yml
+- type: DataModel
+  url: data-model/crowdstrike-data-model.yml
+- type: Deprecation
+  url: lifecycle/crowdstrike-lifecycle.yml
+- type: Hosts
+  url: hosts/crowdstrike-hosts.yml
+- type: IntegrationEdges
+  url: integrations/crowdstrike-integration-edges.yml
+- type: Vendors
+  url: vendors/crowdstrike-vendors.yml
 - type: FinOps
   url: finops/crowdstrike-finops.yml
 - type: Website
@@ -223,11 +194,72 @@ common:
 - type: StreamingEndpoint
   url: asyncapi/crowdstrike-event-streams.yml
   name: Falcon Event Streams
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+
+apis:
+- aid: crowdstrike:crowdstrike-api
+  name: CrowdStrike API
+  tags:
+  - Cybersecurity
+  - Endpoint Security
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.crowdstrike.com
+  humanURL: https://developer.crowdstrike.com
+  properties:
+  - url: https://developer.crowdstrike.com/
+    type: Documentation
+  - url: https://developer.crowdstrike.com/api-reference/overview/
+    type: APIReference
+  - url: https://developer.crowdstrike.com/api-reference/all-operations/
+    type: OperationsList
+    name: All operations (1,463)
+  - url: https://developer.crowdstrike.com/api-reference/falcon-query-language/
+    type: QueryLanguage
+    name: Falcon Query Language (FQL)
+  - url: authentication/crowdstrike-authentication.yml
+    type: Authentication
+  - url: scopes/crowdstrike-scopes.yml
+    type: OAuthScopes
+  - url: errors/crowdstrike-problem-types.yml
+    type: ErrorCatalog
+  - url: conventions/crowdstrike-conventions.yml
+    type: Conventions
+  - url: rate-limits/crowdstrike-rate-limits.yml
+    type: RateLimits
+  - url: lifecycle/crowdstrike-lifecycle.yml
+    type: Lifecycle
+  - url: asyncapi/crowdstrike-event-streams.yml
+    type: StreamingEndpoint
+    name: Falcon Event Streams (no AsyncAPI published)
+  description: The CrowdStrike Falcon API — 1,463 documented operations across 128 service collections
+    covering hosts, detections, incidents, real-time response, threat intelligence, cloud and container
+    security, identity protection, Next-Gen SIEM and MSSP Flight Control. OAuth2 client credentials; scope-gated
+    per service collection; region-specific base URLs (us-1, us-2, eu-1, us-gov-1).
+- aid: crowdstrike:falcon-mcp
+  name: Falcon MCP Server
+  tags:
+  - MCP
+  - Security Operations
+  - Cybersecurity
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.crowdstrike.com/falcon-mcp/overview/
+  baseURL: https://api.crowdstrike.com
+  description: CrowdStrike's first-party open-source MCP server. Self-hosted (uvx/pip/Docker/Bedrock/Cloud
+    Run) and authenticated with the operator's own Falcon API client; 166 tools across 28 modules. A separate
+    CrowdStrike-hosted Falcon MCP is documented but publishes no public endpoint.
+  properties:
+  - url: mcp/crowdstrike-mcp.yml
+    type: MCPServer
+  - url: mcp/crowdstrike-tool-crosswalk.yml
+    type: ToolCrosswalk
+  - url: https://developer.crowdstrike.com/falcon-mcp/overview/
+    type: Documentation
+  - url: https://github.com/CrowdStrike/falcon-mcp
+    type: SourceCode
+  - url: https://developer.crowdstrike.com/falcon-mcp/changelog/
+    type: ChangeLog
+
 x-enrichment:
-  date: '2026-09-19'
+  date: '2026-10-20'
   status: enriched
-  artifacts_added: 17
-  pass: local-v3
+  artifacts_added: 8
+  pass: local-v5

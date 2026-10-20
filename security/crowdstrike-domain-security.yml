@@ -1,23 +1,23 @@
-generated: '2026-09-19'
+generated: '2026-10-20'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
 - host: www.crowdstrike.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Dec 17 16:34:19 2026 GMT
+  cert_expires: Dec 20 18:08:03 2026 GMT
   hsts: true
   hsts_max_age: 31536000
 - host: developer.crowdstrike.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Dec 17 16:34:19 2026 GMT
+  cert_expires: Dec 18 18:21:17 2026 GMT
   hsts: true
   hsts_max_age: 31536000
 - host: api.crowdstrike.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Nov 22 18:50:06 2026 GMT
+  cert_expires: Apr  7 23:59:59 2027 GMT
   hsts: null
 domains:
 - domain: crowdstrike.com

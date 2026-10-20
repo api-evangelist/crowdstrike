@@ -4,41 +4,46 @@
 
 ## Sections
 
-> For the complete version of this document with all 1468 individual API operations listed, see [llms-full.txt](/llms-full.txt)
+> For the complete version of this document with all 1603 individual API operations listed, see [llms-full.txt](/llms-full.txt)
 - [Falcon API Reference](/api-reference/overview.md): CrowdStrike Falcon API reference documentation.
-- [Falcon Foundry](/foundry/understanding-foundry/): Build custom apps, API integrations, and automated workflows directly on the CrowdStrike Falcon platform.
+- [Falcon Foundry](/foundry/understanding-foundry.md): Build custom apps, API integrations, and automated workflows directly on the CrowdStrike Falcon platform.
 - [Configuration as Code](/cac/overview/): Manage the CrowdStrike Falcon platform using Configuration as Code with Terraform.
 - [Falcon MCP](/falcon-mcp/overview.md): Connect AI assistants to the CrowdStrike Falcon platform via the Model Context Protocol.
 - [Sensor Deployment](/falcon-sensor/overview/): Deploy, configure, and manage the CrowdStrike Falcon sensor across your infrastructure.
-- [Falcon Next-Gen SIEM](/ngsiem/overview/): Build custom parsers, normalize security data, and integrate third-party log sources with CrowdStrike Next-Gen SIEM.
-- [Software Development Kits](/sdks/overview/): Official CrowdStrike Falcon SDKs. Six languages, full API coverage.
+- [Falcon Next-Gen SIEM](/ngsiem/overview.md): Build custom parsers, normalize security data, and integrate third-party log sources with CrowdStrike Next-Gen SIEM.
+- [Software Development Kits](/sdks/overview.md): Official CrowdStrike Falcon SDKs. Six languages, full API coverage.
 
 ## API Reference
 
 Markdown versions of every API reference page are available for direct consumption - append `.md` paths below instead of fetching the HTML pages.
 
-- [All Operations](/api-reference/all-operations.md): Complete alphabetical list of all 1468 API operations
+- [All Operations](/api-reference/all-operations.md): Complete alphabetical list of all 1603 API operations
 - [Operations by Collection](/api-reference/operations-by-collection.md): Operations grouped by service collection
 - [API Reference Overview](/api-reference/overview.md): Collections grouped by domain
 - [Falcon Query Language](/api-reference/falcon-query-language/): FQL syntax reference for filtering API results
 
-### Service Collections (128 collections, 1468 operations)
+### Service Collections (140 collections, 1603 operations)
 
 - [Access Scopes](/api-reference/collections/access-scopes.md): 2 operations
 - [Admission Control Policies](/api-reference/collections/admission-control-policies.md): 15 operations
+- [Agent Invocation](/api-reference/collections/agent-invocation.md): 4 operations
 - [Agent Templates](/api-reference/collections/agent-templates.md): 2 operations
 - [Agent Versions](/api-reference/collections/agent-versions.md): 2 operations
+- [Agents](/api-reference/collections/agents.md): 5 operations
+- [AIDR](/api-reference/collections/aidr.md): 33 operations
 - [Alerts](/api-reference/collections/alerts.md): 10 operations
 - [API Clients](/api-reference/collections/api-clients.md): 7 operations
 - [API Integrations](/api-reference/collections/api-integrations.md): 3 operations
-- [ASPM](/api-reference/collections/aspm.md): 52 operations
+- [Application Abuse Exclusions](/api-reference/collections/application-abuse-exclusions.md): 9 operations
+- [ASPM](/api-reference/collections/aspm.md): 53 operations
+- [Audit](/api-reference/collections/audit.md): 4 operations
 - [CAO Hunting](/api-reference/collections/cao-hunting.md): 7 operations
 - [Case Management](/api-reference/collections/case-management.md): 55 operations
 - [Certificate Based Exclusions](/api-reference/collections/certificate-based-exclusions.md): 6 operations
 - [Cloud AWS Registration](/api-reference/collections/cloud-aws-registration.md): 7 operations
 - [Cloud Azure Registration](/api-reference/collections/cloud-azure-registration.md): 17 operations
 - [Cloud Connect AWS](/api-reference/collections/cloud-connect-aws.md): 9 operations
-- [Cloud Google Cloud Registration](/api-reference/collections/cloud-google-cloud-registration.md): 8 operations
+- [Cloud Google Cloud Registration](/api-reference/collections/cloud-google-cloud-registration.md): 9 operations
 - [Cloud OCI Registration](/api-reference/collections/cloud-oci-registration.md): 7 operations
 - [Cloud Policies](/api-reference/collections/cloud-policies.md): 30 operations
 - [Cloud Security](/api-reference/collections/cloud-security.md): 7 operations
@@ -48,6 +53,7 @@ Markdown versions of every API reference page are available for direct consumpti
 - [Cloud Security Registration Combined](/api-reference/collections/cloud-security-registration-combined.md): 1 operations
 - [Cloud Security Risks](/api-reference/collections/cloud-security-risks.md): 1 operations
 - [Cloud Snapshots](/api-reference/collections/cloud-snapshots.md): 8 operations
+- [Code Security](/api-reference/collections/code-security.md): 15 operations
 - [Configuration Assessment](/api-reference/collections/configuration-assessment.md): 2 operations
 - [Configuration Assessment Evaluation Logic](/api-reference/collections/configuration-assessment-evaluation-logic.md): 1 operations
 - [Container Alerts](/api-reference/collections/container-alerts.md): 3 operations
@@ -59,10 +65,10 @@ Markdown versions of every API reference page are available for direct consumpti
 - [Content Update Policies](/api-reference/collections/content-update-policies.md): 11 operations
 - [Correlation Rules](/api-reference/collections/correlation-rules.md): 18 operations
 - [Correlation Rules Admin](/api-reference/collections/correlation-rules-admin.md): 2 operations
-- [CSPM Registration](/api-reference/collections/cspm-registration.md): 41 operations
+- [CSPM Registration](/api-reference/collections/cspm-registration.md): 40 operations
 - [Custom IOA](/api-reference/collections/custom-ioa.md): 20 operations
 - [Custom Storage](/api-reference/collections/custom-storage.md): 18 operations
-- [D4C Registration](/api-reference/collections/d4c-registration.md): 20 operations
+- [D4C Registration](/api-reference/collections/d4c-registration.md): 21 operations
 - [Data Protection Configuration](/api-reference/collections/data-protection-configuration.md): 52 operations
 - [Delivery Settings](/api-reference/collections/delivery-settings.md): 2 operations
 - [Deployments](/api-reference/collections/deployments.md): 6 operations
@@ -88,8 +94,8 @@ Markdown versions of every API reference page are available for direct consumpti
 - [Foundry Lookup Files](/api-reference/collections/foundry-lookup-files.md): 2 operations
 - [Host Group](/api-reference/collections/host-group.md): 9 operations
 - [Host Migration](/api-reference/collections/host-migration.md): 10 operations
-- [Hosts](/api-reference/collections/hosts.md): 17 operations
-- [Identity Protection](/api-reference/collections/identity-protection.md): 12 operations
+- [Hosts](/api-reference/collections/hosts.md): 16 operations
+- [Identity Protection](/api-reference/collections/identity-protection.md): 8 operations
 - [Image Assessment Policies](/api-reference/collections/image-assessment-policies.md): 11 operations
 - [Installation Tokens](/api-reference/collections/installation-tokens.md): 9 operations
 - [Intel](/api-reference/collections/intel.md): 27 operations
@@ -97,7 +103,7 @@ Markdown versions of every API reference page are available for direct consumpti
 - [Intelligence Indicator Graph](/api-reference/collections/intelligence-indicator-graph.md): 2 operations
 - [IOA Exclusions](/api-reference/collections/ioa-exclusions.md): 14 operations
 - [IOC](/api-reference/collections/ioc.md): 17 operations
-- [IOCs](/api-reference/collections/iocs.md): 9 operations
+- [IOCs](/api-reference/collections/iocs.md): 4 operations
 - [IT Automation](/api-reference/collections/it-automation.md): 42 operations
 - [Knowledge Base Audit Events](/api-reference/collections/knowledge-base-audit-events.md): 3 operations
 - [Knowledge Base Files](/api-reference/collections/knowledge-base-files.md): 6 operations
@@ -105,11 +111,13 @@ Markdown versions of every API reference page are available for direct consumpti
 - [Kubernetes Container Compliance](/api-reference/collections/kubernetes-container-compliance.md): 10 operations
 - [Kubernetes Protection](/api-reference/collections/kubernetes-protection.md): 64 operations
 - [MalQuery](/api-reference/collections/malquery.md): 9 operations
-- [Message Center](/api-reference/collections/message-center.md): 10 operations
+- [Message Center](/api-reference/collections/message-center.md): 9 operations
 - [ML Exclusions](/api-reference/collections/ml-exclusions.md): 15 operations
 - [Mobile Enrollment](/api-reference/collections/mobile-enrollment.md): 2 operations
 - [Models](/api-reference/collections/models.md): 2 operations
 - [MSSP (Flight Control)](/api-reference/collections/mssp.md): 30 operations
+- [Network Containment](/api-reference/collections/network-containment.md): 5 operations
+- [Network Scan Detections](/api-reference/collections/network-scan-detections.md): 4 operations
 - [Network Scan Global Configs](/api-reference/collections/network-scan-global-configs.md): 2 operations
 - [Network Scan Networks](/api-reference/collections/network-scan-networks.md): 6 operations
 - [Network Scan Scan Run Reports](/api-reference/collections/network-scan-scan-run-reports.md): 1 operations
@@ -118,38 +126,42 @@ Markdown versions of every API reference page are available for direct consumpti
 - [Network Scan Scans](/api-reference/collections/network-scan-scans.md): 6 operations
 - [Network Scan Templates](/api-reference/collections/network-scan-templates.md): 6 operations
 - [Network Scan Zones](/api-reference/collections/network-scan-zones.md): 7 operations
-- [NGSIEM](/api-reference/collections/ngsiem.md): 77 operations
+- [NGSIEM](/api-reference/collections/ngsiem.md): 86 operations
 - [OAuth2](/api-reference/collections/oauth2.md): 2 operations
 - [ODS (On Demand Scan)](/api-reference/collections/ods.md): 17 operations
-- [Prevention Policies](/api-reference/collections/prevention-policies.md): 10 operations
+- [Prevention Policy](/api-reference/collections/prevention-policy.md): 10 operations
 - [Profile Groups](/api-reference/collections/profile-groups.md): 9 operations
 - [Quarantine](/api-reference/collections/quarantine.md): 6 operations
 - [Quick Scan](/api-reference/collections/quick-scan.md): 4 operations
-- [Quick Scan Pro](/api-reference/collections/quick-scan-pro.md): 7 operations
+- [Quick Scan Pro](/api-reference/collections/quick-scan-pro.md): 6 operations
 - [Real Time Response](/api-reference/collections/real-time-response.md): 23 operations
 - [Real Time Response Admin](/api-reference/collections/real-time-response-admin.md): 20 operations
 - [Real Time Response Audit](/api-reference/collections/real-time-response-audit.md): 1 operations
 - [Recon](/api-reference/collections/recon.md): 26 operations
 - [Report Executions](/api-reference/collections/report-executions.md): 4 operations
 - [Response Policies](/api-reference/collections/response-policies.md): 10 operations
-- [SaaS Security](/api-reference/collections/saas-security.md): 21 operations
+- [SaaS Security](/api-reference/collections/saas-security.md): 36 operations
 - [Sample Uploads](/api-reference/collections/sample-uploads.md): 11 operations
+- [Scanning Orchestrator](/api-reference/collections/scanning-orchestrator.md): 8 operations
 - [Scheduled Reports](/api-reference/collections/scheduled-reports.md): 3 operations
 - [Sensor Download](/api-reference/collections/sensor-download.md): 13 operations
 - [Sensor Update Policy](/api-reference/collections/sensor-update-policy.md): 19 operations
 - [Sensor Usage](/api-reference/collections/sensor-usage.md): 2 operations
 - [Sensor Visibility Exclusions](/api-reference/collections/sensor-visibility-exclusions.md): 5 operations
+- [Seraphic](/api-reference/collections/seraphic.md): 21 operations
 - [Serverless Exports](/api-reference/collections/serverless-exports.md): 4 operations
 - [Serverless Vulnerabilities](/api-reference/collections/serverless-vulnerabilities.md): 1 operations
+- [Skills](/api-reference/collections/skills.md): 6 operations
 - [Spans](/api-reference/collections/spans.md): 2 operations
 - [Spotlight Evaluation Logic](/api-reference/collections/spotlight-evaluation-logic.md): 4 operations
-- [Spotlight Vulnerabilities](/api-reference/collections/spotlight-vulnerabilities.md): 5 operations
+- [Spotlight Vulnerabilities](/api-reference/collections/spotlight-vulnerabilities.md): 4 operations
 - [Spotlight Vulnerability Metadata](/api-reference/collections/spotlight-vulnerability-metadata.md): 1 operations
+- [Stream](/api-reference/collections/stream.md): 1 operations
 - [Tailored Intelligence](/api-reference/collections/tailored-intelligence.md): 5 operations
 - [ThreatGraph](/api-reference/collections/threatgraph.md): 6 operations
 - [Tools](/api-reference/collections/tools.md): 2 operations
 - [Unidentified Containers](/api-reference/collections/unidentified-containers.md): 3 operations
-- [User Management](/api-reference/collections/user-management.md): 26 operations
+- [User Management](/api-reference/collections/user-management.md): 33 operations
 - [Workflows](/api-reference/collections/workflows.md): 21 operations
 - [Zero Trust Assessment](/api-reference/collections/zero-trust-assessment.md): 3 operations
 

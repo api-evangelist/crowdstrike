@@ -1,0 +1,1205 @@
+openapi: 3.1.0
+info:
+  title: CrowdStrike API
+  version: '2026-10-20'
+  description: 'GENERATED FROM DOCUMENTATION by API Evangelist on 2026-10-20: 33 operation(s) read from 11 public documentation page(s) (each
+    operation names its page in x-source). This is not the provider''s published contract; CrowdStrike has published no machine-readable contract
+    that the pipeline could find. Engine: anthropic.'
+  x-evidence-tiers:
+    code-example: 0
+    documentation: 33
+    pages-with-code: 0
+    pages-read: 11
+  x-generated-from: documentation
+  x-provenance: generated
+  x-authored-by: API Evangelist
+  x-generated: '2026-10-20'
+  x-generator: generate-contract-from-docs.py
+  x-engine: anthropic
+  x-sources:
+  - https://developer.crowdstrike.com/api-reference/all-operations
+  - https://developer.crowdstrike.com/api-reference/operations-by-collection
+  - https://developer.crowdstrike.com/api-reference/collections/aidr
+  - https://developer.crowdstrike.com/api-reference/collections/discover
+  - https://developer.crowdstrike.com/api-reference/collections/exposure-management
+  - https://developer.crowdstrike.com/api-reference/collections/hosts
+  - https://developer.crowdstrike.com/api-reference/collections/ioc
+  - https://developer.crowdstrike.com/api-reference/collections/iocs
+  - https://developer.crowdstrike.com/api-reference/collections/it-automation
+  - https://developer.crowdstrike.com/api-reference/collections/mssp
+  - https://developer.crowdstrike.com/api-reference/collections/spotlight-vulnerabilities
+paths:
+  /aidr/entities/process-tree/v1:
+    get:
+      operationId: get_aidr_entities_process_tree_v1
+      tags:
+      - Aidr
+      summary: Get spawned process tree for an AI session
+      x-source: https://developer.crowdstrike.com/api-reference/collections/aidr
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: A session ID. Accepts either the AgenticSessionId from GET /aidr/queries/executions/v1 (resolved automatically) or a ThreatGraph
+          vertex key aisess:{aid}:{session_id}. This is session-scoped — pass a session ID, not a process ID.
+      - name: parameters
+        in: query
+        required: false
+        schema:
+          type: object
+        description: Full query string parameters payload in JSON format. Not required when using other keywords.
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAidrEntitiesProcessTreeV1Response'
+      x-evidence:
+        kind: documentation
+  /aidr/queries/agent-installations/v1:
+    get:
+      operationId: get_aidr_queries_agent_installations_v1
+      tags:
+      - Aidr
+      summary: List AI agent installations
+      x-source: https://developer.crowdstrike.com/api-reference/collections/aidr
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of results to return (1-500, default 50)
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Pagination offset (0-1000)
+      - name: time_range
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Lookback period (e.g., 7d, 24h). Max 90d
+      - name: sensor_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by sensor ID (32-hex aid / AIAgent.SensorId)
+      - name: product
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by AI product name (e.g., CLAUDE_CODE, CURSOR)
+      - name: hostname
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by hostname of the device running the agent
+      - name: parameters
+        in: query
+        required: false
+        schema:
+          type: object
+        description: Full query string parameters payload in JSON format. Not required when using other keywords.
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAidrQueriesAgentInstallationsV1Response'
+      x-evidence:
+        kind: documentation
+  /aidr/queries/agent-sessions/v1:
+    get:
+      operationId: get_aidr_queries_agent_sessions_v1
+      tags:
+      - Aidr
+      summary: List AI agent sessions
+      x-source: https://developer.crowdstrike.com/api-reference/collections/aidr
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: time_range
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: parameters
+        in: query
+        required: false
+        schema:
+          type: object
+        description: Full query string parameters payload in JSON format. Not required when using other keywords.
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAidrQueriesAgentSessionsV1Response'
+      x-evidence:
+        kind: documentation
+  /aidr/queries/agents/v1:
+    get:
+      operationId: get_aidr_queries_agents_v1
+      tags:
+      - Aidr
+      summary: List AI agents
+      x-source: https://developer.crowdstrike.com/api-reference/collections/aidr
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: time_range
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: parameters
+        in: query
+        required: false
+        schema:
+          type: object
+        description: Full query string parameters payload in JSON format. Not required when using other keywords.
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAidrQueriesAgentsV1Response'
+      x-evidence:
+        kind: documentation
+  /aidr/queries/executions/v1:
+    get:
+      operationId: get_aidr_queries_executions_v1
+      tags:
+      - Aidr
+      summary: List AI agent execution records
+      x-source: https://developer.crowdstrike.com/api-reference/collections/aidr
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: time_range
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: parameters
+        in: query
+        required: false
+        schema:
+          type: object
+        description: Full query string parameters payload in JSON format. Not required when using other keywords.
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAidrQueriesExecutionsV1Response'
+      x-evidence:
+        kind: documentation
+  /aidr/queries/model-names/v1:
+    get:
+      operationId: get_aidr_queries_model_names_v1
+      tags:
+      - Aidr
+      summary: List AI model names
+      x-source: https://developer.crowdstrike.com/api-reference/collections/aidr
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: time_range
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: parameters
+        in: query
+        required: false
+        schema:
+          type: object
+        description: Full query string parameters payload in JSON format. Not required when using other keywords.
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAidrQueriesModelNamesV1Response'
+      x-evidence:
+        kind: documentation
+  /aidr/queries/skills/v1:
+    get:
+      operationId: get_aidr_queries_skills_v1
+      tags:
+      - Aidr
+      summary: List AI skills
+      x-source: https://developer.crowdstrike.com/api-reference/collections/aidr
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: time_range
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: parameters
+        in: query
+        required: false
+        schema:
+          type: object
+        description: Full query string parameters payload in JSON format. Not required when using other keywords.
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAidrQueriesSkillsV1Response'
+      x-evidence:
+        kind: documentation
+  /aidr/queries/tools/v1:
+    get:
+      operationId: get_aidr_queries_tools_v1
+      tags:
+      - Aidr
+      summary: List AI tools
+      x-source: https://developer.crowdstrike.com/api-reference/collections/aidr
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: time_range
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: parameters
+        in: query
+        required: false
+        schema:
+          type: object
+        description: Full query string parameters payload in JSON format. Not required when using other keywords.
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAidrQueriesToolsV1Response'
+      x-evidence:
+        kind: documentation
+  /devices/combined/devices/v1:
+    get:
+      operationId: get_devices_combined_devices_v1
+      tags:
+      - Devices
+      summary: Search for hosts in your environment by platform, hostname, IP, and other criteria.
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      parameters:
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDevicesCombinedDevicesV1Response'
+      x-evidence:
+        kind: documentation
+  /discover/queries/accounts/v1:
+    get:
+      operationId: get_discover_queries_accounts_v1
+      tags:
+      - Discover
+      summary: Search for accounts in your environment by providing an FQL (Falcon Query Language) filter and paging details.
+      x-source: https://developer.crowdstrike.com/api-reference/collections/discover
+      parameters:
+      - name: after
+        in: query
+        required: false
+        schema:
+          type: string
+        description: A pagination token used with the limit parameter to manage pagination of results.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: 'The number of account ids to return in this response (Min: 1, Max: 1000, Default: 100).'
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Sort accounts by their properties.
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Search for accounts in your environment by providing an FQL filter.
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDiscoverQueriesAccountsV1Response'
+      x-evidence:
+        kind: documentation
+  /discover/queries/hosts/v1:
+    get:
+      operationId: get_discover_queries_hosts_v1
+      tags:
+      - Discover
+      summary: Search for assets in your environment by providing an FQL (Falcon Query Language) filter and paging details.
+      x-source: https://developer.crowdstrike.com/api-reference/collections/discover
+      parameters:
+      - name: after
+        in: query
+        required: false
+        schema:
+          type: string
+        description: A pagination token used with the limit parameter to manage pagination of results.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: 'The number of asset IDs to return in this response (min: 1, max: 1000, default: 100).'
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Sort assets by their properties.
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter assets using a FQL query.
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDiscoverQueriesHostsV1Response'
+      x-evidence:
+        kind: documentation
+  /discover/queries/iot-hosts/v1:
+    get:
+      operationId: get_discover_queries_iot_hosts_v1
+      tags:
+      - Discover
+      summary: Search for IoT assets in your environment by providing an FQL (Falcon Query Language) filter and paging details.
+      x-source: https://developer.crowdstrike.com/api-reference/collections/discover
+      parameters:
+      - name: after
+        in: query
+        required: false
+        schema:
+          type: string
+        description: A pagination token used with the limit parameter to manage pagination of results.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: 'The number of asset IDs to return in this response (min: 1, max: 1000, default: 100).'
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Sort assets by their properties.
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter assets using a FQL query.
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDiscoverQueriesIotHostsV1Response'
+      x-evidence:
+        kind: documentation
+  /discover/queries/logins/v1:
+    get:
+      operationId: get_discover_queries_logins_v1
+      tags:
+      - Discover
+      summary: Search for logins in your environment by providing an FQL (Falcon Query Language) filter and paging details.
+      x-source: https://developer.crowdstrike.com/api-reference/collections/discover
+      parameters:
+      - name: after
+        in: query
+        required: false
+        schema:
+          type: string
+        description: A pagination token used with the limit parameter to manage pagination of results.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: 'The number of login ids to return in this response (Min: 1, Max: 1000, Default: 100).'
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Sort logins by their properties.
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Search for logins in your environment by providing an FQL filter.
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDiscoverQueriesLoginsV1Response'
+      x-evidence:
+        kind: documentation
+  /entities/cid-group-members/v2:
+    delete:
+      operationId: delete_entities_cid_group_members_v2
+      tags:
+      - Entities
+      summary: Delete CID group members.
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      responses:
+        '200':
+          description: Success (status as documented)
+      x-evidence:
+        kind: documentation
+  /entities/user-groups/v2:
+    get:
+      operationId: get_entities_user_groups_v2
+      tags:
+      - Entities
+      summary: Get user groups by ID.
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      responses:
+        '200':
+          description: Success (status as documented)
+      x-evidence:
+        kind: documentation
+  /fem/entities/ecosystem-subsidiaries/v1:
+    get:
+      operationId: get_fem_entities_ecosystem_subsidiaries_v1
+      tags:
+      - Fem
+      summary: Retrieves detailed information about ecosystem subsidiaries by ID.
+      x-source: https://developer.crowdstrike.com/api-reference/collections/exposure-management
+      parameters:
+      - name: ids
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'One or more asset IDs (max: 100). Find ecosystem subsidiary IDs with GET /fem/entities/ecosystem-subsidiaries/v1'
+      - name: version_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The version ID of the ecosystem subsidiaries data, represented as a hash string. This parameter is required to ensure data
+          consistency and prevent stale data.
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFemEntitiesEcosystemSubsidiariesV1Response'
+      x-evidence:
+        kind: documentation
+  /fem/queries/external-assets/v1:
+    get:
+      operationId: get_fem_queries_external_assets_v1
+      tags:
+      - Fem
+      summary: Get a list of external asset IDs that match the provided filter conditions.
+      x-source: https://developer.crowdstrike.com/api-reference/collections/exposure-management
+      parameters:
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Optional filter criteria in the form of an FQL query.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: The offset of the first record to retrieve.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: The maximum number of records to retrieve.
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The field to sort by.
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFemQueriesExternalAssetsV1Response'
+      x-evidence:
+        kind: documentation
+  /it-automation/entities/task-groups/v1:
+    patch:
+      operationId: patch_it_automation_entities_task_groups_v1
+      tags:
+      - It Automation
+      summary: Update a task group for a given id
+      x-source: https://developer.crowdstrike.com/api-reference/collections/it-automation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchItAutomationEntitiesTaskGroupsV1Request'
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchItAutomationEntitiesTaskGroupsV1Response'
+      x-evidence:
+        kind: documentation
+  /it-automation/queries/it-user-groups/v1:
+    get:
+      operationId: get_it_automation_queries_it_user_groups_v1
+      tags:
+      - It Automation
+      summary: Returns the list of user group ids matching the filter query parameter.
+      x-source: https://developer.crowdstrike.com/api-reference/collections/it-automation
+      parameters:
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The filter expression that should be used to limit the results
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The sort expression that should be used to sort the results
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Starting index for record retrieval
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: The maximum records to return
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetItAutomationQueriesItUserGroupsV1Response'
+      x-evidence:
+        kind: documentation
+  /mssp/entities/cid-group-members/v2:
+    get:
+      operationId: get_mssp_entities_cid_group_members_v2
+      tags:
+      - Mssp
+      summary: Get CID group members by CID Group ID.
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      responses:
+        '200':
+          description: Success (status as documented)
+      x-evidence:
+        kind: documentation
+  /mssp/entities/cid-groups/v2:
+    get:
+      operationId: get_mssp_entities_cid_groups_v2
+      tags:
+      - Mssp
+      summary: Get CID Groups by ID.
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      responses:
+        '200':
+          description: Success (status as documented)
+      x-evidence:
+        kind: documentation
+  /mssp/entities/user-group-members/v2:
+    get:
+      operationId: get_mssp_entities_user_group_members_v2
+      tags:
+      - Mssp
+      summary: Get user group members by user group ID.
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      responses:
+        '200':
+          description: Success (status as documented)
+      x-evidence:
+        kind: documentation
+  /spotlight/queries/vulnerabilities/v1:
+    get:
+      operationId: get_spotlight_queries_vulnerabilities_v1
+      tags:
+      - Spotlight
+      summary: Search for Vulnerabilities in your environment by providing an FQL filter and paging details.
+      x-source: https://developer.crowdstrike.com/api-reference/collections/spotlight-vulnerabilities
+      parameters:
+      - name: after
+        in: query
+        required: false
+        schema:
+          type: string
+        description: A pagination token used with the limit parameter to manage pagination of results. On your first request, don't provide an
+          after token. On subsequent requests, provide the after token from the previous response to continue from that place in the results.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: 'The number of items to return in this response (default: 100, max: 400). Use with the after parameter to manage pagination
+          of results.'
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Sort vulnerabilities by their properties.
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter items using a query in Falcon Query Language (FQL). Wildcards * and empty filter values are unsupported.
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSpotlightQueriesVulnerabilitiesV1Response'
+      x-evidence:
+        kind: documentation
+  /user-management/combined/user-roles/v1:
+    get:
+      operationId: get_user_management_combined_user_roles_v1
+      tags:
+      - User Management
+      summary: 'Deprecated : Please use GET /user-management/combined/user-roles/v2.'
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      responses:
+        '200':
+          description: Success (status as documented)
+      x-evidence:
+        kind: documentation
+  /user-management/combined/user-roles/v2:
+    get:
+      operationId: get_user_management_combined_user_roles_v2
+      tags:
+      - User Management
+      summary: Get User Grant(s).
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      responses:
+        '200':
+          description: Success (status as documented)
+      x-evidence:
+        kind: documentation
+  /user-management/entities/roles/v1:
+    get:
+      operationId: get_user_management_entities_roles_v1
+      tags:
+      - User Management
+      summary: Retrieve a set of roles by specifying their IDs.
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      responses:
+        '200':
+          description: Success (status as documented)
+      x-evidence:
+        kind: documentation
+  /user-management/entities/user-role-actions/v1:
+    post:
+      operationId: post_user_management_entities_user_role_actions_v1
+      tags:
+      - User Management
+      summary: Perform user role actions.
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      responses:
+        '201':
+          description: Success (status as documented)
+      x-evidence:
+        kind: documentation
+  /user-management/entities/users/GET/v1:
+    post:
+      operationId: post_user_management_entities_users_GET_v1
+      tags:
+      - User Management
+      summary: Get info about users including their name, UID and CID by providing user UUIDs
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostUserManagementEntitiesUsersGetV1Request'
+      responses:
+        '201':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostUserManagementEntitiesUsersGetV1Response'
+      x-evidence:
+        kind: documentation
+  /user-management/entities/users/v1:
+    delete:
+      operationId: delete_user_management_entities_users_v1
+      tags:
+      - User Management
+      summary: 'Deprecated : Please use DELETE /user-management/entities/users/v2.'
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      responses:
+        '200':
+          description: Success (status as documented)
+      x-evidence:
+        kind: documentation
+    patch:
+      operationId: patch_user_management_entities_users_v1
+      tags:
+      - User Management
+      summary: Modify existing users by providing a user UUID and the fields you want to update.
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchUserManagementEntitiesUsersV1Request'
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchUserManagementEntitiesUsersV1Response'
+      x-evidence:
+        kind: documentation
+    post:
+      operationId: post_user_management_entities_users_v1
+      tags:
+      - User Management
+      summary: Create a new user.
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      responses:
+        '201':
+          description: Success (status as documented)
+      x-evidence:
+        kind: documentation
+  /user-management/queries/roles/v1:
+    get:
+      operationId: get_user_management_queries_roles_v1
+      tags:
+      - User Management
+      summary: Query available roles.
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      responses:
+        '200':
+          description: Success (status as documented)
+      x-evidence:
+        kind: documentation
+  /user-management/queries/users/v1:
+    get:
+      operationId: get_user_management_queries_users_v1
+      tags:
+      - User Management
+      summary: Search for user UIDs by providing an FQL filter and paging details.
+      x-source: https://developer.crowdstrike.com/api-reference/all-operations
+      parameters:
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success (status as documented)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserManagementQueriesUsersV1Response'
+      x-evidence:
+        kind: documentation
+components:
+  schemas:
+    GetAidrEntitiesProcessTreeV1Response:
+      type: object
+      properties:
+        errors:
+          type: array
+        meta:
+          type: object
+        resources:
+          type: array
+    GetAidrQueriesAgentInstallationsV1Response:
+      type: object
+      properties:
+        errors:
+          type: array
+        meta:
+          type: object
+        resources:
+          type: array
+    GetAidrQueriesAgentSessionsV1Response:
+      type: object
+      properties:
+        errors:
+          type: array
+        meta:
+          type: object
+        resources:
+          type: array
+    GetAidrQueriesAgentsV1Response:
+      type: object
+      properties:
+        errors:
+          type: array
+        meta:
+          type: object
+        resources:
+          type: array
+    GetAidrQueriesExecutionsV1Response:
+      type: object
+      properties:
+        errors:
+          type: array
+        meta:
+          type: object
+        resources:
+          type: array
+    GetAidrQueriesModelNamesV1Response:
+      type: object
+      properties:
+        errors:
+          type: array
+        meta:
+          type: object
+        resources:
+          type: array
+    GetAidrQueriesSkillsV1Response:
+      type: object
+      properties:
+        errors:
+          type: array
+        meta:
+          type: object
+        resources:
+          type: array
+    GetAidrQueriesToolsV1Response:
+      type: object
+      properties:
+        errors:
+          type: array
+        meta:
+          type: object
+        resources:
+          type: array
+    GetDevicesCombinedDevicesV1Response:
+      type: object
+      properties:
+        resources:
+          type: array
+        errors:
+          type: array
+    GetDiscoverQueriesAccountsV1Response:
+      type: object
+      properties:
+        errors:
+          type: array
+        meta:
+          type: object
+    GetDiscoverQueriesHostsV1Response:
+      type: object
+      properties:
+        errors:
+          type: array
+        meta:
+          type: object
+    GetDiscoverQueriesIotHostsV1Response:
+      type: object
+      properties:
+        errors:
+          type: array
+        meta:
+          type: object
+    GetDiscoverQueriesLoginsV1Response:
+      type: object
+      properties:
+        errors:
+          type: array
+        meta:
+          type: object
+    GetFemEntitiesEcosystemSubsidiariesV1Response:
+      type: object
+      properties:
+        asset_count:
+          type: integer
+        cid:
+          type: string
+        discovery:
+          type: object
+        id:
+          type: string
+        name:
+          type: string
+        parent_id:
+          type: string
+        primary_domain:
+          type: string
+        risk_score:
+          type: number
+    GetFemQueriesExternalAssetsV1Response:
+      type: object
+      properties:
+        resources:
+          type: array
+        meta:
+          type: object
+    PatchItAutomationEntitiesTaskGroupsV1Request:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the task group to update
+        name:
+          type: string
+          description: Name of the task group
+        description:
+          type: string
+          description: Description of the task group
+        access_type:
+          type: string
+          description: Access type of the group
+        assigned_user_group_ids:
+          type: array
+          description: Assigned user group IDs of the group
+        assigned_user_ids:
+          type: array
+          description: Assigned user IDs of the group
+        add_task_ids:
+          type: array
+          description: Task IDs to add to the task group
+        remove_task_ids:
+          type: array
+          description: Task IDs to remove from the task group
+      required:
+      - id
+    PatchItAutomationEntitiesTaskGroupsV1Response:
+      type: object
+      properties:
+        resources:
+          type: array
+        errors:
+          type: array
+        meta:
+          type: object
+    GetItAutomationQueriesItUserGroupsV1Response:
+      type: object
+      properties:
+        resources:
+          type: array
+        errors:
+          type: array
+        meta:
+          type: object
+    GetSpotlightQueriesVulnerabilitiesV1Response:
+      type: object
+      properties:
+        resources:
+          type: array
+        errors:
+          type: array
+        meta:
+          type: object
+    PostUserManagementEntitiesUsersGetV1Request:
+      type: object
+      properties:
+        ids:
+          type: array
+      required:
+      - ids
+    PostUserManagementEntitiesUsersGetV1Response:
+      type: object
+      properties:
+        resources:
+          type: array
+        errors:
+          type: array
+    PatchUserManagementEntitiesUsersV1Request:
+      type: object
+      properties:
+        resources:
+          type: array
+      required:
+      - resources
+    PatchUserManagementEntitiesUsersV1Response:
+      type: object
+      properties:
+        resources:
+          type: array
+        errors:
+          type: array
+    GetUserManagementQueriesUsersV1Response:
+      type: object
+      properties:
+        resources:
+          type: array
+        errors:
+          type: array
+  securitySchemes:
+    FalconOAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.crowdstrike.com/oauth2/token
+          scopes: {}
+      x-source: https://developer.crowdstrike.com/api-reference/collections/oauth2/
+tags:
+- name: Aidr
+- name: Devices
+- name: Discover
+- name: Entities
+- name: Fem
+- name: It Automation
+- name: Mssp
+- name: Spotlight
+- name: User Management
+servers:
+- url: https://api.crowdstrike.com
+  description: US-1
+- url: https://api.us-2.crowdstrike.com
+  description: US-2
+- url: https://api.eu-1.crowdstrike.com
+  description: EU-1
+- url: https://api.laggar.gcw.crowdstrike.com
+  description: US-GOV-1
+x-servers-source: 'authentication/crowdstrike-authentication.yml (searched CrowdStrike docs: regional cloud base URLs)'
+security:
+- FalconOAuth2: []

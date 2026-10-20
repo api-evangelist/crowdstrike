@@ -1,0 +1,110 @@
+{
+  "@context": {
+    "@vocab": "https://crowdstrike.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "crowdstrike": "https://crowdstrike.com/schema#",
+    "GetAidrEntitiesProcessTreeV1Response": "crowdstrike:GetAidrEntitiesProcessTreeV1Response",
+    "errors": {
+      "@id": "crowdstrike:errors",
+      "@container": "@list"
+    },
+    "meta": {
+      "@id": "crowdstrike:meta"
+    },
+    "resources": {
+      "@id": "crowdstrike:resources",
+      "@container": "@list"
+    },
+    "GetAidrQueriesAgentInstallationsV1Response": "crowdstrike:GetAidrQueriesAgentInstallationsV1Response",
+    "GetAidrQueriesAgentSessionsV1Response": "crowdstrike:GetAidrQueriesAgentSessionsV1Response",
+    "GetAidrQueriesAgentsV1Response": "crowdstrike:GetAidrQueriesAgentsV1Response",
+    "GetAidrQueriesExecutionsV1Response": "crowdstrike:GetAidrQueriesExecutionsV1Response",
+    "GetAidrQueriesModelNamesV1Response": "crowdstrike:GetAidrQueriesModelNamesV1Response",
+    "GetAidrQueriesSkillsV1Response": "crowdstrike:GetAidrQueriesSkillsV1Response",
+    "GetAidrQueriesToolsV1Response": "crowdstrike:GetAidrQueriesToolsV1Response",
+    "GetDevicesCombinedDevicesV1Response": "crowdstrike:GetDevicesCombinedDevicesV1Response",
+    "GetDiscoverQueriesAccountsV1Response": "crowdstrike:GetDiscoverQueriesAccountsV1Response",
+    "GetDiscoverQueriesHostsV1Response": "crowdstrike:GetDiscoverQueriesHostsV1Response",
+    "GetDiscoverQueriesIotHostsV1Response": "crowdstrike:GetDiscoverQueriesIotHostsV1Response",
+    "GetDiscoverQueriesLoginsV1Response": "crowdstrike:GetDiscoverQueriesLoginsV1Response",
+    "GetFemEntitiesEcosystemSubsidiariesV1Response": "crowdstrike:GetFemEntitiesEcosystemSubsidiariesV1Response",
+    "asset_count": {
+      "@id": "crowdstrike:asset_count",
+      "@type": "xsd:integer"
+    },
+    "cid": {
+      "@id": "crowdstrike:cid",
+      "@type": "xsd:string"
+    },
+    "discovery": {
+      "@id": "crowdstrike:discovery"
+    },
+    "id": {
+      "@id": "crowdstrike:id",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "crowdstrike:name",
+      "@type": "xsd:string"
+    },
+    "parent_id": {
+      "@id": "crowdstrike:parent_id",
+      "@type": "xsd:string"
+    },
+    "primary_domain": {
+      "@id": "crowdstrike:primary_domain",
+      "@type": "xsd:string"
+    },
+    "risk_score": {
+      "@id": "crowdstrike:risk_score",
+      "@type": "xsd:decimal"
+    },
+    "GetFemQueriesExternalAssetsV1Response": "crowdstrike:GetFemQueriesExternalAssetsV1Response",
+    "PatchItAutomationEntitiesTaskGroupsV1Request": "crowdstrike:PatchItAutomationEntitiesTaskGroupsV1Request",
+    "description": {
+      "@id": "crowdstrike:description",
+      "@type": "xsd:string"
+    },
+    "access_type": {
+      "@id": "crowdstrike:access_type",
+      "@type": "xsd:string"
+    },
+    "assigned_user_group_ids": {
+      "@id": "crowdstrike:assigned_user_group_ids",
+      "@container": "@list"
+    },
+    "assigned_user_ids": {
+      "@id": "crowdstrike:assigned_user_ids",
+      "@container": "@list"
+    },
+    "add_task_ids": {
+      "@id": "crowdstrike:add_task_ids",
+      "@container": "@list"
+    },
+    "remove_task_ids": {
+      "@id": "crowdstrike:remove_task_ids",
+      "@container": "@list"
+    },
+    "PatchItAutomationEntitiesTaskGroupsV1Response": "crowdstrike:PatchItAutomationEntitiesTaskGroupsV1Response",
+    "GetItAutomationQueriesItUserGroupsV1Response": "crowdstrike:GetItAutomationQueriesItUserGroupsV1Response",
+    "GetSpotlightQueriesVulnerabilitiesV1Response": "crowdstrike:GetSpotlightQueriesVulnerabilitiesV1Response",
+    "PostUserManagementEntitiesUsersGetV1Request": "crowdstrike:PostUserManagementEntitiesUsersGetV1Request",
+    "ids": {
+      "@id": "crowdstrike:ids",
+      "@container": "@list"
+    },
+    "PostUserManagementEntitiesUsersGetV1Response": "crowdstrike:PostUserManagementEntitiesUsersGetV1Response",
+    "PatchUserManagementEntitiesUsersV1Request": "crowdstrike:PatchUserManagementEntitiesUsersV1Request",
+    "PatchUserManagementEntitiesUsersV1Response": "crowdstrike:PatchUserManagementEntitiesUsersV1Response",
+    "GetUserManagementQueriesUsersV1Response": "crowdstrike:GetUserManagementQueriesUsersV1Response"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "CrowdStrike API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects CrowdStrike's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-20) from openapi/_ae-authored/crowdstrike-openapi-generated.yml.",
+  "dcterms:created": "2026-10-20",
+  "dcterms:source": [
+    "openapi/_ae-authored/crowdstrike-openapi-generated.yml"
+  ]
+}

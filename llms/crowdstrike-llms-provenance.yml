@@ -1,0 +1,6 @@
+generated: '2026-10-20'
+method: probed
+generator: harvest-llms.py
+source: https://developer.crowdstrike.com/llms.txt
+bytes: 14221
+note: saved verbatim; the provider's own document

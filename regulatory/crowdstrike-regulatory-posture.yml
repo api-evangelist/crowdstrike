@@ -5,27 +5,26 @@ providerId: crowdstrike
 generated: '2026-09-19'
 method: searched
 probe: true
-description: 'HARVEST ONLY — the horizontal regulatory evidence CrowdStrike actually publishes on public surfaces.
-  Three signals verified: a Global Privacy Control commitment stated in the privacy notice, a data-subject request
-  route (OneTrust web forms plus privacy@crowdstrike.com), and a publicly reachable Data Protection Agreement. Everything
-  else probed came back absent: no public subprocessor list, no VPAT or accessibility conformance report, no SBOM,
-  no transparency report, no stated support lifetime, no AI transparency or training-data page. The trust portal
-  at trust.crowdstrike.com returns 403 to non-browser clients, so any subprocessor or certification detail behind
-  it could not be verified anonymously and is not recorded.'
+description: 'HARVEST ONLY — the horizontal regulatory evidence CrowdStrike actually publishes on public surfaces. Three signals
+  verified: a Global Privacy Control commitment stated in the privacy notice, a data-subject request route (OneTrust web forms
+  plus privacy@crowdstrike.com), and a publicly reachable Data Protection Agreement. Everything else probed came back absent:
+  no public subprocessor list, no VPAT or accessibility conformance report, no SBOM, no transparency report, no stated support
+  lifetime, no AI transparency or training-data page. The trust portal at trust.crowdstrike.com returns 403 to non-browser
+  clients, so any subprocessor or certification detail behind it could not be verified anonymously and is not recorded.'
 signals:
   global_privacy_control:
     honored: true
     url: https://www.crowdstrike.com/en-us/legal/privacy-notice/
-    statement: '"You may also opt out by using an opt-out preference signal, such as the Global Privacy Control
-      (GPC)." — CrowdStrike Privacy Notice, section 10, Individual Privacy Rights.'
+    statement: '"You may also opt out by using an opt-out preference signal, such as the Global Privacy Control (GPC)." —
+      CrowdStrike Privacy Notice, section 10, Individual Privacy Rights.'
     evidence:
     - source: https://www.crowdstrike.com/en-us/legal/privacy-notice/
       status: 200
       keywords:
       - global privacy control
       - opt-out preference signal
-    note: Set from the published statement only. No Sec-GPC header was sent; a header probe tests one request, not
-      a commitment.
+      quote: You may also opt out by using an opt-out preference signal, such as the Global Privacy Control (“ GPC ”).
+    note: Set from the published statement only. No Sec-GPC header was sent; a header probe tests one request, not a commitment.
   data_subject_request:
     url: https://www.crowdstrike.com/en-us/legal/privacy-notice/
     forms:
@@ -42,14 +41,16 @@ signals:
     - withdraw consent
     - CCPA opt-out of sale/share
     - limit use of sensitive data
-    note: The notice states that where the requester's employer is the CrowdStrike customer, CrowdStrike cannot
-      respond directly and the request must go to the customer — the processor posture, stated explicitly.
+    note: The notice states that where the requester's employer is the CrowdStrike customer, CrowdStrike cannot respond directly
+      and the request must go to the customer — the processor posture, stated explicitly.
     evidence:
     - source: https://www.crowdstrike.com/en-us/legal/privacy-notice/
       status: 200
       keywords:
       - individual privacy right request form
       - privacy@crowdstrike.com
+      quote: You may exercise your privacy rights by completing our Individual Privacy Right Request Form or by emailing your
+        request to privacy@crowdstrike.com .
   data_processing_agreement:
     url: https://www.crowdstrike.com/en-us/legal/data-protection-agreement/
     anonymous: true
@@ -59,9 +60,12 @@ signals:
     evidence:
     - source: https://www.crowdstrike.com/en-us/legal/data-protection-agreement/
       status: 200
-    note: Reachable without a login. Recorded as a published DPA; no incident-notification SLA is extracted from
-      it because the clause text is rendered client-side and could not be read anonymously — see incident_notification
-      below.
+      quote: To learn about how we protect our customers’ personal information, please review our Global Data Protection Agreement
+      note: Quote is from the privacy notice, which links the DPA; the DPA page itself returned 200 but its clause text renders
+        client-side.
+      quote_source: https://www.crowdstrike.com/en-us/legal/privacy-notice/
+    note: Reachable without a login. Recorded as a published DPA; no incident-notification SLA is extracted from it because
+      the clause text is rendered client-side and could not be read anonymously — see incident_notification below.
 absent:
 - signal: subprocessors
   probed:
@@ -80,8 +84,7 @@ absent:
   - https://www.crowdstrike.com/en-us/legal/accessibility-statement/
   status: 404
   note: The site footer carries an 'Accessibility' control, but it opens an in-page accessibility WIDGET (cs-uw-accessibilityWidget,
-    href="#") rather than linking a VPAT or conformance report. A widget is not a conformance claim, so no signal
-    is recorded.
+    href="#") rather than linking a VPAT or conformance report. A widget is not a conformance claim, so no signal is recorded.
 - signal: sbom
   probed:
   - https://www.crowdstrike.com/en-us/security/sbom
@@ -93,18 +96,18 @@ absent:
   - https://www.crowdstrike.com/en-us/legal/transparency-report/
   status: 404
 - signal: support_lifetime
-  note: No public versioning or support-period page exists for the platform API; deprecation is per-operation prose
-    with no notice period — see lifecycle/crowdstrike-lifecycle.yml.
+  note: No public versioning or support-period page exists for the platform API; deprecation is per-operation prose with no
+    notice period — see lifecycle/crowdstrike-lifecycle.yml.
 - signal: incident_notification
-  note: The DPA is published but its clause text did not render to an anonymous fetch; no verbatim breach-notification
-    SLA could be read, so none is recorded.
+  note: The DPA is published but its clause text did not render to an anonymous fetch; no verbatim breach-notification SLA
+    could be read, so none is recorded.
 - signal: data_residency
-  note: Four named clouds (us-1, us-2, eu-1, us-gov-1) are documented as API base URLs in the developer docs, but
-    no data-residency or data-location policy page was found. The region list is recorded in authentication/ as
-    routing, not as a residency commitment.
+  note: Four named clouds (us-1, us-2, eu-1, us-gov-1) are documented as API base URLs in the developer docs, but no data-residency
+    or data-location policy page was found. The region list is recorded in authentication/ as routing, not as a residency
+    commitment.
 - signal: ai_transparency
-  note: No AI transparency, model or training-data disclosure page found, despite Charlotte AI and AgentWorks being
-    shipping products.
+  note: No AI transparency, model or training-data disclosure page found, despite Charlotte AI and AgentWorks being shipping
+    products.
 - signal: training_data_summary
   note: Not published.
 - signal: age_assurance
@@ -123,3 +126,4 @@ x-evidence:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+source: https://www.crowdstrike.com/en-us/legal/privacy-notice/

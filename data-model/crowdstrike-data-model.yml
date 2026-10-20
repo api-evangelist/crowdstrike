@@ -1,0 +1,60 @@
+generated: '2026-10-20'
+method: derived
+generator: derive-data-model.py
+source:
+- openapi/_ae-authored/crowdstrike-openapi-generated.yml
+notation: has_one = property $ref; has_many = array of $ref; belongs_to = <entity>_id field
+summary:
+  entities: 24
+  entities_in_spec: 24
+  relationships: 0
+entities:
+- name: GetAidrEntitiesProcessTreeV1Response
+  fields: 3
+- name: GetAidrQueriesAgentInstallationsV1Response
+  fields: 3
+- name: GetAidrQueriesAgentSessionsV1Response
+  fields: 3
+- name: GetAidrQueriesAgentsV1Response
+  fields: 3
+- name: GetAidrQueriesExecutionsV1Response
+  fields: 3
+- name: GetAidrQueriesModelNamesV1Response
+  fields: 3
+- name: GetAidrQueriesSkillsV1Response
+  fields: 3
+- name: GetAidrQueriesToolsV1Response
+  fields: 3
+- name: GetDevicesCombinedDevicesV1Response
+  fields: 2
+- name: GetDiscoverQueriesAccountsV1Response
+  fields: 2
+- name: GetDiscoverQueriesHostsV1Response
+  fields: 2
+- name: GetDiscoverQueriesIotHostsV1Response
+  fields: 2
+- name: GetDiscoverQueriesLoginsV1Response
+  fields: 2
+- name: GetFemEntitiesEcosystemSubsidiariesV1Response
+  fields: 8
+- name: GetFemQueriesExternalAssetsV1Response
+  fields: 2
+- name: GetItAutomationQueriesItUserGroupsV1Response
+  fields: 3
+- name: GetSpotlightQueriesVulnerabilitiesV1Response
+  fields: 3
+- name: GetUserManagementQueriesUsersV1Response
+  fields: 2
+- name: PatchItAutomationEntitiesTaskGroupsV1Request
+  fields: 8
+- name: PatchItAutomationEntitiesTaskGroupsV1Response
+  fields: 3
+- name: PatchUserManagementEntitiesUsersV1Request
+  fields: 1
+- name: PatchUserManagementEntitiesUsersV1Response
+  fields: 2
+- name: PostUserManagementEntitiesUsersGetV1Request
+  fields: 1
+- name: PostUserManagementEntitiesUsersGetV1Response
+  fields: 2
+relationships: []

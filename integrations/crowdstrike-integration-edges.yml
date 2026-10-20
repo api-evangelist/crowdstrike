@@ -1,5 +1,8 @@
-generated: '2026-10-14'
+generated: '2026-10-20'
 method: searched
+source:
+- https://marketplace.crowdstrike.com/listings/
+- https://n8n.io/integrations/crowdstrike/
 checked:
 - https://api.nuget.org/v3
 - https://cloudsecurityalliance.org/star/registry
@@ -19,8 +22,11 @@ checked:
 - https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud-15/suppliers
 - kong/integrations/kong-integration-edges.yml
 - zoom/integrations/zoom-integration-edges.yml
-source:
-- https://marketplace.crowdstrike.com/listings/
+- https://composio.dev/toolkits/crowdstrike
+- https://monid.ai/tools/crowdstrike
+- https://n8n.io/integrations/crowdstrike/
+- https://zapier.com/apps/crowdstrike/integrations
+summary: null
 marketplace_apps:
 - marketplace: own
   channel: partner-built
@@ -30,6 +36,28 @@ marketplace_apps:
   adapter: sweep-security.py:crowdstrike-marketplace-html
   listed: 486
   note: server-rendered listing pages; builder from 'Built by', partner domain from support mailto
+- marketplace: n8n
+  channel: open-source-node
+  app: crowdstrike
+  url: https://n8n.io/integrations/crowdstrike/
+  identity: title
+  pair_pages: 15
+  pairs:
+  - discord
+  - github
+  - gmail
+  - google-calendar
+  - google-drive
+  - google-sheets
+  - http-request
+  - microsoft-excel
+  - mysql
+  - notion
+  - openai
+  - postgres
+  - slack
+  - supabase
+  - telegram
 edges:
 - partner_name: GitHub Marketplace (actions)
   partner: github-actions
@@ -13123,3 +13151,4 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-compliance-assurance.py
   first_seen: '2026-10-20'
+templates: []
