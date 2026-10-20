@@ -4,6 +4,7 @@ checked:
 - https://api.nuget.org/v3
 - https://crates.io/api/v1
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
+- https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/
 - https://github.com/marketplace?type=actions
 - https://govramp.org/program-participants
 - https://marketplace.crowdstrike.com/listings/
@@ -23,9 +24,9 @@ marketplace_apps:
   channel: partner-built
   app: crowdstrike
   url: https://marketplace.crowdstrike.com/listings/
-  app_count: 487
+  app_count: 486
   adapter: sweep-security.py:crowdstrike-marketplace-html
-  listed: 487
+  listed: 486
   note: server-rendered listing pages; builder from 'Built by', partner domain from support mailto
 edges:
 - partner_name: GitHub Marketplace (actions)
@@ -47,6 +48,239 @@ edges:
   - Verified creator
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
+- partner_name: Kong (own)
+  partner: kong
+  partner_match: mirror
+  mirror_match: domain+name-among-holders
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://developer.konghq.com/plugins/crowdstrike-aidr-mcp/
+  mirror_of: kong/integrations/kong-integration-edges.yml
+  apps:
+  - CrowdStrike Falcon AIDR MCP
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Kong Plugin Hub
+- partner_name: Zoom (own)
+  partner: zoom
+  partner_match: mirror
+  mirror_match: domain+name-among-holders
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.zoom.us/apps/_IvEgw66S0i15MXvKokZfA
+  mirror_of: zoom/integrations/zoom-integration-edges.yml
+  apps:
+  - Falcon Shield
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Zoom app
+- partner_name: Go module proxy
+  partner: null
+  partner_match: null
+  type: register
+  direction: provider-built
+  category: official SDK (Go)
+  evidence: https://pkg.go.dev/github.com/crowdstrike/gofalcon
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: Go module proxy (public registry JSON)
+    spec_file: null
+    language: Go
+    packages:
+    - name: github.com/crowdstrike/gofalcon
+      version: v0.23.0
+      released: '2026-10-02'
+      released_field: Time
+      lapsed: false
+      page: https://pkg.go.dev/github.com/crowdstrike/gofalcon
+      repo_leg: github-org:crowdstrike
+      publisher_leg: org:crowdstrike
+      matched_by: github-org
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@crowdstrike/falcon-shoelace
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@crowdstrike/falcon-shoelace'
+      version: 0.4.0
+      released: '2025-09-22'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@crowdstrike/falcon-shoelace
+      repo_leg: github-org:crowdstrike
+      publisher_leg: email:crowdstrike.com
+      matched_by: domain+name-among-holders
+    - name: '@crowdstrike/foundry-js'
+      version: 0.22.0
+      released: '2026-05-19'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@crowdstrike/foundry-js
+      repo_leg: github-org:crowdstrike
+      publisher_leg: email:crowdstrike.com
+      matched_by: domain+name-among-holders
+    - name: '@crowdstrike/glide-core'
+      version: 0.34.1
+      released: '2025-12-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@crowdstrike/glide-core
+      repo_leg: github-org:crowdstrike
+      publisher_leg: email:crowdstrike.com
+      matched_by: domain+name-among-holders
+    - name: crowdstrike-falcon
+      version: 0.7.0
+      released: '2026-07-23'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/crowdstrike-falcon
+      repo_leg: github-org:crowdstrike
+      publisher_leg: email:crowdstrike.com
+      matched_by: domain+name-among-holders
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+- partner_name: PyPI
+  partner: pypi
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Python)
+  evidence: https://pypi.org/project/crowdstrike-falconpy/
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: PyPI (public registry JSON)
+    spec_file: null
+    language: Python
+    packages:
+    - name: crowdstrike-falconpy
+      version: 1.6.6
+      released: '2026-09-28'
+      released_field: upload_time
+      lapsed: false
+      page: https://pypi.org/project/crowdstrike-falconpy/
+      repo_leg: github-org:crowdstrike
+      publisher_leg: email:crowdstrike.com
+      matched_by: domain+name-among-holders
+    - name: crowdstrike-foundry-function
+      version: 1.1.4
+      released: '2026-02-24'
+      released_field: upload_time
+      lapsed: false
+      page: https://pypi.org/project/crowdstrike-foundry-function/
+      repo_leg: github-org:crowdstrike
+      publisher_leg: email:crowdstrike.com
+      matched_by: domain+name-among-holders
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+- partner_name: FedRAMP
+  partner: null
+  partner_match: register
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://marketplace.fedramp.gov/products/FR1807853629
+  category: FedRAMP authorization
+  contract_reference:
+    register: FedRAMP Marketplace data (github.com/18F/fedramp-data data/data.json @4b73d9247f)
+    standard: FedRAMP
+    spec_file: null
+    role: fedramp-authorized
+    registered_name: CrowdStrike, Inc.
+    register_id: FR1807853629
+    matched_domain: crowdstrike.com
+    matched_by: domain+name-among-holders
+    domain_source: website
+    designations:
+    - Compliant
+    packages:
+    - Falcon Platform
+    service_models:
+    - SaaS
+    paths:
+    - Agency
+    signal_note: certified_products = one entry per AUTHORIZED impact level, never per package; packages, service
+      models, paths and leveraging agencies are context, never counted. The register lists current designations
+      only (revoked / expired are removed), so lapsed is always false
+    detected_by: sweep-gov-cloud.py
+    detected: '2026-10-15'
+    certified_products:
+    - product: FedRAMP Moderate
+      impact_level: Moderate
+      lapsed: false
+      latest_authorization: '2022-08-17'
+  detected_by: sweep-gov-cloud.py
+  first_seen: '2026-10-15'
+- partner_name: GovRAMP
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://govramp.org/program-participants
+  category: GovRAMP authorization
+  contract_reference:
+    register: GovRAMP Program Participants (govramp.org/program-participants)
+    standard: GovRAMP
+    spec_file: null
+    role: govramp-authorized
+    registered_name: CrowdStrike, Inc.
+    register_id: SR24071
+    matched_domain: crowdstrike.com
+    matched_by: domain+name-among-holders
+    domain_source: contact-email
+    statuses:
+    - Authorized
+    offerings:
+    - CrowdStrike Falcon Platform for Government
+    signal_note: certified_products = one entry per AUTHORIZED impact level (Authorized / Provisionally Authorized),
+      never per offering; Progressing / Pending / Ready / Core are participation only
+    detected_by: sweep-gov-cloud.py
+    detected: '2026-10-15'
+    certified_products:
+    - product: GovRAMP High
+      impact_level: High
+      lapsed: false
+      latest_authorization: '2025-12-22'
+  detected_by: sweep-gov-cloud.py
+  first_seen: '2026-10-15'
 - partner_name: 1Password
   app: "1Password Enterprise Password Manager for Falcon Next-Gen SIEM</title>\n    \n    <meta name=\"description\"\
     \ content=\"Turn 1Password Enterprise Password Manager activity into actionable security insights into CrowdStrike\
@@ -1399,7 +1633,7 @@ edges:
   detected_by: sweep-security.py
   detected: '2026-10-14'
 - partner_name: Appgate
-  app: Appgate SDP
+  app: Appgate ZTNA
   partner: null
   partner_match: null
   partner_candidate: null
@@ -4242,21 +4476,6 @@ edges:
   evidence: https://marketplace.crowdstrike.com/listings/crum-and-forster-better-cyber-outcomes-with-crowdstrike/
   category: null
   partner_domain: cfins.com
-  detected_by: sweep-security.py
-  detected: '2026-10-14'
-- partner_name: CSC Digital Brand Services
-  app: CSC .Brand Advisory and Domain Security Services
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  relationship: platform-app
-  direction: partner-built
-  evidence: https://marketplace.crowdstrike.com/listings/csc-dot-brand/
-  category: null
-  partner_domain: cscglobal.com
   detected_by: sweep-security.py
   detected: '2026-10-14'
 - partner_name: CSC Digital Brand Services
@@ -9814,7 +10033,7 @@ edges:
   detected_by: sweep-security.py
   detected: '2026-10-14'
 - partner_name: Reach Security
-  app: Reach Security Platform
+  app: Reach Security
   partner: null
   partner_match: null
   partner_candidate: null
@@ -12850,7 +13069,7 @@ edges:
   channel: open-source-node
   relationship: ipaas-bridge
   direction: third-party
-  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/crowdstrike_falcon
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/crowdstrike_falcon
   category: null
   contract_reference:
     register: Pipedream components (PipedreamHQ/pipedream components/)
@@ -12868,236 +13087,3 @@ edges:
     builder: Pipedream repo (component)
   detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
-- partner_name: FedRAMP
-  partner: null
-  partner_match: register
-  type: contract
-  channel: regulator-register
-  relationship: standard-participant
-  direction: partner-built
-  evidence: https://marketplace.fedramp.gov/products/FR1807853629
-  category: FedRAMP authorization
-  contract_reference:
-    register: FedRAMP Marketplace data (github.com/18F/fedramp-data data/data.json @4b73d9247f)
-    standard: FedRAMP
-    spec_file: null
-    role: fedramp-authorized
-    registered_name: CrowdStrike, Inc.
-    register_id: FR1807853629
-    matched_domain: crowdstrike.com
-    matched_by: domain+name-among-holders
-    domain_source: website
-    designations:
-    - Compliant
-    packages:
-    - Falcon Platform
-    service_models:
-    - SaaS
-    paths:
-    - Agency
-    signal_note: certified_products = one entry per AUTHORIZED impact level, never per package; packages, service
-      models, paths and leveraging agencies are context, never counted. The register lists current designations
-      only (revoked / expired are removed), so lapsed is always false
-    detected_by: sweep-gov-cloud.py
-    detected: '2026-10-15'
-    certified_products:
-    - product: FedRAMP Moderate
-      impact_level: Moderate
-      lapsed: false
-      latest_authorization: '2022-08-17'
-  detected_by: sweep-gov-cloud.py
-  first_seen: '2026-10-15'
-- partner_name: GovRAMP
-  partner: null
-  partner_match: register
-  type: register
-  channel: standard-directory
-  relationship: standard-participant
-  direction: partner-built
-  evidence: https://govramp.org/program-participants
-  category: GovRAMP authorization
-  contract_reference:
-    register: GovRAMP Program Participants (govramp.org/program-participants)
-    standard: GovRAMP
-    spec_file: null
-    role: govramp-authorized
-    registered_name: CrowdStrike, Inc.
-    register_id: SR24071
-    matched_domain: crowdstrike.com
-    matched_by: domain+name-among-holders
-    domain_source: contact-email
-    statuses:
-    - Authorized
-    offerings:
-    - CrowdStrike Falcon Platform for Government
-    signal_note: certified_products = one entry per AUTHORIZED impact level (Authorized / Provisionally Authorized),
-      never per offering; Progressing / Pending / Ready / Core are participation only
-    detected_by: sweep-gov-cloud.py
-    detected: '2026-10-15'
-    certified_products:
-    - product: GovRAMP High
-      impact_level: High
-      lapsed: false
-      latest_authorization: '2025-12-22'
-  detected_by: sweep-gov-cloud.py
-  first_seen: '2026-10-15'
-- partner_name: Kong (own)
-  partner: kong
-  partner_match: mirror
-  mirror_match: domain+name-among-holders
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://developer.konghq.com/plugins/crowdstrike-aidr-mcp/
-  mirror_of: kong/integrations/kong-integration-edges.yml
-  apps:
-  - CrowdStrike Falcon AIDR MCP
-  listing_count: 1
-  detected: '2026-10-18'
-  detected_by: mirror-platform-listings.py
-  category: Kong Plugin Hub
-- partner_name: Zoom (own)
-  partner: zoom
-  partner_match: mirror
-  mirror_match: domain+name-among-holders
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://marketplace.zoom.us/apps/_IvEgw66S0i15MXvKokZfA
-  mirror_of: zoom/integrations/zoom-integration-edges.yml
-  apps:
-  - Falcon Shield
-  listing_count: 1
-  detected: '2026-10-18'
-  detected_by: mirror-platform-listings.py
-  category: Zoom app
-- partner_name: Go module proxy
-  partner: null
-  partner_match: null
-  type: register
-  direction: provider-built
-  category: official SDK (Go)
-  evidence: https://pkg.go.dev/github.com/crowdstrike/gofalcon
-  channel: package-registry
-  relationship: distribution-channel
-  contract_reference:
-    register: Go module proxy (public registry JSON)
-    spec_file: null
-    language: Go
-    packages:
-    - name: github.com/crowdstrike/gofalcon
-      version: v0.23.0
-      released: '2026-10-02'
-      released_field: Time
-      lapsed: false
-      page: https://pkg.go.dev/github.com/crowdstrike/gofalcon
-      repo_leg: github-org:crowdstrike
-      publisher_leg: org:crowdstrike
-      matched_by: github-org
-    current: true
-    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
-      24 months'
-    detected_by: sweep-official-sdks.py
-    detected: '2026-10-18'
-  detected_by: sweep-official-sdks.py
-  first_seen: '2026-10-18'
-- partner_name: npm registry
-  partner: npm
-  partner_match: register
-  type: register
-  direction: provider-built
-  category: official SDK (JavaScript/TypeScript)
-  evidence: https://www.npmjs.com/package/@crowdstrike/falcon-shoelace
-  channel: package-registry
-  relationship: distribution-channel
-  contract_reference:
-    register: npm registry (public registry JSON)
-    spec_file: null
-    language: JavaScript/TypeScript
-    packages:
-    - name: '@crowdstrike/falcon-shoelace'
-      version: 0.4.0
-      released: '2025-09-22'
-      released_field: modified
-      lapsed: false
-      page: https://www.npmjs.com/package/@crowdstrike/falcon-shoelace
-      repo_leg: github-org:crowdstrike
-      publisher_leg: email:crowdstrike.com
-      matched_by: domain+name-among-holders
-    - name: '@crowdstrike/foundry-js'
-      version: 0.22.0
-      released: '2026-05-19'
-      released_field: modified
-      lapsed: false
-      page: https://www.npmjs.com/package/@crowdstrike/foundry-js
-      repo_leg: github-org:crowdstrike
-      publisher_leg: email:crowdstrike.com
-      matched_by: domain+name-among-holders
-    - name: '@crowdstrike/glide-core'
-      version: 0.34.1
-      released: '2025-12-15'
-      released_field: modified
-      lapsed: false
-      page: https://www.npmjs.com/package/@crowdstrike/glide-core
-      repo_leg: github-org:crowdstrike
-      publisher_leg: email:crowdstrike.com
-      matched_by: domain+name-among-holders
-    - name: crowdstrike-falcon
-      version: 0.7.0
-      released: '2026-07-23'
-      released_field: modified
-      lapsed: false
-      page: https://www.npmjs.com/package/crowdstrike-falcon
-      repo_leg: github-org:crowdstrike
-      publisher_leg: email:crowdstrike.com
-      matched_by: domain+name-among-holders
-    current: true
-    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
-      24 months'
-    detected_by: sweep-official-sdks.py
-    detected: '2026-10-18'
-  detected_by: sweep-official-sdks.py
-  first_seen: '2026-10-18'
-- partner_name: PyPI
-  partner: pypi
-  partner_match: register
-  type: register
-  direction: provider-built
-  category: official SDK (Python)
-  evidence: https://pypi.org/project/crowdstrike-falconpy/
-  channel: package-registry
-  relationship: distribution-channel
-  contract_reference:
-    register: PyPI (public registry JSON)
-    spec_file: null
-    language: Python
-    packages:
-    - name: crowdstrike-falconpy
-      version: 1.6.6
-      released: '2026-09-28'
-      released_field: upload_time
-      lapsed: false
-      page: https://pypi.org/project/crowdstrike-falconpy/
-      repo_leg: github-org:crowdstrike
-      publisher_leg: email:crowdstrike.com
-      matched_by: domain+name-among-holders
-    - name: crowdstrike-foundry-function
-      version: 1.1.4
-      released: '2026-02-24'
-      released_field: upload_time
-      lapsed: false
-      page: https://pypi.org/project/crowdstrike-foundry-function/
-      repo_leg: github-org:crowdstrike
-      publisher_leg: email:crowdstrike.com
-      matched_by: domain+name-among-holders
-    current: true
-    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
-      24 months'
-    detected_by: sweep-official-sdks.py
-    detected: '2026-10-18'
-  detected_by: sweep-official-sdks.py
-  first_seen: '2026-10-18'
