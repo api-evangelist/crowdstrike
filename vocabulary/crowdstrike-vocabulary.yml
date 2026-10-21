@@ -129,52 +129,327 @@ vocabulary:
     tags:
     - Object
     source: openapi/_ae-authored/crowdstrike-openapi-generated.yml#/components/schemas/GetUserManagementQueriesUsersV1Response
+  - term: Access Scopes
+    definition: 'Resource group in the contract; its operation GET /access-scope-management/entities/access-scopes/v1: List Access Scopes By ID'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Admission Control Policies
+    definition: 'Resource group in the contract; its operation POST /admission-control-policies/entities/policies/v1: Create an admission control
+      policy.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Stream
+    definition: 'Resource group in the contract; its operation GET /agentic-studio-streaming/entities/agent-invocations/v1: Retrieves the stream
+      of results for an invocation'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Knowledge Base Audit Events
+    definition: 'Resource group in the contract; its operation GET /agentic-studio/combined/knowledge_base_audit_events/v1: Get knowledge base
+      audit events with full event details and pagination.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Knowledge Bases
+    definition: 'Resource group in the contract; its operation GET /agentic-studio/combined/knowledge_bases/v1: Search for knowledge bases with
+      filtering and return full entity details in a single response.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Agent Invocation
+    definition: 'Resource group in the contract; its operation POST /agentic-studio/entities/agent-invocations/v1: Invoke a published agent by
+      ID with the specified input.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Agent Templates
+    definition: 'Resource group in the contract; its operation GET /agentic-studio/entities/agent-templates/v1: Retrieve agent template entities
+      for the provided IDs'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Agent Versions
+    definition: 'Resource group in the contract; its operation GET /agentic-studio/entities/agent-versions/v1: Retrieve agent version entities
+      for the provided ids.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Agents
+    definition: 'Resource group in the contract; its operation DELETE /agentic-studio/entities/agents/v1: Delete an agent and all of its versions.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Knowledge Base Files
+    definition: 'Resource group in the contract; its operation GET /agentic-studio/entities/knowledge_base_files/download/v1: Download knowledge
+      base file entities for the provided id.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Models
+    definition: 'Resource group in the contract; its operation GET /agentic-studio/entities/models/v1: Get Model Entities by IDs'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Skills
+    definition: 'Resource group in the contract; its operation GET /agentic-studio/entities/skills/download/v2: Download a single skill blob as
+      a zip archive.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Spans
+    definition: 'Resource group in the contract; its operation GET /agentic-studio/entities/spans/v1: Retrieve spans for the provided ids.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Tools
+    definition: 'Resource group in the contract; its operation GET /agentic-studio/entities/tools/v1: Retrieve tools entities for the provided
+      id.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Scanning Orchestrator
+    definition: 'Resource group in the contract; its operation GET /agentless-scanning/combined/schedules/v1: Get combined scanning schedules'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: AIDR
+    definition: 'Resource group in the contract; its operation GET /aidr/aggregates/agent-sessions/v1: Aggregate agent-session counts by product'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
   - term: Aidr
     definition: 'Resource group in the contract; its operation GET /aidr/entities/process-tree/v1: Get spawned process tree for an AI session'
     tags:
     - Resource Group
     source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
-  - term: Devices
-    definition: 'Resource group in the contract; its operation GET /devices/combined/devices/v1: Search for hosts in your environment by platform,
-      hostname, IP, and other criteria.'
+  - term: Alerts
+    definition: 'Resource group in the contract; its operation POST /alerts/aggregates/alerts/v1: Deprecated: Please use version v2 of this endpoint.'
     tags:
     - Resource Group
     source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
-  - term: Discover
-    definition: 'Resource group in the contract; its operation GET /discover/queries/accounts/v1: Search for accounts in your environment by providing
-      an FQL (Falcon Query Language) filter and paging details.'
+  - term: API Clients
+    definition: 'Resource group in the contract; its operation GET /api-clients/entities/accessible-scopes/v1: Get all available scopes for customer.'
     tags:
     - Resource Group
     source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
-  - term: Entities
-    definition: 'Resource group in the contract; its operation DELETE /entities/cid-group-members/v2: Delete CID group members.'
+  - term: Aspm
+    definition: 'Resource group in the contract; its operation POST /application-security/aggregates/function-data/count/v1: A selected list of
+      queryLanguage count queries.'
     tags:
     - Resource Group
     source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
-  - term: Fem
-    definition: 'Resource group in the contract; its operation GET /fem/entities/ecosystem-subsidiaries/v1: Retrieves detailed information about
-      ecosystem subsidiaries by ID.'
+  - term: Sample Uploads
+    definition: 'Resource group in the contract; its operation GET /archives/entities/archive-files/v1: Retrieves the archives files in chunks.'
     tags:
     - Resource Group
     source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
-  - term: It Automation
-    definition: 'Resource group in the contract; its operation PATCH /it-automation/entities/task-groups/v1: Update a task group for a given id'
+  - term: Audit
+    definition: 'Resource group in the contract; its operation GET /audit-logs/entities/queryjob-exports/v1: Exports the results of a completed
+      query job in CSV or JSON format'
     tags:
     - Resource Group
     source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
-  - term: Mssp
-    definition: 'Resource group in the contract; its operation GET /mssp/entities/cid-group-members/v2: Get CID group members by CID Group ID.'
+  - term: Sensor Usage
+    definition: 'Resource group in the contract; its operation GET /billing-dashboards-usage/aggregates/hourly-average/v1: Fetches hourly average.'
     tags:
     - Resource Group
     source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
-  - term: Spotlight
-    definition: 'Resource group in the contract; its operation GET /spotlight/queries/vulnerabilities/v1: Search for Vulnerabilities in your environment
+  - term: Case Management
+    definition: 'Resource group in the contract; its operation POST /case-files/aggregates/file-details/v1: Get file details aggregates as specified
+      via json in the request body.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Cloud Connect AWS
+    definition: 'Resource group in the contract; its operation GET /cloud-connect-aws/combined/accounts/v1: Search for provisioned AWS Accounts
       by providing an FQL filter and paging details.'
     tags:
     - Resource Group
     source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
-  - term: User Management
-    definition: 'Resource group in the contract; its operation GET /user-management/combined/user-roles/v1: Deprecated : Please use GET /user-management/combined/user-roles/v2.'
+  - term: D4c Registration
+    definition: 'Resource group in the contract; its operation POST /cloud-connect-aws/entities/account/v2: Creates a new account in our system
+      for a customer and generates a script for them to run in their AWS cloud environment to grant us access.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Cspm Registration
+    definition: 'Resource group in the contract; its operation POST /cloud-connect-cspm-aws/entities/account/v1: Creates a new account in our
+      system for a customer and generates a script for them to run in their AWS cloud environment to grant us access.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Cloud Policies
+    definition: 'Resource group in the contract; its operation GET /cloud-policies/combined/rules/input-schema/v1: Get rule input schema for given
+      resource type'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Cloud Security Assets
+    definition: 'Resource group in the contract; its operation GET /cloud-security-assets/combined/application-findings/v1: Get findings for an
+      application resource with pagination'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Cloud Security Compliance
+    definition: 'Resource group in the contract; its operation GET /cloud-security-compliance/entities/framework-posture-summaries/v1: Get sections
+      and requirements with scores for benchmarks.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Cloud Security Detections
+    definition: 'Resource group in the contract; its operation GET /cloud-security-evaluations/combined/ioms-by-rule/v1: returns ioms grouped
+      by rule'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Cloud AWS Registration
+    definition: 'Resource group in the contract; its operation POST /cloud-security-registration-aws/entities/account-scans/v1: Trigger health
+      check scan for AWS accounts'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Cloud Azure Registration
+    definition: 'Resource group in the contract; its operation GET /cloud-security-registration-azure/aggregates/issue-suppressions-values-by-fields/v1:
+      Retrieve distinct filterable values for issue suppression fields'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Cloud Google Cloud Registration
+    definition: 'Resource group in the contract; its operation GET /cloud-security-registration-google-cloud/entities/accounts/v1: Retrieve all
+      GCP entities (organizations, folders, projects) grouped by type with support for FQL filtering, sorting, and pagination.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Cloud OCI Registration
+    definition: 'Resource group in the contract; its operation GET /cloud-security-registration-oci/combined/accounts/v1: Retrieve a list of OCI
+      tenancies with support for FQL filtering, sorting, and pagination'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Cloud Security Registration Combined
+    definition: 'Resource group in the contract; its operation POST /cloud-security-registration/aggregates/accounts/v1: Returns cross-provider
+      account aggregates by status'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Cloud Security
+    definition: 'Resource group in the contract; its operation GET /cloud-security-risks/combined/cloud-risks/v1: Gets cloud risks with full details
+      based on filters and sort criteria'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Cloud Security Risks
+    definition: 'Resource group in the contract; its operation GET /cloud-security-timeline/entities/cloud-risks-enriched-timeline/v1: Returns
+      the enriched asset timeline.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Configuration Assessment
+    definition: 'Resource group in the contract; its operation GET /configuration-assessment/combined/assessments/v1: Search for assessments in
+      your environment by providing an FQL filter and paging details.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Configuration Assessment Evaluation Logic
+    definition: 'Resource group in the contract; its operation GET /configuration-assessment/entities/evaluation-logic/v1: Get details on evaluation
+      logic items by providing one or more finding IDs.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Kubernetes Container Compliance
+    definition: 'Resource group in the contract; its operation GET /container-compliance/aggregates/clusters/v2: Returns cluster details along
+      with aggregated assessment results organized by cluster, including pass/fail assessment counts for various asset types.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Container Image Compliance
+    definition: 'Resource group in the contract; its operation GET /container-compliance/aggregates/compliance-by-clusters/v2: get the assessments
+      for each cluster'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Kubernetes Protection
+    definition: 'Resource group in the contract; its operation GET /container-security/aggregates/clusters/count-by-date/v1: Retrieve clusters
+      by date range counts'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Container Alerts
+    definition: 'Resource group in the contract; its operation GET /container-security/aggregates/container-alerts/count-by-severity/v1: Get Container
+      Alerts counts by severity'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Container Detections
+    definition: 'Resource group in the contract; its operation GET /container-security/aggregates/detections/count-by-severity/v1: Aggregate counts
+      of detections by severity'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Drift Indicators
+    definition: 'Resource group in the contract; its operation GET /container-security/aggregates/drift-indicators/count-by-date/v1: Returns the
+      count of Drift Indicators by the date.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Container Images
+    definition: 'Resource group in the contract; its operation GET /container-security/aggregates/images/assessment-history/v1: Image assessment
+      history'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Container Packages
+    definition: 'Resource group in the contract; its operation GET /container-security/aggregates/packages/by-image-count/v1: Retrieves the N
+      most frequently used packages across images'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Unidentified Containers
+    definition: 'Resource group in the contract; its operation GET /container-security/aggregates/unidentified-containers/count-by-date/v1: Returns
+      the count of Unidentified Containers over the last 7 days'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Container Vulnerabilities
+    definition: 'Resource group in the contract; its operation GET /container-security/aggregates/vulnerabilities/count-by-actively-exploited/v1:
+      Aggregate count of vulnerabilities grouped by actively exploited'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Falcon Container
+    definition: 'Resource group in the contract; its operation GET /container-security/entities/exports/files/v1: Download an export file'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Image Assessment Policies
+    definition: 'Resource group in the contract; its operation POST /container-security/entities/image-assessment-policies/v1: Create Image Assessment
+      policies'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Correlation Rules
+    definition: 'Resource group in the contract; its operation POST /correlation-rules/aggregates/rule-versions/v1: Get rules aggregates as specified
+      via json in the request body.'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Correlation Rules Admin
+    definition: 'Resource group in the contract; its operation PUT /correlation-rules/entities/rules/ownership/v1: Change the owner of an existing
+      Correlation Rule'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Downloads
+    definition: 'Resource group in the contract; its operation GET /csdownloads/combined/files-download/v1: Get files info and pre-signed download
+      URLs'
+    tags:
+    - Resource Group
+    source: openapi/_ae-authored/crowdstrike-openapi-generated.yml
+  - term: Network Containment
+    definition: 'Resource group in the contract; its operation POST /customers/entities/containment-allowlist-rules/v1: Add new network containment
+      allowlist rules'
     tags:
     - Resource Group
     source: openapi/_ae-authored/crowdstrike-openapi-generated.yml

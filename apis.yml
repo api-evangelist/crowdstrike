@@ -158,8 +158,6 @@ common:
   url: conventions/crowdstrike-conventions.yml
 - type: ErrorCatalog
   url: errors/crowdstrike-problem-types.yml
-- type: RateLimits
-  url: rate-limits/crowdstrike-rate-limits.yml
 - type: Plans
   url: plans/crowdstrike-plans-pricing.yml
 - type: Lifecycle
