@@ -1,4 +1,4 @@
-# CrowdStrike (crowdstrike)
+# CrowdStrike
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,23 +64,149 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-CrowdStrike is a major US corporation and Fortune 1000 company. The CrowdStrike API provides programmatic access to its platform services, data, and integrations for enterprise customers and partners.
+CrowdStrike is a US cybersecurity company and Fortune 1000 constituent whose Falcon platform delivers endpoint, cloud, identity and data protection from a single cloud-native agent. Its developer surface is substantial and public: a 1,463-operation OAuth2 REST API spanning 128 service collections, documented operation by operation on developer.crowdstrike.com, with 187 named permission scopes; six official SDKs (Python, PowerShell, Go, TypeScript/JavaScript, Rust, Ruby); a Terraform provider for Configuration as Code; Falcon Foundry, an app platform with its own CLI; a first-party open-source MCP server (falcon-mcp) exposing 166 agent tools across 28 modules; and a published set of Agent Skills for building Foundry apps. CrowdStrike does not publish an OpenAPI document, and API access requires a Falcon subscription — the API itself is included in every paid bundle.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/crowdstrike/refs/heads/main/apis.yml)
+**Areas:** Cybersecurity · Endpoint Security · Endpoint Detection and Response · Threat Intelligence · Cloud Security · Identity Protection · Vulnerability Management · SIEM · Security Operations · MCP
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## CrowdStrike on APIs.io
 
-## Tags:
+Everything profiled for CrowdStrike is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/crowdstrike/](https://apis.io/providers/crowdstrike/)** — or go straight to one of the APIs or properties below.
 
- - Cybersecurity, Endpoint Security
+### APIs (2)
 
-## Timestamps
+- [CrowdStrike API](https://apis.io/apis/crowdstrike/crowdstrike-api/) — The CrowdStrike Falcon API — 1,463 documented operations across 128 service collections covering hosts, detections, incidents, real-time response, threat…
+- [Falcon MCP Server](https://apis.io/apis/crowdstrike/falcon-mcp/) — CrowdStrike's first-party open-source MCP server. Self-hosted (uvx/pip/Docker/Bedrock/Cloud Run) and authenticated with the operator's own Falcon API…
 
-- **Created:** 2026-04-19
-- **Modified:** 2026-04-19
+### Published properties
 
-## Maintainers
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-**FN:** Kin Lane
+#### AsyncAPI (1)
 
-**Email:** kin@apievangelist.com
+Event-driven and webhook contracts.
+
+- [Crowdstrike Event Streams](https://apis.io/asyncapis/crowdstrike/crowdstrike-event-streams/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [CrowdStrike Falcon MCP Server](https://apis.io/servers/crowdstrike/io-github-crowdstrike-falcon-mcp/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Crowdstrike Context](https://apis.io/jsonld/crowdstrike/crowdstrike-context/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [CrowdStrike API Rules](https://apis.io/rules/crowdstrike/crowdstrike-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Crowdstrike Authentication](https://apis.io/security/crowdstrike/crowdstrike-authentication/)
+- [Crowdstrike Domain Security](https://apis.io/security/crowdstrike/crowdstrike-domain-security/)
+- [Crowdstrike Trust Center](https://apis.io/security/crowdstrike/crowdstrike-trust-center/)
+- [Crowdstrike Vulnerability Disclosure](https://apis.io/security/crowdstrike/crowdstrike-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Crowdstrike Scopes](https://apis.io/scopes/crowdstrike/crowdstrike-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Crowdstrike Plans Pricing](https://apis.io/plans/crowdstrike/crowdstrike-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Crowdstrike Rate Limits](https://apis.io/rate-limits/crowdstrike/crowdstrike-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Crowdstrike Finops](https://apis.io/finops/crowdstrike/crowdstrike-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.crowdstrike.com)
+- [Documentation](https://developer.crowdstrike.com/)
+- [Getting started](https://developer.crowdstrike.com/sdks/go/getting-started/)
+- [API reference](https://developer.crowdstrike.com/api-reference/overview/)
+- [Pricing](https://www.crowdstrike.com/en-us/pricing/)
+- [Sign up](https://www.crowdstrike.com/en-us/products/trials/try-falcon/)
+- [Support](https://supportportal.crowdstrike.com/)
+- [Blog](https://www.crowdstrike.com/blog/feed/)
+- [Security](https://www.crowdstrike.com/en-us/report-a-security-bug/)
+- [Compliance](https://trust.crowdstrike.com/)
+- [Terms of service](https://www.crowdstrike.com/en-us/legal/website-terms-of-use/)
+- [Privacy policy](https://www.crowdstrike.com/en-us/legal/privacy-notice/)
+- [GitHub](https://github.com/CrowdStrike)
+
+## API Evangelist rating
+
+**Kin Score 65.6** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.3 |
+| Contract quality | 39.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 50.0 |
+| Developer ergonomics | 78.6 |
+| Access clarity | 92.1 |
+
+**Agent readiness 35.1** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | yes |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 52.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/crowdstrike/](https://apis.io/providers/crowdstrike/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for CrowdStrike: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/crowdstrike/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
