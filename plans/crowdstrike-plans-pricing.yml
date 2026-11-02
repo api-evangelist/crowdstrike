@@ -1,0 +1,140 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://www.crowdstrike.com/en-us/pricing/
+sources:
+- https://www.crowdstrike.com/en-us/pricing/
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T141238
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: usage-other
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-28'
+  managed_tier: Falcon Go
+published: true
+note: Per-device endpoint security bundles with monthly and annual pricing; top MDR tier is quote-based.
+plan_count: 8
+currency: USD
+plans:
+- name: Falcon Free Trial
+  price_text: Free
+  period: none
+  unit: 15 days
+  included_quota: No credit card required
+- name: Falcon Go (monthly)
+  price_text: $7.99 per device, billed monthly
+  price: 7.99
+  currency: USD
+  period: month
+  unit: per device
+  included_quota: Purchases of Falcon Go are limited to a maximum of 100 devices.
+- name: Falcon Pro (monthly)
+  price_text: $14.99 per device, billed monthly
+  price: 14.99
+  currency: USD
+  period: month
+  unit: per device
+- name: Falcon Enterprise (monthly)
+  price_text: $19.99 per device, billed monthly
+  price: 19.99
+  currency: USD
+  period: month
+  unit: per device
+- name: Falcon Go (annual)
+  price_text: $59.99 per device, billed annually
+  price: 59.99
+  currency: USD
+  period: year
+  unit: per device
+- name: Falcon Pro (annual)
+  price_text: $99.99 per device, billed annually
+  price: 99.99
+  currency: USD
+  period: year
+  unit: per device
+- name: Falcon Enterprise (annual)
+  price_text: $184.99 per device, billed annually
+  price: 184.99
+  currency: USD
+  period: year
+  unit: per device
+- name: Falcon Complete
+  price_text: Contact sales
+  period: none
+  included_quota: 24/7 expert-led, AI-accelerated managed detection and response (MDR)
+rate_limit_statements:
+- Purchases of Falcon Go are limited to a maximum of 100 devices.
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - subscription
+  units: []
+  plans:
+  - name: Falcon Free Trial
+    access: other
+    model: unstated
+    model_how: derived
+    units:
+    - other
+    periods:
+    - none
+  - name: Falcon Go (monthly)
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Falcon Pro (monthly)
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Falcon Enterprise (monthly)
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Falcon Go (annual)
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - year
+  - name: Falcon Pro (annual)
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - year
+  - name: Falcon Enterprise (annual)
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - year
+  - name: Falcon Complete
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
