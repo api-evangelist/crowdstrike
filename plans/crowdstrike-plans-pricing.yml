@@ -69,7 +69,7 @@ plans:
 rate_limit_statements:
 - Purchases of Falcon Go are limited to a maximum of 100 devices.
 x-canonical:
-  generated: '2026-11-01'
+  generated: '2026-11-02'
   vocabulary: engine/economics/plans-canonical.yml
   models:
   - subscription
